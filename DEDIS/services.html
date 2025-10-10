@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Thinkpro Tech Initiative</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="index.html"><span class="menu-item">Home</span></a></li>
+                <li><a href="about.html"><span class="menu-item">About</span></a></li>
+                <li><span class="menu-item">Services</span></li>
+                <li><a href="contact.html"><span class="menu-item">Contact</span></a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h1>Our Services</h1>
+            <ul>
+                <li>Introductory workshops on open source software</li>
+                <li>Mentor-guided sessions for beginners</li>
+                <li>Foundational courses in programming and tools</li>
+                <li>Community events for tech enthusiasts</li>
+                <li>Guidance for joining open source projects</li>
+            </ul>
+            <div class="time-display">
+                <span>Current Time: </span><span id="current-time"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString();
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Thinkpro Tech Initiative</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="index.html"><span class="menu-item">Home</span></a></li>
+                <li><a href="about.html"><span class="menu-item">About</span></a></li>
+                <li><a href="services.html"><span class="menu-item">Services</span></a></li>
+                <li><span class="menu-item">Contact</span></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h1>Contact Us</h1>
+            <p>Email: info@thinkprotech.org</p>
+            <p>Phone: +1-123-456-7890</p>
+            <p>Address: 123 Tech Street, Innovation City, IC 12345</p>
+            <form>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message"></textarea><br>
+                <input type="submit" value="Send">
+            </form>
+            <div class="time-display">
+                <span>Current Time: </span><span id="current-time"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString();
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

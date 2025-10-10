@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Thinkpro Tech Initiative</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="index.html"><span class="menu-item">Home</span></a></li>
+                <li><span class="menu-item">About</span></li>
+                <li><a href="services.html"><span class="menu-item">Services</span></a></li>
+                <li><a href="contact.html"><span class="menu-item">Contact</span></a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <h1>About Thinkpro Tech Initiative</h1>
+            <p>In our community, many people only know basic smartphone uses. Recognizing this technology gap, Thinkpro Tech was founded to expand technological horizons beyond the use of gadgets. Our focus is to enlighten the community, students, and tech enthusiasts about the vast potential technology advancements offer through mentor-guided tech journeys. Thinkpro Tech's essence is to ensure everyone, irrespective of their background, harnesses technology's full potential. Our goal goes beyond creating tech experts; we aim for broader tech proficiency, preparing everyone for a digital-centric future.</p>
+            <h2>Mission</h2>
+            <p>Encouraging open source participation, guiding aspiring members who wish to join, and providing foundational knowledge and essential tools necessary for tech journeys.</p>
+            <div class="time-display">
+                <span>Current Time: </span><span id="current-time"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString();
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
