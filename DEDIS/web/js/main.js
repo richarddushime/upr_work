@@ -1,4 +1,4 @@
-/* Simplified JavaScript for Thinkpro Tech Initiative Website */
+/* Thinkpro Tech Initiative Website */
 
 // Update time display
 function updateTime() {
