@@ -1,0 +1,38 @@
+---
+title: "import-modify-visualise"
+date: "13th October 2025"
+author: ""
+format: pdf
+---
+
+# Intro
+
+summarise and visualising datasets 
+
+#setup
+
+```{r}
+#| label: setup
+# packages 
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+
+# Functions 
+`%notin%` <- Negate (`%in%`)
+
+# A color palette 
+
+palette <- viridis::turbo(10)
+```
+
+Data 1 Simple CSV
+
+```{r}
+#| label: d1-simple-csv
+
+fungi <- read_csv()
+```
+
+
