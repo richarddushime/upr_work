@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Thinkpro Tech Initiative</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Basic HTML meta tags -->
+    <meta charset="UTF-8">                                                    <!-- Character encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <!-- Mobile responsiveness -->
+    
+    <!-- Page title -->
+    <title>Contact - Thinkpro Tech Initiative</title>                        <!-- Browser tab title -->
+    
+    <!-- External stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">                            <!-- Main stylesheet -->
+    
+    <!-- Google Fonts - Poppins font family for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />             <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />    <!-- Preconnect for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
@@ -14,35 +24,44 @@
                 <li><a href="index.html"><span class="menu-item">Home</span></a></li>
                 <li><a href="about.html"><span class="menu-item">About</span></a></li>
                 <li><a href="services.html"><span class="menu-item">Services</span></a></li>
-                <li><span class="menu-item">Contact</span></li>
+                <li><a href="contact.html" class="menu-item">Contact</a></li>
             </ul>
         </div>
         <div class="main-content">
+            <!-- Page heading -->
             <h1>Contact Us</h1>
-            <p>Email: info@thinkprotech.org</p>
-            <p>Phone: +1-123-456-7890</p>
-            <p>Address: 123 Tech Street, Innovation City, IC 12345</p>
+            
+            <!-- =============================================================================
+                 CONTACT INFORMATION
+                 ============================================================================= -->
+            <p>Email: info@thinkprotech.org</p>                              <!-- Organization email -->
+            <p>Phone: +393926712171</p>                                      <!-- Contact phone number -->
+            <p>Address: ...</p>                                              <!-- Physical address placeholder -->
+            
+            <!-- =============================================================================
+                 CONTACT FORM
+                 ============================================================================= -->
             <form>
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email"><br>
-                <label for="message">Message:</label><br>
-                <textarea id="message" name="message"></textarea><br>
-                <input type="submit" value="Send">
+                <!-- Name input field -->
+                <label for="name">Name:</label><br>                           <!-- Label for name field -->
+                <input type="text" id="name" name="name"><br>                <!-- Text input for name -->
+                
+                <!-- Email input field -->
+                <label for="email">Email:</label><br>                         <!-- Label for email field -->
+                <input type="email" id="email" name="email"><br>             <!-- Email input with validation -->
+                
+                <!-- Message textarea -->
+                <label for="message">Message:</label><br>                     <!-- Label for message field -->
+                <textarea id="message" name="message"></textarea><br>         <!-- Multi-line text input -->
+                
+                <!-- Submit button -->
+                <input type="submit" value="Send">                           <!-- Form submission button -->
             </form>
             <div class="time-display">
                 <span>Current Time: </span><span id="current-time"></span>
             </div>
         </div>
     </div>
-    <script>
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('current-time').textContent = now.toLocaleTimeString();
-        }
-        updateTime();
-        setInterval(updateTime, 1000);
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

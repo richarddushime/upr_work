@@ -1,33 +1,45 @@
-/* style.css - Updated to handle links in menu */
-body {
-    font-family: Arial, sans-serif;
+/* Simplified CSS for Thinkpro Tech Initiative Website */
+
+/* Basic reset and base styles */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-}
-
-.container {
-    display: flex;
-    height: 100vh;
-}
-
-.sidebar {
-    width: 250px;
-    background-color: #333;
-    color: white;
-    padding: 20px;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Main layout */
+.container {
+    display: flex;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar navigation */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 30px 20px;
+}
+
 .sidebar h2 {
-    margin-top: 0;
-    border-bottom: 1px solid #555;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #3498db;
     padding-bottom: 10px;
 }
 
 .sidebar ul {
-    list-style-type: none;
-    padding: 0;
+    list-style: none;
 }
 
 .sidebar li {
@@ -36,64 +48,230 @@ body {
 
 .menu-item {
     display: block;
-    padding: 10px;
-    background-color: #555;
+    padding: 12px 15px;
+    background: #3498db;
     border-radius: 5px;
     text-decoration: none;
     color: white;
-    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .menu-item:hover {
-    background-color: #777;
+    background: #2980b9;
 }
 
+/* Main content area */
 .main-content {
     flex: 1;
-    padding: 20px;
-    background-color: white;
+    padding: 30px;
+    background: white;
     overflow-y: auto;
 }
 
 .main-content h1 {
-    color: #333;
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
 }
 
 .main-content h2 {
-    color: #555;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+    color: #34495e;
+    font-size: 1.5rem;
+    margin: 25px 0 15px 0;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 8px;
 }
 
 .main-content p {
     line-height: 1.6;
-    color: #666;
+    color: #555;
+    margin-bottom: 15px;
 }
 
 .main-content ul {
-    line-height: 1.6;
-    color: #666;
+    color: #555;
+    margin-bottom: 20px;
 }
 
+.main-content li {
+    margin-bottom: 8px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.main-content li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* Form styles */
 .main-content form {
-    margin-top: 20px;
+    margin-top: 25px;
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
 }
 
 .main-content label {
     display: block;
-    margin-top: 10px;
-    color: #333;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #2c3e50;
+    font-weight: 500;
 }
 
-.main-content input, .main-content textarea {
+.main-content input,
+.main-content textarea {
     width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
 }
 
+.main-content input:focus,
+.main-content textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.main-content input[type="submit"] {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.main-content input[type="submit"]:hover {
+    background: #2980b9;
+}
+
+/* Time display */
 .time-display {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #333;
+    margin-top: 25px;
+    padding: 15px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+#current-time {
+    color: #3498db;
+    margin-left: 10px;
+}
+
+/* Service items */
+.service-item {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.service-item h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.service-item p {
+    color: #555;
+    margin-bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .main-content h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+    }
+    
+    .main-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .main-content form {
+        padding: 20px;
+    }
+}
+
+/* Dark theme support */
+body.dark-theme {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+body.dark-theme .main-content {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
+body.dark-theme .main-content h1,
+body.dark-theme .main-content h2 {
+    color: #ecf0f1;
+}
+
+body.dark-theme .main-content p,
+body.dark-theme .main-content ul {
+    color: #bdc3c7;
+}
+
+body.dark-theme .main-content form {
+    background: #34495e;
+}
+
+body.dark-theme .main-content input,
+body.dark-theme .main-content textarea {
+    background: #2c3e50;
+    border-color: #34495e;
+    color: #ecf0f1;
+}
+
+body.dark-theme .time-display {
+    background: #34495e;
+    color: #ecf0f1;
+}
+
+body.dark-theme .service-item {
+    background: #34495e;
+}
+
+body.dark-theme .service-item h3 {
+    color: #ecf0f1;
+}
+
+body.dark-theme .service-item p {
+    color: #bdc3c7;
 }
