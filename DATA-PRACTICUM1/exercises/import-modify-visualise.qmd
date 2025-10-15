@@ -32,7 +32,29 @@ Data 1 Simple CSV
 ```{r}
 #| label: d1-simple-csv
 
-fungi <- read_csv()
+fungi <- read_csv("data/OOTFungi1MS_11112017_v1_r0.csv")
+glimpse(fungi)
+
+view(fungi)
 ```
+
+# Extract , Modify 
+
+```{r}
+#| label: extract modify
+
+fungi <- fungi |> select(SpecimenID, Inoculant, RelativeMassLoss) |>
+  separate_wider_delim(SpecimenID, delim = "-",
+                       names = c("Species", "Treatment"),
+                       too_many = "drop")
+
+fungi |> slice_head(n=10)
+
+
+```
+
+
+
+
 
 
