@@ -1,0 +1,27 @@
+Seminar topic A
+Zahteve zaključka
+Solving the Sokoban puzzle game
+Consider the possible approaches to solving the Sokoban puzzle game using search algorithms.
+
+1. Use uninformed search (0 - 5 points)
+Create a very small map with one crate and one goal. Try to solve it using: depth-first search and breadth-first search.
+Slowly increase the size of the map and add more crates and goals. Try to find the size limit, at which your algorithm still find a solution in feasible time.
+Be smart when using search. Avoid cycling, try to identify dead-end states (boxes at edges and in corners), and prune the search there.
+Present your findings with plots (time to find a solution / time of execution).
+Show the largest map that your algorithms could process in a feasible time.
+2. Use informed search (0 - 5 points)
+Try to determine possible heuristics to speed up the search (e.g., distances of boxes from goal positions, distance of the player from a box, etc.).
+Compare the performance of informed search on the same maps that you have used with uninformed search.
+3. Abstracting the action space (0 - 5 points)
+To further speed up the search, abstract the Sokoban's actions to pushing only. Compute only a plan for moving the boxes (e.g., an action can be defined as pair (box, direction)). Then execute such an action by first moving the Sokoban to the appropriate side of the box using A*-based path finding, and then pushing the box.
+Assess how much the state space has been reduced by such an abstraction. Compare the results.
+4. Source code + presentation (0 - 5 points)
+Use the famnit-gym package to implement the Sokoban environment. Do not use any other libraries.
+All search algorithms must be implemented by you in Python. No external libraries or 3rd party code is allowed.
+Create a poster in PDF format that presents your work and your findings. Follow the templates for conference posters.
+Have a 10 minute presentation together with your colleague. Attendance and presentation is necessary to pass the seminar work.
+Submission
+Submit 3 files to the e-classroom: (1) The ZIP file with the working Python code. (2) The PDF of the poster. (3) A markdown file, giving short instructions on how to run your examples.
+The files must be named using the following pattern: <group number>_IS_Seminar1_<last name 1>_<last name 2>.[zip | pdf | md]
+The deadline for submission is 3 days before the presentations.
+Zadnja sprememba: petek, 24. oktober 2025, 15.17
