@@ -1,0 +1,226 @@
+---
+title: "Homework 1 - DSP1 - 2025/2026"
+author: "Dushime Mudahera Richard 76250043"
+format: html
+toc: true
+---
+
+# Homework 1
+
+Please use this file to complete your homework. This homework is meant to provide some practice working with data from importing through visualisation and to reflect on some core concepts in experimental design that we confront as analysts.
+
+# Instructions
+
+Step 1: Rename this file as follows: "DSP1-HW1-Name-StudentID" with your name and student ID replacing the appropriate parts.
+Step 2: Update the author field in the YAML as indicated.
+Step 3: Ensure the document has a Table of Contents when rendered (hint: you set this in the YAML)
+Step 3: Complete to the Tasks below. Be sure to add meaningul label tags to each R code chunk
+Step 4: Render to html (you will need to change target formats in the YAML)
+Step 5: Zip (or otherwise compress) the html other relevant support folders and include this qmd file with your work filled in
+Step 6: Submit the compressed folder which should be named "DSP1-HW1-Name-StudentID" through the e-classroom by Tuesday 28 October 23:00.
+
+Hint: Make sure that when I open the html file I can view all the embedded images, see all your code and easily identify your responses to questions.
+
+*Note*: if you use AI for help, you must declare so and say how you used it.
+*Note 2*: you may add code chunks as need to create a clean, easy to read, file.
+
+# Task 1 - Import, modify, summarise, and visualise
+
+## Task 1.1 Import
+
+Import the file "hw1_creativity.csv" and assign it to the variable _creativity.d_.
+
+This dataset is part of the Statistical Sleuth textbook and is available in the Sleuth3 R package as well. 
+
+Ramsey, F.L. and Schafer, D.W. (2013). The Statistical Sleuth: A Course in Methods of Data Analysis (3rd ed), Cengage Learning.
+
+I've modifed and exported as CSV for you to work with. The original source of the data is:
+
+Amabile, T. (1985). Motivation and Creativity: Effects of Motivational Orientation on Creative Writers, Journal of Personality and Social Psychology 48(2): 393–399.
+
+```{r}
+#| label: import_data
+library(dplyr)
+
+creativity.d <- read.csv("hw1_creativity.csv")
+head(creativity.d)
+```
+
+## Task 1.2 Modify
+
+a. Rename the column "Trtmnt" to "Treatment"
+b. Replace the abbreviations in the column Treatment with the full word: Ext should be Extrinsic and Int should be Intrinsic.
+
+(make sure these are changed in the creativity.d data frame)
+
+```{r}
+#| label: modify
+
+creativity.d <- creativity.d %>%
+  rename(Treatment = Trtmnt) %>%
+  mutate(Treatment = recode(Treatment,
+                            "Ext" = "Extrinsic",
+                            "Int" = "Intrinsic"))
+
+head(creativity.d)
+```
+
+## Task 1.3 Summarise
+
+Create a summary dataframe that has the mean, median, standard deviation, and interquartile range of the scores for each treatment group. Call it: creativity.sum. Show the summary table as output. Make sure the visual output is rounded to no more than 2 decimal places, but that the data retains the full value.
+
+```{r}
+#| label: dataframe Summary
+
+creativity.sum <- creativity.d %>%
+  group_by(Treatment) %>%
+  summarise(
+    Mean = mean(Score),
+    Median = median(Score),
+    SD = sd(Score),
+    IQR = IQR(Score)
+  ) %>%
+  mutate(across(where(is.numeric), ~ round(., 2)))
+
+print(creativity.sum)
+
+```
+
+## Task 1.4 Visualise
+
+For the following visualisations please use ggplot(), add a title (and/or subtitle) that helps the viewer understand the content of the visualisation, ensure axis labels are clear, and use a caption to acknowledge the source of the data (e.g., "Data from Amabile, T. (1985)."). Use a non-default theme (either by customising a theme, or by selecting another pre-made theme).
+
+a. Create a visualisation that informs the viewer about differences between groups based on the raw data. Explain why you chose the visualisation you made.
+b. Create a visualisation that informs the viewer about differences between groups based on the summary data you created. Explain why you chose the visualisation you made.
+c. Choose one visualisation and duplicate it, but update the axis with numerical values to to have a range of 0 to 30, and axis ticks every 5 points, change the axis label to "Motivation source" for the axis you used for Treatment.
+d. Briefly state any changes you would like to make to one of the visualisations to make it clearer/easier to understand.
+
+```{r}
+#| label: Visualization
+# loading ggplot 
+library(ggplot2)
+
+```
+
+## a. Raw data visualization
+
+```{r}
+#| label: a. Raw data visualization
+# Distribution of creativity scores by treatment group (raw data)
+
+ggplot(creativity.d, aes(x = Treatment, y = Score, fill = Treatment)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.6, size = 1.5) +
+  labs(
+    title = "Creativity Scores by Motivational Orientation",
+    subtitle = "Boxplot with individual data points overlaid",
+    x = "Treatment Group",
+    y = "Creativity Score",
+    caption = "Data from Amabile, T. (1985)."
+  ) +
+  theme_minimal()
+
+```
+
+I chose a boxplot with jittered points because it shows the full distribution (median, quartiles, outliers) while also displaying every individual data point. This allows the viewer to see both summary statistics and the raw spread, which is good while comparing small group
+
+
+## b. Summary data visualization
+
+```{r}
+#| label: b. Summary data visualization
+# Mean creativity scores with error bars by treatment
+
+ggplot(creativity.sum, aes(x = Treatment, y = Mean, fill = Treatment)) +
+  geom_col(width = 0.6) +
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0.25) +
+  labs(
+    title = "Mean Creativity Score by Treatment Group",
+    subtitle = "Error bars represent ±1 standard deviation",
+    x = "Treatment Group",
+    y = "Mean Creativity Score",
+    caption = "Data from Amabile, T. (1985)."
+  ) +
+  theme_light()
+
+```
+A bar plot with error bars (SD) clearly communicates the central tendency and variability in a concise way. It’s effective for comparing just two groups and emphasizes the difference in means.
+
+## c. Modified axis version(duplicate)
+
+```{r}
+#| label: c. Modified axis version(duplicate)
+# Mean creativity scores with custom axis scaling
+
+ggplot(creativity.sum, aes(x = Treatment, y = Mean, fill = Treatment)) +
+  geom_col(width = 0.6) +
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0.25) +
+  scale_y_continuous(
+    breaks = seq(0, 30, 5),
+    limits = c(0, 30),
+    labels = seq(0, 30, 5)
+  ) +
+  labs(
+    title = "Mean Creativity Score by Treatment Group",
+    subtitle = "Error bars represent ±1 standard deviation",
+    x = "Motivation Source",
+    y = "Mean Creativity Score",
+    caption = "Data from Amabile, T. (1985)."
+  ) +
+  theme_light()
+
+```
+## d. Suggested improvement
+
+I would improve the raw data boxplot (a) by:
+- Adding a violin layer underneath the boxplot to show the density shape of the data.
+- Using colorblind-friendly colors (e.g., viridis palette).
+- Slightly increasing point transparency and reducing jitter width for better readability.
+
+```{r}
+#| label: Suggested improvement
+library(viridis)   # For colorblind-friendly palette
+
+# Distribution of creativity scores by treatment group (raw data)
+
+ggplot(creativity.d, aes(x = Treatment, y = Score, fill = Treatment)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.6, size = 1.5) +
+  labs(
+    title = "Creativity Scores by Motivational Orientation",
+    subtitle = "Boxplot with individual data points overlaid",
+    x = "Treatment Group",
+    y = "Creativity Score",
+    caption = "Data from Amabile, T. (1985)."
+  ) + 
+  geom_violin(alpha = 0.3) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d()
+ 
+```
+> **Declaration**: I used Grok to help implement the suggested improvements and to make it look nicely.
+
+
+# Task 2
+
+This task is based on the reading uploaded with the assignment: 
+
+Hurlbert SH. Pseudoreplication and the Design of Ecological Field Experiments. Ecological Monographs 1984; 54: 187–211.
+
+Respond the to questions below:
+
+
+## Task 2.1
+
+In your own words, what is pseudoreplication?
+
+Pseudoreplication is when an experiment uses data points that are treated as independent replicates even though they are not really independent. In other words, it happens when the same experimental unit is measured multiple times or when samples are taken from within one treatment group or location but analyzed as if they came from different, independent treatments. This leads to incorrect statistical conclusions because the variation being measured doesn’t actually represent real differences between treatments it reflects repeated measures or local variation within a single unit rather than true replication.
+
+## Task 2.2
+
+Give an example of a situation where pseudoreplication may occur in an experiment - not from the paper or what we discussed in class. Please note: I will ask students for a few examples in class.
+
+I remember back home in my village around 2011(i dont remember the exact year), when fertilizer was first introduced for Irish potato cultivation. Before that, we did not use any fertilizers. To test whether the fertilizer could increase yield, some farmers divided a single garden into two parts applying fertilizer on one side and leaving the other side untreated to compare the results at harvest time.
+
+I think This situation represents pseudoreplication because both sides of the same garden share the same soil type, rainfall, and environmental conditions. The two sides are not truly independent experimental units. Any difference in yield might be influenced by local variation within the same plot rather than the fertilizer itself. To avoid pseudoreplication, the experiment would need several separate gardens (each treated or untreated independently) to provide true replication.
+

@@ -1,0 +1,18 @@
+---
+title: "class2.qmd"
+format: pdf
+---
+```{r}
+#| label: setup
+# packages 
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+```
+
+
+```{r}
+air_q <- read.csv("data/air_temperature_humidity.csv")
+```
+

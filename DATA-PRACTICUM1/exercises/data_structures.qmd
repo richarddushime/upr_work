@@ -1,0 +1,145 @@
+---
+title: "data_structures"
+author: "Richard Dushime"
+format: pdf
+---
+
+## Data Structures Book [here](https://intro2r.com/data-structures.html)
+
+Matrices and arrays
+
+```{r}
+#| label: setup
+
+my_mat <- matrix(1:16, nrow = 4, byrow = TRUE)
+my_mat
+
+my_array <- array(1:16, dim = c(2, 4, 3))
+my_array
+
+```
+
+```{r}
+rownames(my_mat) <- c("A","B","C","D")
+colnames(my_mat) <- c("a", "b", "c", "d")
+my_mat
+```
+
+```{r}
+transpose_my_mat <- t(my_mat)
+transpose_my_mat
+```
+# Import functions 
+
+```{r}
+#| label: importfunc
+
+flowers <- read.table("flower.txt", header = TRUE,sep = "\t")
+str(flowers)
+```
+
+
+```{r}
+summary(flowers)
+```
+```{r}
+View(flowers)
+```
+```{r}
+names(flowers)
+```
+```{r}
+flowers$height
+```
+```{r}
+f_heights <- flowers$height
+# f_heights
+summary(f_heights)
+```
+```{r}
+# Accessing values by indexes
+flowers[1:4]
+# by columns index
+f_heights[1]
+
+```
+
+```{r}
+flowers[1:10, 1:4]
+```
+
+```{r}
+# Excluding columns and rows 
+flowers[-(1:10), -c(0,3)]
+```
+
+
+```{r}
+flowers[1:5, c("treat", "nitrogen", "leafarea")]
+```
+```{r}
+big_flowers <- flowers[flowers$height > 12, ]
+big_flowers
+```
+
+
+```{r}
+flowers[flowers$height >= 6, ]        # values greater or equal to 6
+
+flowers[flowers$height <= 6, ]          # values less than or equal to 6
+
+flowers[flowers$height == 8, ]         # values  equal to 8
+
+flowers[flowers$height != 8, ]         # values  not equal to 8
+```
+```{r}
+tip_med_2 <- subset(flowers, treat == "tip" & nitrogen == "medium" & block == 2)
+tip_med_2
+```
+```{r}
+# rbind for rows
+df1 <- data.frame(id = 1:4, height = c(120, 150, 132, 122),
+                        weight = c(44, 56, 49, 45))
+df1
+##   id height weight
+## 1  1    120     44
+## 2  2    150     56
+## 3  3    132     49
+## 4  4    122     45
+
+df2 <- data.frame(id = 5:6, height = c(119, 110),
+                        weight = c(39, 35))
+df2
+##   id height weight
+## 1  5    119     39
+## 2  6    110     35
+
+df3 <- data.frame(id = 1:4, height = c(120, 150, 132, 122),
+                        weight = c(44, 56, 49, 45))
+df3
+##   id height weight
+## 1  1    120     44
+## 2  2    150     56
+## 3  3    132     49
+## 4  4    122     45
+
+df4 <- data.frame(location = c("UK", "CZ", "CZ", "UK"))
+df4
+##   location
+## 1       UK
+## 2       CZ
+## 3       CZ
+## 4       UK
+```
+```{r}
+plot(flowers$height)
+```
+```{r}
+pairs(flowers[, c("height", "weight", "leafarea", 
+                "shootarea", "flowers")])
+```
+
+
+
+
+

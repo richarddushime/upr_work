@@ -1,0 +1,203 @@
+---
+title: "Handling violated assumptions - linear regression & alternatives"
+author: "Mike B."
+date: "11/10/2025"
+format: revealjs
+---
+
+```{r}
+#| include: false
+#| label: setup
+
+#standard set
+library(tidyverse)
+library(emmeans)
+library(marginaleffects)
+
+#for bayesian modeling
+#install.packages(c("brms", "bayestestR", "bayesplot", "tidybayes"))
+library(brms)
+library(bayestestR)
+library(bayesplot)
+library(tidybayes)
+
+palette <- viridis::rocket(10)
+
+```
+
+## When assumptions aren't met
+
+Sometimes our data doesn't meet the assumptions of the analytical tools we would like to use - in my experience, more often than not. We often need to choose a different approach to make sense of our data, and we will look at a few options related to skewed data when we have linear regression in mind for our analysis. 
+
+## A note on planning analysis
+
+I usually recommend researchers don't plan the specific analytical tool they plan to apply (i.e., linear regression, t-test, etc.). Instead, I advise they plan on the effects they want to describe and choose the appropriate analysis when the data is known - especially unbounded continuous data.
+
+## Data
+
+This data is from a fairly recent experiment, where we ended up with with skewed data.
+
+```{r}
+#| label: data
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+frac <- read_csv("data/Fracture_GcGf_v1.csv") |> 
+  mutate(
+    treatment =
+      case_when(
+        treatment == "control" ~ "Control",
+        treatment == "70C" ~ "70°C",
+        treatment == "140C" ~ "140°C"
+      ),
+    treatment = fct_relevel(factor(treatment), "Control", "70°C", "140°C"),
+    orientation = if_else(orientation == "R", "TR", "RT")
+  )
+
+frac |> slice_head(n = 10)
+```
+
+## Visualise
+
+```{r}
+#| label: vis_raw
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Linear regression
+
+```{r}
+#| label: fit_lm
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Adjusting with a log transformation
+
+```{r}
+#| label: fit_log_transform
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Predictions
+
+```{r}
+#| label: predict_each_val_gf
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+```{r}
+#| label: predict_each_val_gf_log
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+
+```
+
+## Comparisons
+
+## Standard linear regression
+
+```{r}
+#| label: compare_lm
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Log-transformed
+
+```{r}
+#| label: compare_log
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+
+```
+
+## Visualising
+
+```{r}
+#| label: vis_mods
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+```
+
+## Gamma regression
+
+```{r}
+#| label: gamma_regression
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Another alternative - Bayesian regression
+
+
+## Packages
+
+```{r}
+#| label: bayes_packages
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+#loaded previously, but repeated here for informative purposes
+# library(brms)
+# library(bayestestR)
+# library(bayesplot)
+# library(tidybayes)
+
+```
+
+
+## Fitting a bayesian model requires estimating prior knowledge
+
+```{r}
+#| label: bayes_priors
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Bayesian regression fitting
+
+```{r}
+#| label: bayes_fit
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+```
+
+## Output
+
+```{r}
+#| label: bayes_out
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+```
+
+## A closer look: EPI:140C
+
+```{r}
+#| label: bayes_est_vs_lm_est
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
