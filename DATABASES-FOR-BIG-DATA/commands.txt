@@ -1,0 +1,18 @@
+Run the Container: This command starts Hive and maps the necessary ports (10000 for JDBC, 10002 for Web UI).
+docker run -d -p 10000:10000 -p 10002:10002 --env SERVICE_NAME=hiveserver2 --name Apache-Hive apache/hive:4.0.0
+
+
+Connect to the Container: You can now access the Hive CLI directly inside the container:
+docker exec -it Apache-Hive beeline -u 'jdbc:hive2://localhost:10000/' 
+
+
+Since we mapped port 10002, you can see a graphical interface of your Hive server.
+
+Open your browser and go to: http://localhost:10002
+
+You will see active sessions, queries, and logs.
+
+How to Stop/Start Later
+Stop Hive: docker stop Apache-Hive
+
+Start it again: docker start Apache-Hive

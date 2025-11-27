@@ -1,0 +1,79 @@
+---
+title: "Homework 2 - DSP1 - 2025/2026"
+author: "Your name and student ID"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Homework 2
+
+Please use this file to complete your homework. This homework is meant
+to provide some practice working with data from importing through
+visualisation and to reflect on some core concepts in experimental
+design that we confront as analysts.
+
+# Instructions
+
+Step 1: Rename this file as follows: "DSP1-HW2-Name-StudentID" with your
+name and student ID replacing the appropriate parts. Step 2: Update the
+author field in the YAML as indicated. Step 3: Ensure the document has a
+Table of Contents when rendered (hint: you set this in the YAML) Step 3:
+Complete to the Tasks below. Be sure to add meaningul label tags to each
+R code chunk and structure your analysis sensibly. Step 4: Render to
+html or pdf (you may need to change target formats in the YAML) Step 5:
+Zip (or otherwise compress) the html other relevant support folders and
+include this qmd file with your work filled in Step 6: Submit the
+compressed folder which should be named "DSP1-HW2-Name-StudentID"
+through the e-classroom by Tuesday 25 Nov 23:00.
+
+Hint: Make sure that when I open the html file I can view all the
+embedded images, see all your code and easily identify your responses to
+questions.
+
+Note: Please see the rules for using AI on the e-classroom.
+
+# Task 1 - Comparing two groups
+
+Determine if the weight of chickens eating two different diets differs
+using the chickwts dataset. Explore, analyse, and explain a statistical
+analysis comparing two groups. Include an explanation of each step you
+took and why you took that step.
+
+Compare chicken weights between those eating meatmeal and soybean diets
+from the built-in chickwts dataset. Check the help for the dataset for a
+source reference.
+
+# Task 2 - Comparing two methods of comparing two groups
+
+Using the same dataset compare the diets of casein and linseed. Use both
+a t-test and a wilcoxon rank-sum test. Explain which one you would
+choose and show why you made that decision, then report the outcomes of
+that test.
+
+# Task 3 - Linear regression - Iris data
+
+Fit a linear regression predicting petal width based on petal length and
+species of iris using the built-in iris dataset
+
+Answer the following questions/complete the following tasks:
+
+a.  Plot the data in a useful way to show any potential relationships.
+    Add a reference to the data source as a caption to the plot (hint:
+    check help(iris) and use the Anderson reference).
+b.  Fit a linear regression to the data. Is linear regression
+    appropriate for the data?
+c.  What is the effect of a one unit increase in petal length on petal
+    width?
+d.  Are there statistically significant differences in petal width
+    between species?
+
+-   Create a table with the difference that includes an estimate of the
+    difference and confidence intervals for those estimates.
+-   Create a visualisation of the differences
+-   Write a few sentences that describe the differences using the
+    estimates and CIs you have found.
+
+e.  Create a visualisation of the petal width data with the regression
+    lines for each species overlayed on the points.

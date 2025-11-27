@@ -1,0 +1,162 @@
+---
+title: "Logistic regression"
+author: "mike burnard"
+date: "17 Nov 2025"
+format: revealjs
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+#standard set
+library(tidyverse)
+library(emmeans)
+library(marginaleffects)
+
+#introducing
+# you may need to install these with install.packages()
+library(broom)
+library(tidymodels)
+#library(ISLR)
+```
+
+## Logistic regression
+
+- Used when we have a binary outcome (0,1 | Yes,No), etc.
+- A _classification_ method
+- In R, the process is similar to linear regression
+
+Example: Your bank wants to assess if online transactions are fraud or not. They might look at IP address, website, transaction amounts as independent variables, but the dependent variable is binary: Fraud or Authentic.
+
+We will look at another case: given annual income, and loan balance can we predict if someone will default on their loan (fail to make the payment).
+
+## Training and testing datasets
+
+When we fit a model to experimentally collected data - when there was a planned experiment - we are using statistical models to explain the data and (sometimes) make predictions future experiments based on the data.
+
+In a machine/statistical learning environment we are often trying to fit a model to a large set of data to predict future events. The same techniques are commonly applied. However, in ML we often use a training dataset to fit the model and testing dataset to assess how well the model fits. 
+
+In this case, we will take use the Default dataset from the ISLR package, and split it into a training data set with 60 % of the values (~6k), and a testing data set with the rest (~4k)
+
+## Data
+
+```{r}
+#| label: data
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+
+```
+
+
+## Visualise
+
+```{r }
+#| label: vis_raw1
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Visualisations continuned
+
+```{r }
+#| label: vis_raw2
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Fitting logistic regression
+
+```{r }
+#| label: model 1
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+## Extracting values from coefficients
+
+```{r}
+#| label: coefs
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+```
+
+
+
+## Comparing models with ANOVA
+
+```{r}
+#| label: model_compare
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+
+
+```
+## Extracting information with broom
+
+```{r}
+#| label: extract_with_broom
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+
+```
+
+
+## Comparisons
+
+```{r}
+#| label: comparisons
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+
+## Predictions
+
+```{r }
+#| label: preds
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Vis predictions
+
+```{r}
+#| label: vis_preds
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```
+
+## Assessing the model
+
+```{r }
+#| label: mcfaddans_psr2
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+```
+
+## Classification rate
+
+Here we use the test data we created earlier to see how well our model performs on the other part of the original dataset.
+
+```{r }
+#| label: class_rat
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+```

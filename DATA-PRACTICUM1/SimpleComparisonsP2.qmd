@@ -1,0 +1,154 @@
+---
+title: "DSP1: Comparing groups"
+author: "Mike Burnard"
+date: "10/27/2025"
+format: revealjs
+---
+
+```{r}
+#| include: false
+#| label: setup
+library(tidyverse)
+```
+
+# Comparing groups
+
+One of our most common tasks is making simple comparisons between two (or more) groups with some measured attribute. This results from many experiments where, rightly so, researchers try to conduct simple analyses to isolate a phenomena. We have some very common tools for working with these types of comparisons that generally fall into two categories: parametric tests and non-parametric tests.
+
+## Assumptions about tests
+
+Assumptions of tests let use choose the right test for the right task and data. We will look at the assumptions about some data below.
+
+### Parametric tests
+
+Parametric tests are used for comparing data meeting assumptions related to normality and variance structure. We will look at t-tests (two groups) and ANOVA (analysis of variance; more than two groups). The assumptions are:
+
+1.  Independence
+2.  Normality
+3.  Homogeneity of variance (approximately equal variance)
+
+### Non-parametric tests
+
+When we cant meet the normality and homogeneity of variance, we can use non-parametric tests like rank-based tests, for example: Wilcoxon rank-sum test (for two groups) or the Kruskal-Wallace test for more than two groups.
+
+1.  Independence
+2.  Ordinal or continuous data
+3.  Same shape for each distribution of data (roughly)
+
+## What do the assumptions mean?
+
+### Independence
+
+*Independence*
+
+This is critical in most basic statistical tests our data our data should be. This means that the observation of one value in our dataset isn't related to the observation of another.
+
+For example, my blood pressure is unrelated to your blood pressure in normal circumstances.
+
+There are common violations of these assumption:
+
+1.  My blood pressure before and after an intervation (like a scary movie) - repeated measures
+2.  Measurements related in time, like seasonal temperature - autocorrelation
+
+We have tools to deal with both of these. We may discuss repeated measures.
+
+### Normality
+
+*Normality*
+
+Data should be roughly normally distributed. More important for small n (\< 30)
+
+```{r}
+#| echo: false
+set.seed(1234)
+d <- tibble(group = rep(c("A", "B"), each = 100),
+            value = c(rnorm(100), rnorm(100,1,1)))
+
+ggplot(data = d, aes(x = value, fill = group)) + theme_classic() +
+  geom_density(alpha = 0.6) +
+  scale_fill_viridis_d(option = "viridis")
+```
+
+### Homegeneity of variance
+
+*Equal variance*
+
+The spread of the data should be approximately equal.
+
+```{r}
+#| echo: false
+
+ggplot(data = d, aes(y = value, x = group)) + theme_classic() +
+  geom_boxplot()
+```
+
+### Continuous or Ordinal
+
+*Continuous or ordinal*
+
+The data must minimally be in order, even if we don't know the space between the values.
+
+### Same distribution shape
+
+The data need not be normal, but it should be approximately qually shaped.
+
+```{r}
+#| echo: false
+
+set.seed(1235)
+
+dx <- tibble(group = rep(c("A", "B"), each = 100),
+             value = c(rexp(100), (rexp(100, rate = 1) + 1.3)))
+
+ggplot(data = dx, aes(x = value, fill = group)) + theme_classic() +
+  geom_density(alpha = 0.6) +
+  scale_fill_viridis_d(option = "viridis")
+```
+
+# Examples
+
+Some data for us:
+
+```{r}
+
+set.seed(123456)
+d.para <- tibble(
+  group = rep(c("control", "treatmentA", "treatmentB"), each = 30),
+  blood_pressure = c(
+    rnorm(n = 30, mean = 120, sd = 10),
+    rnorm(n = 30, mean = 115, sd = 10),
+    rnorm(n = 30, mean = 110, sd = 10)
+    )
+)
+
+d.npara <- tibble(
+  group = rep(c("control", "treatmentA", "treatmentB"), each = 30),
+  blood_pressure = c(
+    rexp(n = 30, rate = 0.3) + 120,
+    rexp(n = 30, rate = 0.3) + 110,
+    rexp(n = 30, rate = 0.3) + 100
+  )
+)
+```
+
+# Parametric tests
+
+## T-tests
+
+```{r}
+#| label: ttest
+
+# compare treatment a and treatment b
+
+ggplot(data = d.para, aes(x = blood_pressure, fill = group)) + theme_classic() +
+  geom_density(alpha = 0.6) +
+  scale_fill_viridis_d(option = "viridis")
+  
+```
+
+```{r}
+#| label: control
+
+(t.out <- t.test(value ~ group, data = d.para |> filter(group != "control")))
+
+```

@@ -1,0 +1,342 @@
+---
+title: "Handling violated assumptions - linear regression & alternatives"
+author: "Mike B."
+date: "11/10/2025"
+format: revealjs
+---
+
+```{r}
+#| include: false
+#| label: setup
+
+#standard set
+library(tidyverse)
+library(emmeans)
+library(marginaleffects)
+
+#for bayesian modeling
+#install.packages(c("brms", "bayestestR", "bayesplot", "tidybayes"))
+library(brms)
+library(bayestestR)
+library(bayesplot)
+library(tidybayes)
+
+palette <- viridis::rocket(10)
+
+```
+
+## When assumptions aren't met
+
+Sometimes our data doesn't meet the assumptions of the analytical tools we would like to use - in my experience, more often than not. We often need to choose a different approach to make sense of our data, and we will look at a few options related to skewed data when we have linear regression in mind for our analysis. 
+
+## A note on planning analysis
+
+I usually recommend researchers don't plan the specific analytical tool they plan to apply (i.e., linear regression, t-test, etc.). Instead, I advise they plan on the effects they want to describe and choose the appropriate analysis when the data is known - especially unbounded continuous data.
+
+## Data
+
+This data is from a fairly recent experiment, where we ended up with with skewed data. The study investigated [fracture energy](https://en.wikipedia.org/wiki/Energy_release_rate_(fracture_mechanics)) in glued wood composites. The article is here:
+
+Pečnik JG, Pondelak A, Burnard MD, Sebera V. Mode I fracture of beech-adhesive bondline at three different temperatures. Wood Material Science & Engineering 2023; 18: 1349–1359.
+
+
+```{r}
+#| label: data
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+frac <- read_csv("data/Fracture_GcGf_v1.csv") |> 
+  mutate(
+    treatment =
+      case_when(
+        treatment == "control" ~ "Control",
+        treatment == "70C" ~ "70°C",
+        treatment == "140C" ~ "140°C"
+      ),
+    treatment = fct_relevel(factor(treatment), "Control", "70°C", "140°C"),
+    orientation = if_else(orientation == "R", "TR", "RT")
+  )
+
+frac |> slice_head(n = 10)
+```
+
+## Visualise
+
+Checking our data (Gf, in this case) we see some skew. Try with and without _facet_wrap()_.
+```{r}
+#| label: vis_raw
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+ggplot(data = frac, aes(x = Gf)) + theme_classic() +
+  geom_density() +
+  facet_wrap(. ~ treatment)
+
+```
+
+## Linear regression
+
+Here we fit a linear regression with interaction terms. I prefer to specify them explicitly with x1 + x2 + x3 + x1:x2 + x1:x3 + x2:x3 in "final" analyses documentation, but you can use a shortcut as in: x1 * x2 * x3, too.
+
+```{r}
+#| label: fit_lm
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+# fitting follows standard formula notation
+frac.lm <- lm(Gf ~ adhesive + treatment + orientation + 
+                adhesive:orientation +
+                adhesive:treatment + treatment:orientation,
+              data = frac)
+
+#Summary output
+#provides an overview of the model fit
+#key aspects: residual spread, estimates ("betas"),
+#fit diagnostics, like r-squared, f-statistics, etc.
+summary(frac.lm)
+
+#diagnostic plots
+#the most important are residuals vs (standardised) fitted
+# and the quantile-quantile plot (qqplot)
+#qqplot: all dots should be on the line, with no "s" shape
+#residuals: even vertical spread across the horizontal range, look out for
+#expanding or contracting patterns
+plot(frac.lm)
+```
+
+## Adjusting with a log transformation
+
+We see some problems with the diagnostics above. One common solution is to use a (natural) log transformation. This tends to bring outliers in and can make a right-skewed (long-right tail) approximately normal. Log transformations are convenient because they are easy to back-transform, or, to convert back to the original scale. There are some caveats (we get ratio's for comparisons and medians instead of means for estimates.)
+
+```{r}
+#| label: fit_log_transform
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+frac.lm2 <- lm(log(Gf) ~ adhesive + treatment + orientation +
+                 adhesive:orientation + treatment:orientation +
+                 adhesive:treatment, data = frac)
+
+summary(frac.lm2)
+plot(frac.lm2)
+```
+
+## Predictions
+
+Even if we want to just a point estimate for a group mean, we can use the predict function. 
+
+```{r}
+#| label: predict_each_val_gf
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+#we set up some new data to base our prediction on
+#this is just the model frame, and there are other ways to get it
+#but this is a good opportunity to introduce expand.grid() which makes
+#all combinations of variables given to it
+d.pre <- expand.grid(
+  adhesive = c("EPI", "MUF", "PUR"),
+  treatment = c("Control","70°C", "140°C"),
+  orientation = c("TR", "RT")
+)
+
+#we add our predicted values to the expanded grid from above which makes useful labels
+gf.pre <- as_tibble(cbind(d.pre, predict(frac.lm, newdata = d.pre, interval = "confidence")))
+
+#speaking of labels, for plots, we might want to make some nice group names
+gf.pre <- gf.pre |> mutate(
+  label = str_c(treatment, orientation, adhesive, sep = "-"),
+  label = fct_reorder(label, fit)
+)
+
+ggplot(gf.pre, aes(y = fit, ymin = lwr, ymax = upr, x = label,
+                   colour = treatment, linetype = orientation,
+                   shape = adhesive)) + theme_minimal() +
+  geom_point(size = 1.5) +
+  geom_errorbar() +
+  labs(y = "Mean Gf (N/mm)",
+       x = "Sample Group") +
+  scale_shape_manual(values = c(1,2,0), name = "Adhesive") +
+  scale_colour_manual(values = palette[c(9,3,5)], name = "Treatment") + scale_linetype_discrete(name = "Orientation") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,
+                               size = 6)
+  )
+  
+```
+
+```{r}
+#| label: predict_each_val_gf_log
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+gf.pre2 <- as_tibble(cbind(d.pre, exp(predict(frac.lm2, newdata = d.pre, interval = "confidence"))))
+
+gf.pre2 <- gf.pre2 |> mutate(
+  label = str_c(treatment, orientation, adhesive, sep = "-"),
+  label = fct_reorder(label, fit)
+)
+
+ggplot(gf.pre2, aes(y = fit, ymin = lwr, ymax = upr, x = label,
+                   colour = treatment, linetype = orientation,
+                   shape = adhesive)) + theme_minimal() +
+  geom_point(size = 1.5) +
+  geom_errorbar() +
+  labs(y = "Mean Gf (N/mm)",
+       x = "Sample Group") +
+  scale_shape_manual(values = c(1,2,0), name = "Adhesive") +
+  scale_colour_manual(values = palette[c(9,3,5)], name = "Treatment") + scale_linetype_discrete(name = "Orientation") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,
+                               size = 6)
+  )
+```
+
+## Comparisons
+
+## Standard linear regression
+
+Here we will use the emmeans function from the emmeans package to get comparisons
+```{r}
+#| label: compare_lm
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+#we can specify how our comparisons should be structured
+#here we say compare orientations given each adhesive*treatment combo
+lm.em <- emmeans(frac.lm, ~ orientation | adhesive * treatment,
+                 type = "response")
+
+lm.em
+
+#the pairs function then makes a nice table for us
+#confint provides confidence intervals
+lm.pairs <- as_tibble(confint(pairs(lm.em, adjust = "tukey")))
+
+lm.pairs
+
+```
+
+## Log-transformed
+
+Same as above, but instead of a - b we get a/b (a ratio). This is due to the log transformation and that log(a) - log(b) = a / b.
+```{r}
+#| label: compare_log
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+lm.em2 <- emmeans(frac.lm2, ~ orientation | adhesive * treatment,
+                 type = "response")
+
+lm.em2
+
+lm.pairs2 <- as_tibble(confint(pairs(lm.em2, adjust = "tukey")))
+
+lm.pairs2
+
+```
+
+## Visualising
+
+```{r}
+#| label: vis_mod_lm
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+ggplot(data = lm.pairs, aes(x = contrast, y = estimate,
+                            ymin = lower.CL, ymax = upper.CL,
+                            colour = treatment, 
+                            linetype = adhesive)) +
+  geom_hline(yintercept = 0, colour = "#FF6666") +
+  geom_point(position = position_dodge(width = 0.9)) +
+  geom_errorbar(position = position_dodge(width = 0.9)) +
+  coord_flip() +
+  theme_minimal() +
+  scale_linetype_discrete(name = "Adhesive") +
+  scale_color_manual(values = palette[c(9,3,5)]) +
+  labs(title="Pairwise comparisons between orientations",
+       subtitle = "For each combination of factors",
+       x = "Contrast", y = "Fracture energy (N/mm)") + 
+  theme(
+    panel.grid.major.y = element_blank()
+  )
+```
+
+```{r}
+#| label: vis_mods_log
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+ggplot(data = lm.pairs2, aes(x = contrast, y = ratio,
+                            ymin = lower.CL, ymax = upper.CL,
+                            colour = treatment, 
+                            linetype = adhesive)) +
+  geom_hline(yintercept = 1, colour = "#FF6666") +
+  geom_point(position = position_dodge(width = 0.9)) +
+  geom_errorbar(position = position_dodge(width = 0.9)) +
+  coord_flip() +
+  theme_minimal() +
+  scale_linetype_discrete(name = "Adhesive") +
+  scale_color_manual(values = palette[c(9,3,5)]) +
+  labs(title="Pairwise comparisons between orientations",
+       subtitle = "For each combination of factors",
+       x = "Contrast", y = "Fracture energy (N/mm)") + 
+  theme(
+    panel.grid.major.y = element_blank()
+  )
+```
+
+
+## Gamma regression
+
+An alternative is a generalised linear model (glm) with a distribution that is close to our data, in this case a gamma distribution can be made to fit rather easily. We use glm() instead of lm(), and now we need to specify the family we want to use as well. Otherwise we follow the same procedure. We will use glm() more in the future.
+
+```{r}
+#| label: gamma_regression
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+frac.glm <- glm(Gf ~ adhesive + treatment + orientation +
+                  adhesive:treatment + adhesive:orientation +
+                  treatment:orientation, data = frac,
+                family = Gamma(link = "log"))
+
+summary(frac.glm)
+plot(frac.glm)
+
+glm.em <- emmeans(frac.glm, ~ orientation | adhesive * treatment,
+                  type = "response")
+glm.em
+
+glm.pairs <- as_tibble(confint(pairs(glm.em, adjust = "tukey")))
+glm.pairs
+
+ggplot(data = glm.pairs, aes(x = contrast, y = ratio,
+                            ymin = lower.CL, ymax = upper.CL,
+                            colour = treatment, 
+                            linetype = adhesive)) +
+  geom_hline(yintercept = 1, colour = "#FF6666") +
+  geom_point(position = position_dodge(width = 0.9)) +
+  geom_errorbar(position = position_dodge(width = 0.9)) +
+  coord_flip() +
+  theme_minimal() +
+  scale_linetype_discrete(name = "Adhesive") +
+  scale_color_manual(values = palette[c(9,3,5)]) +
+  labs(title="Pairwise comparisons between orientations",
+       subtitle = "For each combination of factors",
+       x = "Contrast", y = "Fracture energy (N/mm)") + 
+  theme(
+    panel.grid.major.y = element_blank()
+  )
+```
+
+

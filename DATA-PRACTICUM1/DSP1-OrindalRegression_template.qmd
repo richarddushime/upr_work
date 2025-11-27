@@ -1,0 +1,104 @@
+---
+title: "Ordinal regression"
+author: "Mike B."
+format: revealjs
+---
+
+Linear regression with metrics model 
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(ordinal)
+
+palette <- viridis::viridis(10, option = "magma")
+
+`%notin%` <- Negate(`%in%`)
+```
+
+## Data
+
+```{r}
+#| label: data
+d.boring <- read.csv("data/boring-interesting.csv")
+b_i_scale <- tibble(value= c(-2, -1, 0, 1, 2),
+                    labels= c("Very boring", "Boring", "Neutral", "Interesting", "very Interesting"))
+d.boring <- right_join()
+
+```
+
+## Visualise
+
+```{r}
+#| label: visualise
+
+ggplot(data = d.boring, aes(x=Labels) + 
+         geom_col())
+```
+
+## Analyse - Ordinal regression 
+
+```{r}
+
+#| label: logistic pdf oeverlay theory 
+logistic_pdf <- function(x, loc = 0, s=1) {
+  exp(-(x - loc) / s) / (s *(1+Exp(-(x-loc) / s))^2)
+}
+
+logistic.df <- tibble(x= seq(-10, 10, length.out = 1000),
+                      y= )
+
+```
+
+# Ordinal regression probability estimates 
+
+```{r}
+#| label: probs_estimates_example
+
+round(plogis(-0.4) - plogis(-1.2), 3) *100
+
+```
+
+##  Visualizing the probability  of very interesting 
+
+```{r}
+#| label: very interesting 
+
+
+```
+
+
+## ordinal regression fitting 
+
+```{r}
+#| label: ordinal_fit 
+
+boring.clm <- ()
+```
+
+
+## model visualisation 
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
