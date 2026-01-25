@@ -1,0 +1,118 @@
+---
+title: "DSP I - 2025/2026 - Beta regression - Bayesian style"
+author: "Mike B."
+format: revealjs
+---
+
+## Goal: model survey response data on a likert-like scale
+
+Data on a likert-like scale are categories in a specific order. They seek to measure something that cant be measured directly (like beauty, or interestingness, or agreement). This is called a latent variable. (There are other ways to model latent variables, too).
+
+## Motivation
+
+A survey (ongoing!) asks respondents to rate pictures of walls along several likert-like scales, including boring-interesting (this is a semantic differential scale, which has opposite adjectives on either end of the scale).
+
+We will examine if boring-interesting ratings differ between wall types.
+
+## Our setup
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(betareg)
+library(brms)
+library(distributional)
+library(ggdist)
+library(tidybayes)
+library(bayestestR)
+
+palette <- viridis::viridis(10, option = "turbo")
+
+`%notin%` <- Negate(`%in%`)
+inv.logit <- function(x) { exp(x) / (1 + exp(x))}
+```
+
+## Data
+
+```{r}
+#| label: data
+
+
+d.sound <- read_csv("data/sound_acceptability.csv")
+```
+
+## Visualise
+
+```{r}
+#| label: visualise
+
+
+```
+
+## Analyse - Beta regression
+
+Beta regression is used when we have data bounded between in the range 0 < y < 1. The beta distribution is not defined for y = 0 or y = 1, so we refer to these as degenerate values. If we have zeroes and ones in our data set we have a couple options:
+
+  1. Fit a Zero-One inflated beta regression model or ordered beta regression
+  2. With very few 0s or 1s we may consider dropping those values or adding or subtracting a small quantity (i.e., 0.0001) to/from the degenerate values.
+
+We aren't limited to values that are explicitly between 0 and 1. Scaling to values between 0 and 1 is quite easy, so if we have a scale with with five scored items between 1 and 5, we have a minimum score of 5 and a maximum score of 25. We can rescale this range to 0,1 fit our beta model and then scale the results back to the original scale quite easily. (This is a case where degenerate values are likely to occur, so option 1 above is useful.)
+
+The beta distribution has two characteristics: shape (alpha) and scale (beta).
+
+```{r}
+
+```
+
+ 
+Why not linear regression? Linear regressions assumes unbounded ranges. Even with low probabilities of values outside the observable range, out estimates are likely to be biased to some degree.
+
+Our data doesn't currently have a column with values 0 < y < 1, so we should create one:
+
+```{r}
+
+```
+
+## Bayesian regression
+
+
+
+## Priors
+
+To fit a Bayesian regression model we need to know another piece of information that we haven't encountered before: _Priors_. Priors are our prior knowledge - what we know going into our analysis. While this can be intuition, it best to utilise information from previously gained knowledge or to use _uninformative_ or _weekly informative_ priors. 
+
+We use priors to describe an expected range for the estimated betas, intercepts, and variances to take. These require a some understanding of the scale the betas are likely to be on. For example, fitting a standard (non-transformed) linear regression, the beta coefficient for a slope will be the mean value from the average for the baseline case and could be -120, or zero, or 146 if that's the sample mean. However, in regressions that use other scales like a logit scale or log scale) large values are exceedingly rare. We need to set our priors accordingly.
+
+```{r}
+#| label: priors
+
+```
+
+By default, we have a "flat" prior for our betas, and student's t distribution for the intercept and sigma. A flat distribution is a uniform 1 distribution.
+
+
+```{r}
+#| label: model_fitting
+
+
+```
+
+
+```{r}
+#| label: model_checking
+
+
+```
+
+```{r}
+#| label: extracting_estimates
+
+
+```
+
+```{r}
+#| label: visualising_estimates
+
+
+```

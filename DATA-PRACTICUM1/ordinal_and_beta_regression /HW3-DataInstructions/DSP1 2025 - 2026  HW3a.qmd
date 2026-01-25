@@ -1,0 +1,62 @@
+---
+title: "Homework 3 - DSP1 - 2025/2026"
+author: "Your name and student ID"
+format: html
+---
+
+Homework 3
+
+Step 1: Rename this file as follows: "DSP1-HW3-Name-StudentID" with your name and student ID replacing the appropriate parts.
+Step 2: Update the author field in the YAML as indicated.
+Step 3: Ensure the document has a Table of Contents when rendered (hint: you set this in the YAML)
+Step 3: Complete to the Tasks below. Be sure to add meaningful label tags to each R code chunk and structure your analysis sensibly.
+Step 4: Render to html or pdf (you may need to change target formats in the YAML)
+Step 5: Zip (or otherwise compress) the html other relevant support folders and include this qmd file with your work filled in
+Step 6: Submit the compressed folder which should be named "DSP1-HW3-Name-StudentID" through the e-classroom by Tuesday 6 January 2026.
+
+Hint: Make sure that when I open the html file I can view all the embedded images, see all your code and easily identify your responses to questions.
+
+Note: Please see the rules for using AI on the e-classroom.
+
+## Ordinal regression and beta regression
+
+This homework will cover two regression types: logistic and ordinal regression. 
+
+## Ordinal regression
+
+A recent survey asked respondents to rate wood wall panels they viewed on a several semantic differential scales. These scales use two adjectives with opposite meanings and ask respondents to describe some stimuli by selecting a point on the scale between the two adjectives.
+
+In this case, the scale was between artificial and natural with the following ordered categories:
+
+Artificial, Somewhat artificial, Neutral, Somewhat Natural, Natural
+
+The data set "artificial_natural.csv" includes a numeric version of this scale (-2 to 2) and a character version.
+
+Fit a an ordinal regression model that uses the character version of the scale ("labs" in the data provided) as the dependent variable and Panel (8 level categorical), Age (numeric, continuous), and NR.mu (numeric, continuous) as the predictor variables. Use a _logit_ link function. "labs" will need to be converted to an ordered factor with the factors in the correct order as above. The other variables are self explanatory enough, but NR.mu is the mean score of the items on the nature relatedness scale [NR-6 version](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2013.00813/full).
+
+  1. Are there differences in ratings between panel types? Provide a text explanation and visualisation that illustrates the
+  differences on the probability scale.
+  2. What is the effect of age? Is it meaningful? Provide a text explanation and a visualisation to explain the outcome.
+  3. Does nature relatedness have an effect? Provide a text explanation and a visualisation to explain the outcome.
+  4. Create a visualisation of the boundaries between artificial-natural scale categories overlaid on a logistic distribution for the
+  2waycladding panel (baseline unless you change something) and the singlebrown panel (two separate visualisations are ok) In each,
+  highlight the probability of selecting "somewhat natural" by using a fill between the boundaries for that category and label of the
+  probability of selecting that category.
+  5. Refit the model using a _probit_ link. State which model you prefer between the logit and probit model and why. (Refer to the Bürkner and Vuorre (2019) reading on the e-classroom for support.)
+
+
+
+## Beta regression
+
+Use the attached data about democracy worldwide. It is a subset from the (Varieties of Democracy)[https://www.v-dem.net] project (V-Dem). You will model the proportion of female (prop_fem) members of parliament (MP) with different predictors.
+
+The data is in the "vdem_2020_subset.csv" file.
+
+1. Visualise the proportion of women in parliament based on quota in two different ways.
+2. Fit a beta regression with prop_fem as the response variable with quota and polyarchy (degree of democracy) as predictor variables.
+3. Visualise the proportion of women MPs based on quota
+4. Visualise the proportion of women MPs based on polyarchy
+5. Write a brief explanation of the outcomes, refer to previous visualisations or create new ones to help with the explanation.
+
+
+

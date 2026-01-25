@@ -1,0 +1,420 @@
+---
+title: "Logistic regression"
+author: "mike burnard"
+date: "17 Nov 2025"
+format: revealjs
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+#standard set
+library(tidyverse)
+library(emmeans)
+library(marginaleffects)
+
+#introducing
+# you may need to install these with install.packages()
+library(broom)
+library(tidymodels)
+#library(ISLR)
+```
+
+## Logistic regression
+
+- Used when we have a binary outcome (0,1 | Yes,No), etc.
+- A _classification_ method
+- In R, the process is similar to linear regression
+
+Example: Your bank wants to assess if online transactions are fraud or not. They might look at IP address, website, transaction amounts as independent variables, but the dependent variable is binary: Fraud or Authentic.
+
+We will look at another case: given annual income, and loan balance can we predict if someone will default on their loan (fail to make the payment).
+
+## Training and testing datasets
+
+When we fit a model to experimentally collected data - when there was a planned experiment - we are using statistical models to explain the data and (sometimes) make predictions future experiments based on the data.
+
+In a machine/statistical learning environment we are often trying to fit a model to a large set of data to predict future events. The same techniques are commonly applied. However, in ML we often use a training dataset to fit the model and testing dataset to assess how well the model fits. 
+
+In this case, we will take use the Default dataset from the ISLR package, and split it into a training data set with 60 % of the values (~6k), and a testing data set with the rest (~4k)
+
+## Data
+
+```{r}
+#| label: data
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+d <- ISLR::Default
+
+d <- d |> mutate(
+  default.num = if_else(default == "No", 0, 1)
+)
+
+#two ways to split the data in to training and testing
+#first, a simple approach with no packages
+set.seed(1234)
+#here we create a vector with 10,000 rows that have the values TRUE, FALSE
+#there will be about 60% TRUE and 40% FALSE, but not exactly..
+d.samp <- sample(c(TRUE, FALSE), nrow(d), replace = TRUE, prob=c(0.6, 0.4))
+
+table(d.samp)
+
+d.train <- d[d.samp, ]
+d.test <- d[!d.samp, ]
+
+#using the tidymodels package, we can get exact splits 
+#with a few simple functions
+split.d <- initial_split(d, prop = 0.6)
+train.d <- training(split.d)
+test.d <- testing(split.d)
+
+
+```
+
+
+## Visualise
+
+Here we visualise the relationship between default status and income and balance. 
+
+```{r }
+#| label: vis_raw1
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+ggplot(d.train, aes(y = balance, x = income, colour = default)) + 
+  geom_point(alpha = 0.4) +
+  theme_classic()
+
+d.train |> pivot_longer(cols=3:4, names_to = "Finance", values_to="Euros") |> 
+  ggplot(aes(y = Euros, x = default, colour = student)) +
+  geom_boxplot() +
+  facet_wrap(~ Finance, scales = "free_y") +
+  theme_classic()
+```
+
+## Visualisations continuned
+
+```{r }
+#| label: vis_raw2
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+ggplot(d.train, aes(y=default.num, x = balance, colour = default)) +
+  geom_point(shape = 1) +
+  theme_classic()
+```
+
+## Fitting logistic regression
+
+Fitting the model follows the standard formula notation. We use the glm() function for generalised linear models instead of lm(). With glm() we need to specify the family of distribution we will use. For logistic regression, its the binomial family. 
+
+glm() distribution families use a link function to set the transformation to make the data fit within the expected range of the distribution families. We usually don't need to change this, but its possible to change it. By default the link function for the binomial family is the logit function:
+
+log(Pr(x) / (1 + Pr(x)))
+
+Pr = probability. (note the correction to 1 PLUS Pr(x))
+
+This is the log (natural) of the odds, which is why the model returns coefficients on the log-odds scale. This means we need to back transform if we want to report odds by exponentiating: exp(). 
+
+Recall that odds are the probability of something happening by the odds of that thing not happening. So, the odds of a fair coin coming up heads are: 0.5 / (1 - 0.5) = 0.5 / 0.5 = 1, or even odds of getting a heads. The odds of rolling a 6 on a fair six-sided die are: 0.16667 / (1 - 0.16667) = 0.16667 / 0.83333 = 0.2.
+
+```{r }
+#| label: model 1
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+d.lrb <- glm(default.num ~ balance, data=d.train, family = "binomial")
+
+#coefficients are log-odds
+summary(d.lrb)
+
+```
+
+
+## Extracting values from coefficients
+
+We can use the inverse logit function to extract probabilities of defaulting from the model. Below we define a function to calculate the inverse logit function: inv.logit.
+
+How we choose x in the function below determines what we are predicting.
+
+If we use the coefficient for Intercept (-10.6), we are predicting the probability of defaulting with 0 balance. This should be defined to be zero, but because we are modeling this its approximately 0.
+
+```{r}
+#| label: coefs
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+coef(d.lrb)
+broom::tidy(d.lrb)
+
+#define the inverse logit function
+inv.logit <- function(x) { exp(x) / (1 + exp(x))}
+
+#probability of default with 0 balance
+inv.logit(-10.6) * 100
+#just to show it works
+exp(-10.6) / (1 + exp(-10.6)) * 100
+
+#probability of defaulting with a balance of 1250
+#now we plug the entire right-hand side of the regression equation as x 
+#recall the general format is y ~ b0 + b1x (in our case y is logit(y))
+#b0 is the intercept, b1 is the coefficient for balance, and x is the balance
+
+inv.logit(-10.658 + 0.0055 * 1250) * 100 # 2.2 %
+
+#for a balance of 1500
+
+inv.logit(-10.658 + 0.0055 * 1500) * 100 # 8.3 %
+
+#for a balance of 1750
+
+inv.logit(-10.658 + 0.0055 * 1750) * 100 # 26.3 %!! 
+predict(d.lrb, newdata = tibble(balance = 1750), type="response")
+
+```
+
+
+
+## Comparing models with ANOVA
+
+We have other variables to consider, we could see some differences between students and non-students in our boxplot above, but no apparent relationship for income. Lets make a model with students as a second predictor then try to choose which model fits best. We can use the anova() function (important! not aov()) for this.
+
+```{r}
+#| label: model_compare
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+# first fit the model
+d.lrbs <- glm(default.num ~ balance + student, data = d, family = "binomial")
+summary(d.lrbs)
+
+# use anova to compare
+anova(d.lrb, d.lrbs)
+
+# model 2 (balance + student) has a significantly lower deviance
+```
+
+## Digging deeper into the unexpected coefficient for students...
+
+In class I was surprised to see the coefficient associated with student status and misintrepeted it. My apologies for that, but lets dig deeper to find the explanation.
+
+Lets look at three models:
+
+1. default ~ balance
+2. default ~ student (we skipped this in class)
+3. default ~ balance + student
+
+```{r}
+#| label: digging_deeper
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+#balance model (d.lrb from above)
+summary(d.lrb)
+#here we see an increase in probability of defaulting as balance increases
+# we get the oddratio per increase 1 unit increase in balance 
+# by exponentiating the coefficient (sometimes called beta) for balance
+exp(0.0055) # 1.0055
+
+#student model (new)
+d.lrs <- glm(default.num ~ student, data = d.train, family = "binomial")
+summary(d.lrs)
+#as above we see an increase in probability of defaulting for students
+exp(0.474) #1.6064
+
+#balance+student model (d.lrbs from above)
+summary(d.lrbs)
+#here we see a negative association with the probability of defaulting for 
+#student because the odds are less than 1!
+exp(-0.792) #0.4529
+```
+
+So, what is happening here? Balance is correlated with student status. Students tend to have a higher balance than non-students, but they don't default as frequently as non-students _at higher balances_. So, as balance increases non-students default more often and non-students default less often. 
+
+This is a risk of not including multiple variables in a regression. If we look at two variables separately, we assess the risk of default quite differently for students. The next boxplot shows that students do tend to carry a higher
+
+```{r}
+#| label: balance_student
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+ggplot(data = d, aes(y=balance, x = student)) + theme_classic() +
+  geom_boxplot()
+```
+
+
+## Predictions for default status for students vs. non-students carrying a specific balance
+
+We can use our inverse logit function from above to make the comparisons here. We can also use the predict function here, but to be clear about what's going on lets look at the manual approach first, then using predict()
+```{r}
+#| label: predict_student_balance
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+
+#non-student (we set that coefficient to 0), balance = 1500
+inv.logit(-10.7495 + 0.005738*1500 - 0.71488 * 0) * 100 # 5.4 %
+exp(-10.7495 + 0.005738*1500 - 0.71488 * 1) / (1 + exp(-10.7495 + 0.005738*1500 - 0.71488 * 1)) * 100
+#student (we set that coefficient to 1), balance = 1500
+inv.logit(-10.7495 + 0.005738*1500 - 0.71488 * 1) * 100 # 10.5 %
+
+
+new.d <- tibble(balance = c(1500, 1500),
+                student = c("No", "Yes"))
+
+predict(d.lrbs, newdata = new.d, type = "response") * 100
+coef(d.lrbs)
+```
+
+
+## Comparisons
+
+We can use the helpful packages emmeans and marginaleffects to get some comparisons
+```{r}
+#| label: comparisons
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+# taken at the mean of balance
+bs.em <- emmeans(d.lrbs, ~ student, type = "response")
+bs.em
+confint(pairs(bs.em)) # returns an odds ratio
+
+#also taken at the average of balance ~ 835 EUR
+# model.frame is a nice shortcut so we don't have to create 
+# a new data frame for the newdata input.
+avg_comparisons(d.lrbs, newdata = model.frame(d.lrbs),
+                variables = list(student = "pairwise"),
+                type = "response")
+
+#using our new.d from above balance = 1500
+avg_comparisons(d.lrbs, newdata = new.d,
+                variables = list(student = "pairwise"),
+                type = "response")
+```
+
+
+## Predictions
+
+Lets take a closer look at making predictions with the predict function.
+
+Doing manual calculations as we did above can get complicated for more complex regression models with lots of predictors or if we have interaction effects. It can get tedious if we want to check many cases. 
+
+Here we will make predictions for 5 balance values for both students and non students.
+```{r }
+#| label: preds
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+#predict wants new data for this type of prediction
+newdata <- tibble(
+  student = rep(c("Yes", "No"), times = 5),
+  balance = rep(c(750, 1000, 1250, 1500, 2000), each = 2)
+)
+
+d.preds <- bind_cols(newdata, probs = predict(d.lrbs, newdata = newdata, 
+                                     type="response"))
+
+d.preds
+
+#We need confidence intervals, so lets add those.
+#unfortunately its a little more complicated
+#for simple CIs we need to calculate them on the linear scale
+#that means we need to get the predictions, calculate CIs, then 
+#transform back to the predicted space
+#to do this we set type = link so we have logit scaled values
+#and we ask for the standard error, which is part of the calculation of CIs
+
+d.preds <- bind_cols(newdata, predict(d.lrbs, newdata = newdata, 
+                                     type="link", se.fit = TRUE))
+d.preds 
+
+#the basic formulate for a confidence interval half-width is:
+#critical value * standard error.
+#critical value for ci can be retrieved with qnorm(1-alpha/2)
+#for a 95% CI it is qnorm(1-0.05/2) or qnorm(0.975)
+d.preds <- d.preds |> mutate(
+  ci.upper = fit + 1.96 * se.fit,
+  ci.lower = fit - 1.96 * se.fit
+)
+
+#now we need to convert to the response scale = our probabilities
+
+#we can use our inverse logit function from above, or we can pull it from the 
+#model like this: h/t:
+#https://stackoverflow.com/questions/14423325/confidence-intervals-for-predictions-from-logistic-regression
+d.preds <- d.preds |> mutate(
+  fit.resp = d.lrbs$family$linkinv(fit),
+  ci.upper.resp = d.lrbs$family$linkinv(ci.upper),
+  ci.lower.resp = d.lrbs$family$linkinv(ci.lower)
+)
+d.preds
+```
+
+## Vis predictions
+
+```{r}
+#| label: vis_preds
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+ggplot(data = d.preds, 
+       aes(x = balance, y = fit.resp, ymin = ci.lower.resp, ymax = ci.upper.resp,
+           colour = student)) +
+  geom_pointrange() +
+  theme_classic()
+```
+
+
+
+## Assessing the model
+
+A convenient number for assessing fit analogous to R^2 for a linear regression is McFaddens' pseudo R^2. 
+
+
+```{r }
+#| label: mcfaddans_psr2
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+#install.packages("pscl")
+pscl::pR2(d.lrbs)["McFadden"]
+```
+
+## Classification rate
+
+Here we use the test data we created earlier to see how well our model performs on the other part of the original dataset. We use this approach when we would like to make predictions about new data, however it can help us understand accuracy for descriptive models, too.
+
+```{r }
+#| label: class_rat
+#| echo: true
+#| code-fold: true
+#| code-summary: "click for code"
+
+test.preds <- predict(d.lrbs, newdata=d.test, type="response")
+
+d.test$preds <- test.preds
+
+table(d.test$default, d.test$preds > 0.5)
+table(d.test$default, d.test$preds > 0.5) |> prop.table()
+```
+
+* true positives (Bottom-right quadrant): these are cases in which we predicted the customer would default and they did.
+* true negatives (Top-left quadrant): We predicted no default, and the customer did not default.
+* false positives (Top-right quadrant): We predicted yes, but they didn’t actually default. (Also known as a “Type I error.”)
+* false negatives (Bottom-left): We predicted no, but they did default. (Also known as a “Type II error.”)

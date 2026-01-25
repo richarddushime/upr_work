@@ -1,0 +1,749 @@
+DSP I - 2025/2026 - Beta regression - Bayesian style
+Author
+Mike B.
+
+Published
+Dec 20, 2025
+
+Goal:
+Through working with this data we are going to learn about beta regression, which is used for data in the bounds 0 < y < 1 (this range is sometimes called the “support”). Note that it excludes both zero and one. Other techniques are needed to address those (some more description below). Zero and one are in this case called “degenerate” values.
+
+We will also use this opportunity to introduce Bayesian regression.
+
+Motivation
+Our goal was to find a more sustainable floor construction system that met the standards and then determine which one was most suitable for occupants.
+
+The data we will use for this exercise comes from a study in the domain of psychoacoustics - where we examine the effect of different aural (acoustic) environments on subjects by playing different sounds in a controlled setting and monitoring subjective evaluation, cognitive function, and physiological indicators. In this case, different floor constructions (in the data, screed: A, C, H, I) were developed and sounds were recorded beneath the floors when people walked on them at different paces (speed: 80 bpm and 100 bpm) with and without shoes (shoes: bare, shoes).
+
+We will look at one response scale related to acceptability. Study participants used a tablet to respond to questions while in our anechoic chamber as we played different sounds for them. The acceptability question was on a slider with a 10-point scale, but decimal values were included.
+
+For this case, I have removed a few rows of data that had zero’s or 10s.
+
+Our setup
+library(tidyverse)
+
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.2.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+library(betareg) # frequentist beta regression
+library(distributional) # this is useful for drawing distributions
+library(brms) # fitting bayesian regression models (with stan)
+
+Loading required package: Rcpp
+Loading 'brms' package (version 2.23.0). Useful instructions
+can be found by typing help('brms'). A more detailed introduction
+to the package is available through vignette('brms_overview').
+
+Attaching package: 'brms'
+
+The following object is masked from 'package:stats':
+
+    ar
+library(ggdist) # plotting distributional data in ggplot
+
+
+Attaching package: 'ggdist'
+
+The following objects are masked from 'package:brms':
+
+    dstudent_t, pstudent_t, qstudent_t, rstudent_t
+library(tidybayes) # handling Bayesian models
+
+
+Attaching package: 'tidybayes'
+
+The following objects are masked from 'package:brms':
+
+    dstudent_t, pstudent_t, qstudent_t, rstudent_t
+
+The following object is masked from 'package:distributional':
+
+    parameters
+library(bayestestR) # calculating some statistics from Bayesian models
+
+
+Attaching package: 'bayestestR'
+
+The following object is masked from 'package:tidybayes':
+
+    hdi
+
+The following object is masked from 'package:ggdist':
+
+    hdi
+palette <- viridis::viridis(10, option = "turbo")
+
+`%notin%` <- Negate(`%in%`)
+
+Data
+# our data
+d.sound <- read_csv("data/sound_acceptability.csv")
+
+Rows: 812 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): screed.alpha, shoes
+dbl (2): accept.mu, speed
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+glimpse(d.sound)
+
+Rows: 812
+Columns: 4
+$ accept.mu    <dbl> 4.273333, 6.266667, 8.010000, 5.766667, 4.966667, 7.74000…
+$ screed.alpha <chr> "A", "A", "A", "A", "C", "C", "C", "C", "H", "H", "H", "H…
+$ speed        <dbl> 100, 80, 100, 80, 100, 80, 100, 80, 100, 80, 100, 80, 100…
+$ shoes        <chr> "bare", "bare", "shoe", "shoe", "bare", "bare", "shoe", "…
+Visualise
+ggplot(data = d.sound, aes(x = accept.mu)) + 
+  geom_density()
+
+
+
+ggplot(data = d.sound, aes(x = accept.mu, y = screed.alpha)) +
+  stat_slab()
+
+
+
+ggplot(data = d.sound, aes(x = accept.mu, y = screed.alpha)) +
+  stat_halfeye(point_interval = "median_qi")
+
+
+
+Analyse - Beta regression
+Beta regression is used when we have data bounded between in the range 0 < y < 1. The beta distribution is not defined for y = 0 or y = 1, so we refer to these as degenerate values. If we have zeroes and ones in our data set we have a couple options:
+
+Fit a Zero-One inflated beta regression model or ordered beta regression
+With very few 0s or 1s we may consider dropping those values or adding or subtracting a small quantity (i.e., 0.0001) to/from the degenerate values. (Do this sparingly, only if you have very few cases… < 1 % or so).
+We aren’t limited to values that are explicitly between 0 and 1. Scaling to values between 0 and 1 is quite easy, so if we have a scale with with five scored items between 1 and 5, we have a minimum score of 5 and a maximum score of 25. We can rescale this range to 0,1 fit our beta model and then scale the results back to the original scale quite easily. (This is a case where degenerate values are likely to occur, so option 1 above is useful.)
+
+The beta distribution has two characteristics: shape (alpha) and scale (beta). Change the values in d.beta below to see how it changes.
+
+d.beta <- tibble(
+  shape = c(1, 1, 5, 5, 10, 10),
+  scale = rep(c(5,10), times = 3)
+)
+
+ggplot(data = d.beta, aes(xdist = dist_beta(scale, shape),
+                          colour = as.factor(shape),
+                          linetype = as.factor(scale))) +
+  stat_slab(fill = NA) +
+  coord_cartesian(expand = FALSE) +
+  scale_colour_viridis_d(option = "turbo", begin = 0.3, end = 0.7) +
+  theme_classic()
+
+
+
+Why not linear regression? Linear regressions assumes unbounded ranges. Even with low probabilities of values outside the observable range, out estimates are likely to be biased to some degree.
+
+Our data doesn’t currently have a column with values 0 < y < 1, so we should create one:
+
+glimpse(d.sound)
+
+Rows: 812
+Columns: 4
+$ accept.mu    <dbl> 4.273333, 6.266667, 8.010000, 5.766667, 4.966667, 7.74000…
+$ screed.alpha <chr> "A", "A", "A", "A", "C", "C", "C", "C", "H", "H", "H", "H…
+$ speed        <dbl> 100, 80, 100, 80, 100, 80, 100, 80, 100, 80, 100, 80, 100…
+$ shoes        <chr> "bare", "bare", "shoe", "shoe", "bare", "bare", "shoe", "…
+d.sound$accept.beta <- d.sound$accept.mu / 10 # scale to 0 < y < 1
+d.sound$screed.alpha <- as.factor(d.sound$screed.alpha)
+# speed is numeric: 80 or 100. Given that we have only two options
+# treating them as a factor is probably safer than expecting a metric relationship
+d.sound$speed <- as.factor(d.sound$speed) 
+d.sound$shoes <- as.factor(d.sound$shoes)
+
+Bayesian analysis
+Up until now we’ve been working in a frequentist setting. This has been the conventional approach for quite some time. Another approach is Bayesian analysis, which is an older way of approaching data analysis. Bayesian analysis is more deeply rooted in probability theory and Baye’s theorem (or Baye’s rule) is a statement of using probabilities to define the credibility of different possibilities that may occur (in an experiment, in business settings, in life…). One of the major benefits of Bayesian analysis is full estimation of uncertainty - we’ll see this later when we look at our posterior distributions! We don’t have p-values but have an analogous tools called probability of direction, which we will look at in more detail. We will explore other key concepts as we proceed.
+
+I only want to touch on Bayesian analysis here to present that an alternative exists and because it is a good demonstration of some tools in R. However, I will disclose that I have switched almost entirely to Bayesian analysis in the last year.
+
+Frequentist vs Bayesian analysis
+There remains some controversy between frequentist and Bayesian analysts. Both approaches have their strengths and weaknesses. One of the major weaknesses of Bayesian analysis is the intractability of some of calculations behind it. This weakness has more or less been resolved through sampling techniques that are now computationally reasonable to conduct given the compute power we have these days, even on our personal computers. Complex models are difficult to run on smaller machines though, and I often run more complex models on a server. From the Bayesian side many of the weaknesses in frequentist analysis are related to null hypothesis significance testing (the whole concept, but also the rigidity of experimental design to make NHST work, that is often ignored). From the frequentist side, the weaknesses of Bayesian analysis are often considered to lie within intractability and now computational power needed to conduct analysis, but also with some philosophical perspectives related to incorporating prior knowledge and flexibility linked with updating knowledge an incorporating that information into our modelling.
+
+Bayes’ Theorem
+ 
+
+where D = data, and 
+ is our belief.
+
+Terminology
+ the posterior - the result of our analysis, the credibility of 
+ - a parameter value - given the data we have D.
+ the prior - your belief / previous knowledge about the situation (typically related to a hypothesis). Once defined can also be considered the credibility your belief without considering the data.
+ the likelihood - the probability the data could be generated given a parameter 
+Prior belief - most commonly our hypothesis- think in terms of a similar experiment found results n +/- m, so I belief that to be a reasonable estimate for what my data will look like.
+probability of the data 
+: a normalising factor, with the probability of the event, without conditions. Also called marginal likelihood or simply evidence as I have labelled it below.
+credible intervals - the range in which we think the target estimate will reliably lie. (Analogous to a confidence intervals from a frequentist approach.)
+Putting it together
+Returning to Baye’s theorem,
+ 
+
+we can relabel the parts with the terminology
+
+ 
+
+Priors
+To fit a Bayesian regression model we need to know another piece of information that we haven’t encountered before: Priors. Priors are our prior knowledge - what we know going into our analysis. While this can be intuition, it best to utilise information from previously gained knowledge or to use uninformative or weekly informative priors.
+
+We use priors to describe an expected range for the estimated betas, intercepts, and variances to take. These require a some understanding of the scale the betas are likely to be on. For example, fitting a standard (non-transformed) linear regression, the beta coefficient for a slope will be the mean value for the baseline case and could be -120, or zero, or 146 if that’s the sample mean. However, in regressions that use other scales like a logit scale or log scale large values are exceedingly rare. We need to set our priors accordingly.
+
+By default, we have a “flat” prior for our betas, and student’s t distribution for the intercept and sigma. A flat distribution is a uniform 1 distribution.
+
+# We can see some the default setting: flat for beta's and the other parameters 
+# will vary based on the specific family
+# defaults for variance/shape estimates are usually a good starting point and
+# I wouldn't change those without reason
+# Intercept can be set based on model family and prior information
+# other than that I use weekly informative priors most of the time
+# normal(0,3) (or 5, or 10 previous experiments, pilot data, or well founded 
+# expectations)
+default_prior(accept.beta ~ screed.alpha + shoes + speed, data = d.sound, family = "beta")
+
+                prior     class          coef group resp dpar nlpar lb ub tag
+               (flat)         b                                              
+               (flat)         b screed.alphaC                                
+               (flat)         b screed.alphaH                                
+               (flat)         b screed.alphaI                                
+               (flat)         b     shoesshoe                                
+               (flat)         b      speed100                                
+ student_t(3, 0, 2.5) Intercept                                              
+    gamma(0.01, 0.01)       phi                                      0       
+       source
+      default
+ (vectorized)
+ (vectorized)
+ (vectorized)
+ (vectorized)
+ (vectorized)
+      default
+      default
+# we cab set the betas all at once as below
+# or we can additionally specify coef = "nameofcoef" to set them individually
+# beta regression uses a logit link so it returns estimates for betas on the
+# logit scale - we shouldn't expect large numbers....
+priors <- c(
+  prior("normal(0,3)", class = "b")
+)
+
+Fitting a Bayesian regression
+We need some extra information for the sampling process than what we already know.
+
+chains: The sampler runs chains of random walks through “parameter space” - specifically Markov Chain Monte Carlo. To be confident in the sampling process and to be sure multiple chains come to the same/similar conclusions we want to run multiple chains. Four is my default choice.
+iterations (iter): the number of steps in the random walk. 4000 is a good place to check if the model looks like it will work. I use 20000 for reporting. For complex models I might do some more robust testing around 10000. Some ordinal regressions I’ve been working on lately take around 15 minutes to run 10000 iterations, so I wan’t to be sure the model makes sense before I jump up to 20000 for final reporting.
+warmup: the first steps in the walk tend to be somewhat unstable, but tend to be settle into to more consistent patterns after a while. We tend to toss out those first steps. For iterations >= 4000, set warmup to iter/4. For iter < 4000 set warmup to 2000 as a general starting point.
+cores: this type of sampling is ideal for parallel processing. If you have the cores available, use the same number of cores as chains. Using more won’t help. Use parallel::detectCores() to see how many R thinks you have. Not here the answer may vary by operating system and be real cores or logical cores see ?parallel::detectCores for more details
+Seed is optional. I suggest not using one while testing your models. I’ve specified one here so we may have more comparable results if you are testing the code, too. I often specify a seed for my final model when reporting.
+There are many other settings that have specific uses. Some commands to be sent to the sampler may come in handy if you get errors during sampling.
+#brm is the function for fitting bayesian regression models with the brms package
+
+sound.beta <- brm(
+  accept.beta ~ screed.alpha + shoes + speed,
+  data = d.sound,
+  family = "beta",
+  prior = priors,
+  chains = 4,
+  cores = 4,
+  iter = 4000,
+  warmup = 1000,
+  seed = 1234,
+  #setting silent and refresh like this squelches the output
+  # i only use these settings once i've fit the model at least once
+  # and usually only before I ouput the PDF/HTML version
+  silent = 2, 
+  refresh = 0
+)
+
+Trying to compile a simple C file
+Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
+using C compiler: ‘Apple clang version 17.0.0 (clang-1700.0.13.5)’
+using SDK: ‘MacOSX15.5.sdk’
+clang -arch arm64 -std=gnu2x -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c foo.c -o foo.o
+In file included from <built-in>:1:
+In file included from /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
+In file included from /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/RcppEigen/include/Eigen/Dense:1:
+In file included from /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/RcppEigen/include/Eigen/Core:19:
+/Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:679:10: fatal error: 'cmath' file not found
+  679 | #include <cmath>
+      |          ^~~~~~~
+1 error generated.
+make: *** [foo.o] Error 1
+# like our other fit models, we can use summary to see what the results are
+# however what we see is a bit different
+summary(sound.beta)
+
+ Family: beta 
+  Links: mu = logit 
+Formula: accept.beta ~ screed.alpha + shoes + speed 
+   Data: d.sound (Number of observations: 812) 
+  Draws: 4 chains, each with iter = 4000; warmup = 1000; thin = 1;
+         total post-warmup draws = 12000
+
+Regression Coefficients:
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept         0.73      0.09     0.55     0.90 1.00    13383     9314
+screed.alphaC    -0.25      0.10    -0.45    -0.05 1.00    11938     8623
+screed.alphaH    -0.19      0.10    -0.39     0.01 1.00    12858     9912
+screed.alphaI    -0.55      0.10    -0.75    -0.35 1.00    12502     9773
+shoesshoe         0.46      0.07     0.32     0.61 1.00    18396     8914
+speed100         -0.11      0.07    -0.25     0.03 1.00    17904     8649
+
+Further Distributional Parameters:
+    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+phi     2.58      0.11     2.36     2.81 1.00    16521     9284
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).
+# Estimates are similar (but remember these are on the logit scale)
+# Estimated error is also similar
+# However, we directly get 95 % Credibility intervals for our estimate
+# We also get a value called Rhat = this is a ratio between the conclusions of 
+# the different chains that were run
+# ESS stands for estimated sample size. For some estimates that are frequently used,
+# like highest density intervals, its is recommended that bulk ESS is greater 
+# than 10000. The most direct way to increase this is with a higher iter when
+# fitting the model. If its very low (much lower than iter * chains)
+# there has probably been some problem with sampling and you will have recieved
+# errors / warnings during that process.
+
+Model checking
+# To check if our model fits reasonably well, we can use a posterior probability
+# check pp_check(model, ndraws) 
+
+#default is 10 draws, so I like to specify more - 50 to 100 usually
+
+pp_check(sound.beta, ndraws = 50)
+
+
+
+#this isn't a perfect fit, but its good enough for this process.
+# We want the blue-ish lines follow the black line (our data)
+# though we can imagine that some bumps in our data might be smoothed out
+# with more observations
+
+# another tool is to run loo() and check its output. Some output like the elpd,
+# p_loo, and looic (-2*elpd) are really only useful for model comparison
+# checking that pareto k estimats are < 0.7 is important though. 
+sound.loo <- loo(sound.beta)
+sound.loo
+
+
+Computed from 12000 by 812 log-likelihood matrix.
+
+         Estimate   SE
+elpd_loo    158.5 17.3
+p_loo         6.5  0.4
+looic      -317.0 34.5
+------
+MCSE of elpd_loo is 0.0.
+MCSE and ESS estimates assume MCMC draws (r_eff in [1.0, 1.6]).
+
+All Pareto k estimates are good (k < 0.7).
+See help('pareto-k-diagnostic') for details.
+Extracting details from our model
+We can get a bit more info from our summary info using describe_posterior(). This gives us much of the same info as in summary() but with more detail and two important indicators: probability of direction (pd) and information about the region of practical equivalence (ROPE)
+
+pd is the percent of the posterior distribution for that parameter (i.e, pd screed.alphaI = 100 % in our model ) that has the same sign (positive, negative) as the estimate (median usually) for that parameter. This is one way to express confidence in our estimate being non-zero and so is analogous to a p-value, but with a more direct interpretation. (More details and visualisation below). A recommended range for PDs is as follows: 95 % to 97.5 % suggestive evidence, 97.5 % to 99% strong evidence, > 99 % convincing evidence. This is fairly similar to how we might interpret a p-value.
+ROPE & % in ROPE: ROPE stands for Region of Practical Equivalence and it is a way of assessing if the effect size for our parameter is meaningful. On a metric scale it is usually set to standard deviation / 10 (one-tenth of the standard deviation for the response variable) as a default. This can be adjusted to match the needs of your analysis, domain, etc. On the logit scale we use in this regression it defaults to -0.18 to 0.18, which if we convert to the odds ratio scale by exponentiating is about 0.84 to 1.2, so roughly +/- 20%. Adjust cautiously and report reasoning. % in ROPE is the percent of the credible interval* that falls between those regions. If this value is high, say above 20% we might start to question if our parameter estimate is meaningfully above 0, if it the PD is high.
+Region of Practical Equivalence - Update
+In class I said defined % in ROPE as the portion of the posterior (full posterior distribution of a parameter or contrast) that falls within the ROPE. The more widely accepted definition is the portion of the credible interval (HDI, equal-tailed, quantile, etc.) that lies within the ROPE. My version is a bit more conservative (which is likely how it got stuck in my mind), but I’ve updated the definition and graphics to show this instead. [NB: I also added another one for the contrasts].
+
+describe_posterior(sound.beta)
+
+Summary of Posterior Distribution
+
+Parameter     | Median |         95% CI |     pd |          ROPE | % in ROPE
+----------------------------------------------------------------------------
+(Intercept)   |   0.73 | [ 0.55,  0.90] |   100% | [-0.18, 0.18] |        0%
+screed.alphaC |  -0.25 | [-0.45, -0.05] | 99.17% | [-0.18, 0.18] |    24.41%
+screed.alphaH |  -0.19 | [-0.39,  0.01] | 96.51% | [-0.18, 0.18] |    47.26%
+screed.alphaI |  -0.55 | [-0.75, -0.35] |   100% | [-0.18, 0.18] |        0%
+shoesshoe     |   0.46 | [ 0.32,  0.61] |   100% | [-0.18, 0.18] |        0%
+speed100      |  -0.11 | [-0.25,  0.03] | 93.38% | [-0.18, 0.18] |    86.26%
+
+Parameter     |  Rhat |   ESS
+-----------------------------
+(Intercept)   | 1.000 | 13359
+screed.alphaC | 1.000 | 11871
+screed.alphaH | 1.000 | 12838
+screed.alphaI | 1.000 | 12463
+shoesshoe     | 1.000 | 18340
+speed100      | 1.000 | 17860
+Extracting estimates
+There are a few functions we can use for this most of them refer to draws - samples we pull from the posterior distribution.
+
+We will use epred_draws() from the tidybayes package here. Like our other prediction functions, it requests new data to define the parameters we are interested in. If we just want predictions from our model, we can use a shortcut for the model frame we have: model.frame() this will pull out a data frame with all of our variable levels based on the formula in our model. This function can generate a lot of data and it scales with number of variables in the newdata and the iterations in our model. With larger models I recommend setting ndraws = 4000 or lower.
+
+Once we generate this we can use our typical tools for summarising the data to get simple parameter estimates, credibility intervals, pd, etc.
+
+#9.7 million rows!
+sound.draws <- epred_draws(sound.beta, newdata = model.frame(sound.beta)) 
+
+
+sound.sum <- sound.draws |> group_by(screed.alpha, shoes, speed) |> 
+  summarise(
+    n = n(),
+    median = median(.epred),
+    mean = mean(.epred),
+    hdi = hdi(.epred), #highest density interval
+    eti = eti(.epred), #equal-tailed interval
+    pd = p_direction(.epred)$pd
+  )
+
+`summarise()` has grouped output by 'screed.alpha', 'shoes'. You can override
+using the `.groups` argument.
+sound.sum
+
+# A tibble: 16 × 9
+# Groups:   screed.alpha, shoes [8]
+   screed.alpha shoes speed      n median  mean hdi$CI $CI_low eti$CI    pd
+   <fct>        <fct> <fct>  <int>  <dbl> <dbl>  <dbl>   <dbl>  <dbl> <dbl>
+ 1 A            bare  80    600000  0.674 0.674   0.95   0.634   0.95     1
+ 2 A            bare  100   600000  0.649 0.649   0.95   0.609   0.95     1
+ 3 A            shoe  80    612000  0.767 0.766   0.95   0.734   0.95     1
+ 4 A            shoe  100   600000  0.746 0.746   0.95   0.712   0.95     1
+ 5 C            bare  80    612000  0.617 0.617   0.95   0.576   0.95     1
+ 6 C            bare  100   612000  0.591 0.591   0.95   0.549   0.95     1
+ 7 C            shoe  80    612000  0.719 0.719   0.95   0.681   0.95     1
+ 8 C            shoe  100   612000  0.696 0.696   0.95   0.660   0.95     1
+ 9 H            bare  80    612000  0.631 0.631   0.95   0.590   0.95     1
+10 H            bare  100   612000  0.606 0.605   0.95   0.563   0.95     1
+11 H            shoe  80    612000  0.731 0.731   0.95   0.696   0.95     1
+12 H            shoe  100   612000  0.709 0.709   0.95   0.673   0.95     1
+13 I            bare  80    600000  0.544 0.544   0.95   0.502   0.95     1
+14 I            bare  100   612000  0.517 0.517   0.95   0.474   0.95     1
+15 I            shoe  80    612000  0.655 0.654   0.95   0.615   0.95     1
+16 I            shoe  100   612000  0.630 0.629   0.95   0.590   0.95     1
+# ℹ 3 more variables: hdi$CI_high <dbl>, eti$CI_low <dbl>, $CI_high <dbl>
+Making comparisons
+As before we can use emmeans or marginaleffects. I tend to prefer marginaleffects for Bayesian models, but both are very good!
+
+#this will return a simple frame with the maringalised differences between all screed pairs
+screed.comp <- marginaleffects::avg_comparisons(sound.beta,
+                                                variables = list(screed.alpha = "pairwise"))
+
+screed.comp
+
+
+ Contrast Estimate   2.5 %   97.5 %
+    C - A  -0.0534 -0.0969 -0.00948
+    H - A  -0.0397 -0.0826  0.00287
+    H - C   0.0135 -0.0311  0.05816
+    I - A  -0.1227 -0.1676 -0.07757
+    I - C  -0.0696 -0.1156 -0.02273
+    I - H  -0.0829 -0.1286 -0.03706
+
+Term: screed.alpha
+Type: response
+# but to fully visualise that and see the benefits of we want to see the
+# full posterior, so again, we get some draws!
+# here again you can specify fewer draws for larger models
+# since we are only looking at a few pairwise comparisons
+# we get that number times iter - warmup * chains
+# so, we have 6 comparisons * (4000 iter - 1000 warmup) * 4 chains
+# 6 * (3000) * 4 = 72000 rows
+screed.comp.draws <- marginaleffects::get_draws(screed.comp)
+
+
+# now lets visualise
+# first just the predicted rating on the original scale (i've multipled
+# .epred from the 0 < y < 1 scale by 10 to put it back on our original scale)
+# this shows the estimated rating for each panel at 80 and 100 bpm and for
+# bare feet (socks actually!) and shoes. Clearly I gets worse ratings, shoes help
+# a lot, and we might want to swap fill and facets to check for differences between
+# walking speeds.
+ggplot(data = sound.draws, aes(x = .epred * 10, y = screed.alpha, fill = shoes)) +
+  stat_halfeye(point_interval = "median_hdi") +
+  scale_fill_manual(values = palette[c(3,7)]) +
+  facet_wrap( ~ speed, ncol = 2) +
+  theme_classic()
+
+
+
+# now we will look at the difference in ratings for each panel comparison
+# marginalised over speed and shoes
+# our tools like pd and ROPE can apply here, too!
+# however, we'd want to specify rope on our original scale (see below)
+head(screed.comp.draws)
+
+  drawid         draw         term contrast    estimate    conf.low
+1      1 -0.010294616 screed.alpha    C - A -0.05338234 -0.09685144
+2      1 -0.014020134 screed.alpha    H - A -0.03973992 -0.08263845
+3      1 -0.003725518 screed.alpha    H - C  0.01352203 -0.03113883
+4      1 -0.086812637 screed.alpha    I - A -0.12269441 -0.16762395
+5      1 -0.076518020 screed.alpha    I - C -0.06956222 -0.11561646
+6      1 -0.072792502 screed.alpha    I - H -0.08291308 -0.12864361
+     conf.high
+1 -0.009475630
+2  0.002865852
+3  0.058161771
+4 -0.077569387
+5 -0.022725392
+6 -0.037056134
+# We can get some info for annotations
+screed.comp.sum <- screed.comp.draws |> 
+  group_by(contrast) |> 
+  summarise(
+    med = median(draw * 10),
+    pd = round(p_direction(draw)$pd * 100, 1),
+    #there are two hdi functions in the packages i have loaded
+    # so i'm specifying that I want the one from ggdist, not bayestestR
+    hdi.low = ggdist::hdi(draw * 10)[1],
+    hdi.high = ggdist::hdi(draw * 10)[2],
+    rope(draw * 10, range = c(-0.26, 0.26), ci = 0.95),
+    rope = round(ROPE_Percentage * 100,1),
+    rope_segment_start = if_else(hdi.high >= -0.26, max(hdi.low, -0.26), NA),
+    rope_segment_end = if_else(hdi.high <= -0.26, NA, min(hdi.high, 0.26))
+  )
+# I made some updates to the plot:
+# geom_text for PD labels, and labs
+# also changes the x axis tick labels
+
+ggplot(data = screed.comp.draws, 
+       aes(y = contrast, x = draw * 10)) +
+  stat_slabinterval(point_interval = "median_hdi",
+                    .width = c(.5, .95),
+                    fill = palette[2]
+                    ) + 
+  geom_vline(xintercept = 0, linetype = 2, colour = palette[9]) +
+  geom_text(data = screed.comp.sum, 
+           aes(x = med, y = contrast, label = paste0("PD = ", pd, " %")),
+           colour = "#FFFFFF", vjust = -0.65) +
+  scale_x_continuous(limits = c(-2.05, 1.05), breaks = seq(-2,1,.25)) +
+  guides(fill = "none") +
+  labs(y = "Comparison", x = "Acceptance rating difference",
+       caption = "Comparisons marginalised over speed and shoes.") +
+  theme_classic()
+
+
+
+Core concepts, revisited
+The core concepts for key attributes of our models are demonstrated in more detail below. PD, Credible Intervals, and ROPE.
+
+PD
+#|label: pd
+
+# subset our draws to focus on one comparison
+d.ha <- screed.comp.draws |> filter(contrast == "H - A")
+
+#calculate pd (could also use pd(d.ha$draw))
+pd(screed.comp.draws |> filter(contrast == "H - A") |> pull(draw))
+
+Probability of Direction
+
+Parameter |     pd
+------------------
+Posterior | 96.51%
+# PD is 96.5 %, so we can label a chart with that value
+# we can colour in the parts above and below zero (so the probability matching
+# the sign of the estimate is the once colour, and the opposite sign is another)
+
+ggplot(data = d.ha, aes(x = draw)) +
+  stat_slab(aes(fill = after_stat(x > 0))) +
+  scale_fill_manual(values = palette[c(2,7)]) +
+  geom_vline(xintercept = 0, linetype = 2, colour = "#333333") +
+  annotate("text", label = "PD = 96.5 %", x = -0.05, y = 0.95) +
+  guides(fill = "none") +
+   labs(caption = "The blue region all shares the same sign as the median estimate\nand is the Probability of Direction (PD).",
+       x = "Difference in acceptability H - A", 
+       y = "Density") + 
+  theme_classic()
+
+
+
+Credible intervals
+#|label: cred_int
+
+# we can calculate the highest density interval
+# HDI is perhaps the most robust type of credible interval
+# but it takes a moment (at least for me) to process it:
+# its the narrowest range of the posterior where 95 % (or whatever your range is)
+# have a higher probability density than those outside of it
+# it handles bimodal ranges reasonably well, but you get multipart ranges :)
+hdi(d.ha$draw) #-0.083, 0.0021
+
+95% HDI: [-0.08, 0.00]
+# similar to above, with can use fill and some lines to indicate the HDI
+# we can confirm using the hdi from stat_halfeye
+
+ggplot(data = d.ha, aes(x = draw)) +
+  stat_halfeye(point_interval = "median_hdi", .width = 0.95,
+               aes(fill = after_stat(x > -0.083 & x < 0.0021)),
+               linewidth = 15, size = 20, shape = 10,
+               interval_colour = "#66ff66") +
+  scale_fill_manual(values = palette[c(2,7)]) +
+  geom_vline(xintercept = -0.083, linetype = 2, colour = "#333333") +
+  geom_vline(xintercept = 0.0021, linetype = 2, colour = "#333333") + 
+  annotate(geom = "text", label = "95 % HDI = -0.083 to 0.0021",  x = -0.05, y = 0.95) +
+  guides(fill = "none") +
+   labs(caption = "Vertical lines are the 95 % HDI boundaries.",
+       x = "Difference in acceptability H - A", 
+       y = "Density") + 
+  theme_classic()
+
+
+
+ROPE - Region of practical equivalence
+#|label: rope
+
+# calculate 1/10 our sd
+(rope.ha <- sd(d.sound$accept.beta) / 10) # -0.026 to 0.026
+
+[1] 0.02637732
+# calculate the % in ROPE using our defined range
+rope(d.ha$draw, range = c(-0.026, 0.026), ci = 0.95) # 25.1 %
+
+# Proportion of samples inside the ROPE [-0.03, 0.03]:
+
+Inside ROPE
+-----------
+25.10 %    
+# plot similarly as before.
+# could add text as we did with PD to specify the % in rope to be more complete
+# in fact.... added it after class
+# reminder: our hdi is: -0.083, 0.0021
+ggplot(data = d.ha, aes(x = draw)) +
+  stat_slabinterval(point_interval = "median_hdi",
+            aes(fill = after_stat(x > if_else(-0.083 > -0.026, -0.083, -0.026)  & 
+                                  x < if_else(0.0021 < 0.026, 0.0021, 0.026)))) +
+  scale_fill_manual(values = palette[c(2,7)]) +
+  geom_vline(xintercept = -0.026, linetype = 2, colour = "#333333") +
+  geom_vline(xintercept = 0.026, linetype = 2, colour = "#333333") + 
+  annotate(geom = "text", label = "% in ROPE = 25.1",  x = 0, y = 0.95) +
+  labs(caption = "Vertical lines are the ROPE, Yellow area is the % in ROPE\n% of the HDI within the ROPE region.",
+       x = "Difference in acceptability H - A", 
+       y = "Density") + 
+  guides(fill = "none") +
+  theme_classic()
+
+
+
+Below is a version of the % in ROPE plot for all contrasts. This was really hard to make! Thankfully I found a useful post on the stan forums (stan is the engine behind brms) where someone had a very similar problem. User joel had a good answer, which I’ve used below with slight modifications. I couldn’t make it work with stat_slab, but this does it pretty well.
+
+#make a smaller dataframe with draws on the original scale
+screed.comp.draws_os <- screed.comp.draws |> 
+  select(contrast, draw) |> 
+  mutate(
+    draw = draw * 10
+  )
+hdi = screed.comp.draws_os  |> 
+  group_by(contrast) |>
+  summarise(as_tibble(hdi(draw)))
+
+# Calculate densities
+adj = 1.2 # values above 1 increase the detail in the density
+dens.hist = screed.comp.draws_os |> 
+  group_by(contrast) |> 
+  group_split() |> 
+  map_df(~{
+    dens = density_bounded(.x$draw, adjust=adj)
+    tibble(contrast=.x$contrast[1],
+           x=dens$x, draw=dens$y)
+  }) |> 
+  left_join(hdi, by = "contrast")
+
+# Calculate ROPE density
+rope.rng = c(-0.26, 0.26)
+
+rope.dens = dens.hist |> 
+  filter(x >= min(rope.rng), x <= max(rope.rng)) |> 
+  group_by(contrast) |> 
+  summarise(rope.dens = sum(mean(diff(x)) * draw))
+
+rope.colour = palette[2]
+hdi.colour = palette[7]
+lwd = 0.3
+theme_set(theme_classic())
+
+dens.hist1 <- left_join(dens.hist, 
+                        screed.comp.sum |> 
+                          select(contrast, rope, 
+                                 rope_segment_start, rope_segment_end),
+                        by = "contrast")
+
+
+ggplot(data = dens.hist1, aes(x, draw)) +
+  # Overall densities
+  geom_line(linewidth=lwd) +
+  # Shade HDI
+  geom_area(data= dens.hist1 |>
+              filter(x >= CI_low, x <= CI_high),
+            aes(fill="HDI")) +
+  # shade only region in ROPE
+  geom_area(data= dens.hist1 |>
+              filter(x >= rope_segment_start, x <= rope_segment_end),
+            aes(fill="ROPE")) +
+  # ROPE Limits
+  geom_vline(xintercept = -0.26, linetype = 2, colour = "#333333") +
+  geom_vline(xintercept = 0.26, linetype = 2, colour = "#333333") + 
+  # ROPE density value
+  geom_text(data=screed.comp.sum,
+            size=3.5, vjust=0.5,
+            aes(label=paste0("In ROPE: ", rope,"%"),
+                x = 0.75,
+                y = 1.2),
+            colour = "#333333",
+            fontface = "bold") +
+  scale_y_continuous(expand=c(0.03, 0.03)) +
+  scale_x_continuous(breaks = seq(-2,1,0.25)) +
+  scale_fill_manual(values=c(ROPE=palette[7], HDI=palette[2]), name = "") +
+  guides(colour="none") +
+  labs(y = "Comparison", x = "Acceptance rating difference",
+       subtitle = "% in ROPE = HDI \u2229 ROPE.",
+       caption = "Dashed lines are limits of ROPE.\nComparisons marginalised over speed and shoes.") +
+  facet_grid(rows = vars(contrast), switch = "y") +
+  theme_classic() +
+  theme(
+    strip.text.y.left=element_text(angle=0, vjust=0.02),
+    axis.text.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    strip.background = element_blank(),
+    axis.line = element_blank(),
+  )
+
+
+
+Beta regression with frequentist tools
+Compare these results with those from the bayesian approach. They should be quite similar.
+
+library(betareg)
+sound.fbeta <- betareg(accept.beta ~ screed.alpha + shoes + speed, data = d.sound)
+summary(sound.fbeta)
+
+
+Call:
+betareg(formula = accept.beta ~ screed.alpha + shoes + speed, data = d.sound)
+
+Quantile residuals:
+    Min      1Q  Median      3Q     Max 
+-3.0888 -0.5812  0.1075  0.6778  2.3139 
+
+Coefficients (mean model with logit link):
+              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    0.72666    0.09026   8.050 8.25e-16 ***
+screed.alphaC -0.24980    0.10316  -2.422   0.0155 *  
+screed.alphaH -0.18961    0.10319  -1.837   0.0662 .  
+screed.alphaI -0.55070    0.10331  -5.331 9.79e-08 ***
+shoesshoe      0.46366    0.07301   6.351 2.14e-10 ***
+speed100      -0.10943    0.07261  -1.507   0.1318    
+
+Phi coefficients (precision model with identity link):
+      Estimate Std. Error z value Pr(>|z|)    
+(phi)   2.5846     0.1149    22.5   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+Type of estimator: ML (maximum likelihood)
+Log-likelihood: 165.3 on 7 Df
+Pseudo R-squared: 0.08875
+Number of iterations: 18 (BFGS) + 2 (Fisher scoring) 
