@@ -1,0 +1,97 @@
+---
+title: "Data Science Practicum I 2025/2026 - The Bootstrap"
+author: "Mike Burnard"
+date: "05 January 2026"
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(boot) # you need the boot library for this.
+options(dplyr.summarise.inform = FALSE)
+```
+
+# The bootstrap
+
+The bootstrap is a simple, powerful, and effective resampling-and-refitting technique. Essentially, it takes some data, applies a function many times (1000 to 10000 usually), and produces point estimates of statistics (like model coefficients, means, medians, variance estimates, etc.). Bootstrap confidence intervals are also good indicators of variance in the data.
+
+Bootstrapping can be useful in many cases:
+
+1. When data is insufficient, yet believed to be representative (too few observations, but the observations are considered reliable)
+2. When confidence intervals cant reliably be calculated based on distributional assumptions (a good example is mixed models, but we haven't talked about that much yet*)
+3. When variance estimates aren't well linked to the the point estimate (which variance indicator would you use for the median?)
+4. ...and others
+
+* In the linear regression models we used before we had fixed effects associated with our variables. This means our variables were independent and uncorrelated. In a mixed effects model we have both random and fixed effects. This allows us have non-indepdentant and correlated variables as dependent variables in our model. But, in most cases, we cant calculate reliable confidence intervals in the same way, especially if our data isn't associated with the normal distribution. In these cases we can use bootstrap confidence intervals for our coefficients and effect sizes.
+
+# The general bootstrap model   
+
+The basics are of the bootstrap quite simple:
+
+1. Select your data
+2. Sample with replacement
+3. Calculate statistics of interest with the sampled data
+4. Record results
+5. Repeat steps 2 to 4 ~ 1000 to 10000 times
+6. Calculate the indicators of all the repeated bootstrapped statistics (mean, variance)
+
+Those steps are quite simple, and we can do them on our own rather easily. But using the boot package provides many advantages.
+
+# Bootstapping confidence intervals for the median
+
+```{r}
+#| label: basic_boot
+
+
+```
+
+# Bootstrap regression coefficients
+
+Iris data, with only one species.
+
+```{r}
+#| label: boot_coef
+
+```
+
+# Bootstrap regression with stratification
+
+We had one species before, but if we need to resample across each species, we need to include a stratification variable. Stratification ensures sampling includes at least some observations of all subgroups. Without this you are likely to get errors.
+
+```{r}
+#| label: stratified_boot
+
+
+```
+
+# Example with non normal data
+
+We will invent some data.
+
+```{r}
+#| label: boot_non_normal
+
+```
+
+
+```{r}
+#| label: boot_nn_func
+
+
+}
+
+
+```
+
+
+
+```{r}
+#| label: boot_shrooms_vis
+
+
+
+```
+
+
+

@@ -1,0 +1,183 @@
+---
+title: "penguins dataset"
+format: html
+---
+
+```{r}
+# view(penguins)
+glimpse(penguins)
+```
+
+```{r}
+ggplot(data = penguins,
+       mapping = aes(x=flipper_len, y=body_mass)
+) +
+  geom_point(mapping = aes(color=species, shape = species)) + 
+  geom_smooth(method = "lm") + 
+  labs(
+    title = "Body mass and Flipper length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length in (mm)",
+    y = "Body mass in (g)",
+    color = "Species",
+    shape = "Species"
+  )
+  # scale_color_colorblind()
+
+```
+
+```{r}
+ggplot(
+  data = penguins,
+  aes(x=bill_len, y=bill_dep)
+) + 
+  geom_point(aes(color=species, shape=species)) + 
+  geom_smooth(method = "lm")
+```
+
+```{r}
+ggplot(data = penguins,
+       aes(x=species, y=bill_dep, color=island)) + 
+  geom_point()
+```
+
+
+```{r}
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_len, y = body_mass, color=species)
+) +
+  geom_point() +
+  geom_smooth() +
+  labs(
+    title = "First"
+  )
+
+ggplot() +
+  geom_point(
+    data = penguins,
+    mapping = aes(x = flipper_len, y = body_mass,colour =species )
+  ) +
+  geom_smooth(
+    data = penguins,
+    mapping = aes(x = flipper_len, y = body_mass)
+  ) + 
+  labs(
+    title = "Second"
+  )
+```
+
+# ggplot2 calls
+
+```{r}
+ggplot(penguins, aes(x=flipper_len, y= body_mass)
+    ) + 
+  geom_point() 
+  
+
+```
+
+using the pipe, |>:
+
+```{r}
+penguins |> 
+  ggplot(aes(x = flipper_len, y = body_mass, colour = species)) + 
+  geom_point()
+
+```
+# bar charts 
+for categorical variables 
+
+```{r}
+ggplot(penguins, aes(x=fct_infreq(species), fill = species)
+       ) + 
+  geom_bar()
+
+# relationship btn island and species 
+
+ggplot(penguins, aes(x=island , fill = species)
+       ) + 
+  geom_bar(position = "fill") + 
+  labs(
+    y = "proportion"
+  )
+```
+
+# hiistograms 
+good for numercial variables 
+
+```{r}
+ggplot(penguins, aes(x=body_mass)
+       ) + 
+  geom_histogram(binwidth = 200)
+```
+
+
+# desnsity plot 
+
+A density plot is a smoothed-out version of a histogram and a practical alternative, particularly for continuous data that comes from an underlying smooth distribution
+
+```{r}
+ggplot(penguins, aes(x=body_mass)
+       ) + 
+  geom_density()
+```
+
+# Visualizing relationships
+
+box plot 
+
+```{r}
+ggplot(penguins, aes(x=species, y=body_mass)
+       ) + 
+  geom_boxplot()
+```
+
+```{r}
+ggplot(penguins, aes(x=body_mass, colour = species, fill = species)
+       ) + 
+  geom_density(linewidth = 0.75, alpha=0.2)
+
+```
+
+# 3 or more variables
+
+```{r}
+ggplot(penguins, aes(x = flipper_len, y = body_mass)) +
+  geom_point(aes(color = species, shape = island))
+```
+facet wrap is useful for categorical variables 
+
+```{r}
+ggplot(penguins, aes(x = flipper_len, y = body_mass)) +
+  geom_point(aes(color = species, shape = species)) +
+  facet_wrap(~island)
+
+ggsave(filename = "penguins_analysis.png")
+```
+
+# MPG dataset 
+The mpg data frame contains 234 observations collected by the US Environmental Protection Agency on 38 car models
+
+```{r}
+glimpse(mpg)
+```
+
+## visualization
+
+```{r}
+ggplot(mpg, aes(x = fct_infreq(class), fill = class)) +
+  geom_bar()
+
+ggplot(mpg, aes(x = cty, y = hwy, color=class)) +
+  geom_point()
+
+ggsave("mpg-plot.png")
+```
+
+```{r}
+ggplot(mpg, aes(x= cty, color=class)) + 
+  geom_density()
+```
+
+

@@ -1,0 +1,60 @@
+---
+title: "Homework 3 - DSP1 - 2025/2026"
+author: "Your name and student ID"
+format: html
+---
+
+Homework 3
+
+Step 1: Rename this file as follows: "DSP1-HW3-Name-StudentID" with your name and student ID replacing the appropriate parts.
+Step 2: Update the author field in the YAML as indicated.
+Step 3: Ensure the document has a Table of Contents when rendered (hint: you set this in the YAML)
+Step 3: Complete to the Tasks below. Be sure to add meaningful label tags to each R code chunk and structure your analysis sensibly.
+Step 4: Render to html or pdf (you may need to change target formats in the YAML)
+Step 5: Zip (or otherwise compress) the html other relevant support folders and include this qmd file with your work filled in
+Step 6: Submit the compressed folder which should be named "DSP1-HW3-Name-StudentID" through the e-classroom by Tuesday 6 January 2026.
+
+Hint: Make sure that when I open the html file I can view all the embedded images, see all your code and easily identify your responses to questions.
+
+Note: Please see the rules for using AI on the e-classroom.
+
+## Ordinary least products regression and the bootstrap
+
+For this section you will use your knowledge and skills to complete a task you have (likely) not encountered before. Use Ordinary least products (OLP) regression to compare measurement methods of the same phenomenon.
+
+Ordinary least products regression is related to ordinary least squares regression (simple linear regression). However, it accounts for error on both the x and y axis data. It is often used to compare two different measures of the same phenomenon. For example, we can compare a standard method of measuring something to a new method of measuring something.
+
+In this case we are most interested in the coefficients for the slope and intercept. We can determine if there is bias present in the new measure if the confidence intervals for the slopes do not include certain values.
+
+Fixed bias is present if the confidence interval for the intercept of the OLP regression line DOES NOT include 0. Fixed bias is a constant difference in measurement.
+
+Proportional bias is present if the confidence interval of the slope of the OLP regression line DOES NOT include 1. Proportional bias differs at different levels of measurement (i.e., greater error at higher measured values, and smaller error and lower measured values).
+
+In this analysis you should write your own code to determine the OLP regression line intercept and slope and determine their bias-corrected accelerated confidence intervals via *bootstrapping*.
+
+Use the attached *wood-mc.csv* data set and compare the Reference results to the Spike and NIR results.
+
+In this case, we compare three methods of measuring the moisture content of wood (how much water is in wood, as a % of weight). Assume the measurements are taken on the same sample of wood (each row is one piece of wood that was measured multiple times.)
+
+1. Reference method (weigh the wood, dry it in an oven, weigh it again: only appropriate in the lab, or calibration in industry).
+2. Spike electrode meter (drive electrodes into the material, measure conductance/resistance between electrodes: damages wood, but used often in industry because it is quick and pretty accurate if multiple measurements are taken)
+3. Near infrared spectroscopy (NIR) (chemometric analysis of NIR spectra to assess moisture content: non-contact and fast, new method and we need to know how well it works)
+
+(This data is simulated.)
+
+See the attached paper (Ludbrook, 2010) for details on implementing OLP (esp. equations 1 through 5).
+
+## 4.a) Estimated statistics.
+
+Create a table that includes the OLP estimated Intercept and Slope for each comparison (ref<->spike, ref<->NIR), along with the upper and lower bounds of the confidence intervals for each. 
+
+## 4.b) Visulisation
+
+Create a visualisation that shows the point estimate of the intercept and slope for each comparison, along with the confidence intervals for each. Slopes and Intercepts should be in separate charts.
+
+Create a visualisation of the regression lines for each each pair of measurements with the OLP regression line overlaid (this should be two plots, one for each pair of measurements).
+
+## 4.c) Text responses
+
+Is either method biased? How so? Do you notice anything of interest about the results?
+

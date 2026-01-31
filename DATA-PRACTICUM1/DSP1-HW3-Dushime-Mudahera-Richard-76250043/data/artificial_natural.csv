@@ -1,0 +1,2388 @@
+Value,Panel,Age,NR.mu,labs
+-1,2waycladding,65,4.4,Somewhat artificial
+-1,2waycladding,50,3.25,Somewhat artificial
+1,2waycladding,43,4.8,Somewhat natural
+2,2waycladding,51,4,Natural
+2,2waycladding,66,5,Natural
+0,2waycladding,41,2.8,Neutral
+2,2waycladding,37,4,Natural
+1,2waycladding,58,1.4,Somewhat natural
+0,2waycladding,60,3.2,Neutral
+0,2waycladding,32,4.6,Neutral
+2,2waycladding,50,2.5,Natural
+1,2waycladding,58,4,Somewhat natural
+1,2waycladding,59,3.4,Somewhat natural
+-2,2waycladding,79,4.4,Artificial
+1,2waycladding,49,3.8,Somewhat natural
+2,2waycladding,68,4.2,Natural
+1,2waycladding,54,4.4,Somewhat natural
+1,2waycladding,73,3.8,Somewhat natural
+0,2waycladding,58,4.4,Neutral
+0,2waycladding,45,3.8,Neutral
+0,2waycladding,70,4.6,Neutral
+1,2waycladding,57,4.8,Somewhat natural
+-1,2waycladding,23,4,Somewhat artificial
+2,2waycladding,44,3.5,Natural
+0,2waycladding,38,3.8,Neutral
+2,2waycladding,73,4.2,Natural
+1,2waycladding,50,2.8,Somewhat natural
+-2,2waycladding,47,2.4,Artificial
+2,2waycladding,58,4.8,Natural
+2,2waycladding,56,4.8,Natural
+1,2waycladding,84,3,Somewhat natural
+-1,2waycladding,38,4.6,Somewhat artificial
+2,2waycladding,56,4.2,Natural
+0,2waycladding,40,3.2,Neutral
+2,2waycladding,54,3.25,Natural
+1,2waycladding,61,4.75,Somewhat natural
+1,2waycladding,60,3.4,Somewhat natural
+2,2waycladding,49,4,Natural
+1,2waycladding,26,2.8,Somewhat natural
+1,2waycladding,26,2.5,Somewhat natural
+-1,2waycladding,23,3,Somewhat artificial
+1,2waycladding,26,3.4,Somewhat natural
+1,2waycladding,28,4,Somewhat natural
+-1,2waycladding,25,3,Somewhat artificial
+2,2waycladding,63,3.3333333333333335,Natural
+0,2waycladding,65,3.8,Neutral
+1,2waycladding,27,4.2,Somewhat natural
+2,2waycladding,41,4,Natural
+2,2waycladding,58,4,Natural
+1,2waycladding,62,4,Somewhat natural
+-1,2waycladding,47,3.4,Somewhat artificial
+1,2waycladding,45,4.6,Somewhat natural
+-2,2waycladding,33,4.2,Artificial
+-1,2waycladding,33,3.2,Somewhat artificial
+2,2waycladding,56,5,Natural
+2,2waycladding,38,3,Natural
+2,2waycladding,37,4,Natural
+1,2waycladding,40,3.2,Somewhat natural
+2,2waycladding,57,1,Natural
+1,2waycladding,48,3.4,Somewhat natural
+1,2waycladding,62,4.4,Somewhat natural
+2,2waycladding,52,2.6,Natural
+1,2waycladding,40,4.8,Somewhat natural
+0,2waycladding,53,4.25,Neutral
+2,2waycladding,29,4.2,Natural
+2,2waycladding,56,4.25,Natural
+0,2waycladding,25,4.75,Neutral
+2,2waycladding,40,5,Natural
+2,2waycladding,49,4.6,Natural
+1,2waycladding,56,5,Somewhat natural
+2,2waycladding,59,4.2,Natural
+0,2waycladding,25,5,Neutral
+2,2waycladding,66,3,Natural
+0,2waycladding,44,4.4,Neutral
+2,2waycladding,39,4.6,Natural
+0,2waycladding,60,4.8,Neutral
+0,2waycladding,53,4.2,Neutral
+2,2waycladding,72,3.8,Natural
+2,2waycladding,57,4.8,Natural
+2,2waycladding,31,4.2,Natural
+2,2waycladding,44,4.2,Natural
+2,2waycladding,59,3.8,Natural
+1,2waycladding,59,3.75,Somewhat natural
+-1,2waycladding,36,2.2,Somewhat artificial
+0,2waycladding,53,4.8,Neutral
+2,2waycladding,50,3.2,Natural
+0,2waycladding,38,3.75,Neutral
+2,2waycladding,64,4.2,Natural
+0,2waycladding,50,4,Neutral
+1,2waycladding,36,4.6,Somewhat natural
+2,2waycladding,60,3.4,Natural
+2,2waycladding,61,3.8,Natural
+1,2waycladding,51,5,Somewhat natural
+2,2waycladding,47,4.6,Natural
+1,2waycladding,57,3.6,Somewhat natural
+0,2waycladding,65,3.2,Neutral
+1,2waycladding,73,2.6666666666666665,Somewhat natural
+2,2waycladding,80,4.4,Natural
+1,2waycladding,56,4,Somewhat natural
+1,2waycladding,61,3.8,Somewhat natural
+1,2waycladding,63,4.6,Somewhat natural
+1,2waycladding,46,4,Somewhat natural
+2,2waycladding,66,4.2,Natural
+-1,2waycladding,50,3.8,Somewhat artificial
+0,2waycladding,41,2.8,Neutral
+2,2waycladding,48,3.2,Natural
+2,2waycladding,43,3.4,Natural
+0,2waycladding,63,3.6,Neutral
+1,2waycladding,53,4.2,Somewhat natural
+1,2waycladding,44,3,Somewhat natural
+1,2waycladding,39,4,Somewhat natural
+-1,2waycladding,50,4.2,Somewhat artificial
+1,2waycladding,53,4,Somewhat natural
+-1,2waycladding,44,3.2,Somewhat artificial
+1,2waycladding,62,4.4,Somewhat natural
+2,2waycladding,54,4.4,Natural
+1,2waycladding,52,3.2,Somewhat natural
+0,2waycladding,65,3.8,Neutral
+2,2waycladding,38,4,Natural
+2,2waycladding,66,3.8,Natural
+1,2waycladding,83,4.4,Somewhat natural
+0,2waycladding,57,3.6,Neutral
+1,2waycladding,28,2.25,Somewhat natural
+0,2waycladding,52,3.8,Neutral
+1,2waycladding,45,4,Somewhat natural
+1,2waycladding,52,4.75,Somewhat natural
+0,2waycladding,38,2.25,Neutral
+1,2waycladding,34,3.4,Somewhat natural
+2,2waycladding,68,4.2,Natural
+1,2waycladding,25,4.2,Somewhat natural
+2,2waycladding,25,3.3333333333333335,Natural
+0,2waycladding,30,4.2,Neutral
+2,2waycladding,39,3.2,Natural
+0,2waycladding,46,4.4,Neutral
+2,2waycladding,64,4.4,Natural
+2,2waycladding,52,4.2,Natural
+2,2waycladding,40,5,Natural
+0,2waycladding,50,3.4,Neutral
+-1,2waycladding,27,4,Somewhat artificial
+0,2waycladding,75,4.2,Neutral
+1,2waycladding,58,3.2,Somewhat natural
+-2,2waycladding,61,4.6,Artificial
+1,2waycladding,23,4.4,Somewhat natural
+0,2waycladding,25,3.4,Neutral
+-1,2waycladding,34,3.5,Somewhat artificial
+0,2waycladding,26,4,Neutral
+1,2waycladding,48,1.6,Somewhat natural
+2,2waycladding,61,4.8,Natural
+0,2waycladding,41,4,Neutral
+2,2waycladding,48,4.6,Natural
+0,2waycladding,35,2.25,Neutral
+1,2waycladding,24,3.25,Somewhat natural
+2,2waycladding,62,3,Natural
+0,2waycladding,22,3.2,Neutral
+-1,2waycladding,30,4,Somewhat artificial
+0,2waycladding,29,4,Neutral
+0,2waycladding,33,4.4,Neutral
+1,2waycladding,41,4.6,Somewhat natural
+2,2waycladding,63,2.2,Natural
+0,2waycladding,51,4,Neutral
+2,2waycladding,53,3.2,Natural
+-1,2waycladding,25,3.4,Somewhat artificial
+-1,2waycladding,27,3.8,Somewhat artificial
+2,2waycladding,26,3,Natural
+-1,2waycladding,93,4.8,Somewhat artificial
+-1,2waycladding,25,4,Somewhat artificial
+-1,2waycladding,26,2.8,Somewhat artificial
+-1,2waycladding,62,2.6,Somewhat artificial
+1,2waycladding,22,2.75,Somewhat natural
+0,2waycladding,25,3.8,Neutral
+-1,2waycladding,25,3.6,Somewhat artificial
+0,2waycladding,27,3.8,Neutral
+0,2waycladding,25,4.5,Neutral
+1,2waycladding,57,3.6,Somewhat natural
+1,2waycladding,23,3.5,Somewhat natural
+1,2waycladding,25,3.8,Somewhat natural
+0,2waycladding,60,4.25,Neutral
+0,2waycladding,28,4.4,Neutral
+1,2waycladding,36,4.6,Somewhat natural
+-1,2waycladding,28,2.6,Somewhat artificial
+2,2waycladding,25,4.25,Natural
+1,2waycladding,48,3.8,Somewhat natural
+2,2waycladding,32,2.75,Natural
+2,2waycladding,25,3.8,Natural
+-1,2waycladding,42,4.2,Somewhat artificial
+1,2waycladding,46,3.6,Somewhat natural
+2,2waycladding,32,4.8,Natural
+0,2waycladding,23,4.6,Neutral
+1,2waycladding,24,4.8,Somewhat natural
+1,2waycladding,1,4.2,Somewhat natural
+1,2waycladding,28,4,Somewhat natural
+-1,2waycladding,32,3.6,Somewhat artificial
+1,2waycladding,21,4.2,Somewhat natural
+1,2waycladding,32,4.2,Somewhat natural
+0,2waycladding,28,3.8,Neutral
+1,2waycladding,19,3,Somewhat natural
+-1,2waycladding,58,3.5,Somewhat artificial
+0,2waycladding,42,3.75,Neutral
+1,2waycladding,53,4,Somewhat natural
+1,2waycladding,19,4,Somewhat natural
+0,2waycladding,19,3.2,Neutral
+0,2waycladding,19,4,Neutral
+-2,2waycladding,19,3.8,Artificial
+2,2waycladding,26,4.8,Natural
+0,2waycladding,19,3.4,Neutral
+2,2waycladding,55,3.75,Natural
+1,2waycladding,49,3.2,Somewhat natural
+2,2waycladding,25,4.8,Natural
+1,2waycladding,63,4.2,Somewhat natural
+0,2waycladding,19,3.8,Neutral
+2,2waycladding,26,3.6,Natural
+1,2waycladding,55,5,Somewhat natural
+0,2waycladding,19,4.2,Neutral
+-1,2waycladding,69,3.6,Somewhat artificial
+2,2waycladding,27,3.8,Natural
+-2,2waycladding,33,4.2,Artificial
+2,2waycladding,30,4,Natural
+2,2waycladding,30,4.5,Natural
+-2,2waycladding,32,3.4,Artificial
+0,2waycladding,31,4.2,Neutral
+-2,2waycladding,60,3.6,Artificial
+1,2waycladding,32,3.4,Somewhat natural
+-1,2waycladding,31,3,Somewhat artificial
+-1,2waycladding,32,2.75,Somewhat artificial
+2,2waycladding,62,4,Natural
+-1,2waycladding,32,2.8,Somewhat artificial
+2,2waycladding,31,4.8,Natural
+1,2waycladding,42,4.25,Somewhat natural
+-1,2waycladding,32,3,Somewhat artificial
+1,2waycladding,32,2.25,Somewhat natural
+-2,2waycladding,30,2.8,Artificial
+1,2waycladding,43,4.2,Somewhat natural
+2,2waycladding,41,4.6,Natural
+1,2waycladding,36,4.2,Somewhat natural
+0,2waycladding,42,3.4,Neutral
+0,2waycladding,32,4.25,Neutral
+1,2waycladding,55,4,Somewhat natural
+2,2waycladding,30,3.4,Natural
+-1,2waycladding,25,3.8,Somewhat artificial
+2,2waycladding,52,3,Natural
+1,2waycladding,49,3.6,Somewhat natural
+2,2waycladding,43,4.4,Natural
+2,2waycladding,48,4.6,Natural
+0,2waycladding,25,4.5,Neutral
+1,2waycladding,53,4.4,Somewhat natural
+0,2waycladding,40,4.6,Neutral
+1,2waycladding,30,4.2,Somewhat natural
+0,2waycladding,38,4,Neutral
+2,2waycladding,44,4.25,Natural
+0,2waycladding,41,4.2,Neutral
+0,2waycladding,59,3.8,Neutral
+0,2waycladding,31,3.8,Neutral
+2,2waycladding,59,3.8,Natural
+0,2waycladding,44,4.2,Neutral
+1,2waycladding,43,4.25,Somewhat natural
+1,2waycladding,56,3.6,Somewhat natural
+2,2waycladding,36,2.6,Natural
+-2,2waycladding,25,1.6666666666666667,Artificial
+0,2waycladding,37,2.2,Neutral
+2,2waycladding,30,4.4,Natural
+1,2waycladding,30,4.5,Somewhat natural
+1,2waycladding,58,3.6,Somewhat natural
+-1,2waycladding,59,3.4,Somewhat artificial
+-1,2waycladding,34,4.4,Somewhat artificial
+0,2waycladding,32,4,Neutral
+-2,2waycladding,20,3.6,Artificial
+2,2waycladding,19,3.4,Natural
+0,2waycladding,19,3.6,Neutral
+-2,2waycladding,34,3.75,Artificial
+2,2waycladding,40,4.8,Natural
+-2,2waycladding,46,3.6,Artificial
+1,2waycladding,48,3.25,Somewhat natural
+1,2waycladding,58,3.2,Somewhat natural
+-1,2waycladding,33,4,Somewhat artificial
+0,2waycladding,99,3,Neutral
+1,2waycladding,52,4.6,Somewhat natural
+-1,2waycladding,31,3.25,Somewhat artificial
+-1,2waycladding,36,3.2,Somewhat artificial
+2,2waycladding,44,4.4,Natural
+2,2waycladding,60,4.4,Natural
+2,2waycladding,36,3.2,Natural
+2,2waycladding,66,4.4,Natural
+2,2waycladding,59,5,Natural
+0,2waycladding,40,3.6,Neutral
+2,2waycladding,44,3.8,Natural
+0,2waycladding,40,3.8,Neutral
+0,2waycladding,45,3.4,Neutral
+0,2waycladding,48,4.2,Neutral
+1,2waycladding,54,2.6,Somewhat natural
+2,2waycladding,53,3.8,Natural
+2,2waycladding,51,4,Natural
+1,2waycladding,60,4.8,Somewhat natural
+0,2waycladding,33,2,Neutral
+0,2waycladding,52,1.8,Neutral
+-1,2waycladding,62,3,Somewhat artificial
+0,2waycladding,35,2.6,Neutral
+-1,2waycladding,51,4.8,Somewhat artificial
+-2,2waycladding,50,3.6,Artificial
+1,2waycladding,47,4.8,Somewhat natural
+1,2waycladding,24,4.6,Somewhat natural
+-1,brownverticals,65,4.4,Somewhat artificial
+0,brownverticals,50,3.25,Neutral
+0,brownverticals,43,4.8,Neutral
+2,brownverticals,51,4,Natural
+2,brownverticals,66,5,Natural
+0,brownverticals,41,2.8,Neutral
+2,brownverticals,37,4,Natural
+1,brownverticals,58,1.4,Somewhat natural
+0,brownverticals,60,3.2,Neutral
+-1,brownverticals,32,4.6,Somewhat artificial
+0,brownverticals,50,2.5,Neutral
+0,brownverticals,58,4,Neutral
+1,brownverticals,59,3.4,Somewhat natural
+2,brownverticals,79,4.4,Natural
+1,brownverticals,49,3.8,Somewhat natural
+2,brownverticals,68,4.2,Natural
+-1,brownverticals,54,4.4,Somewhat artificial
+2,brownverticals,58,4.4,Natural
+0,brownverticals,73,3.8,Neutral
+-1,brownverticals,45,3.8,Somewhat artificial
+-1,brownverticals,70,4.6,Somewhat artificial
+2,brownverticals,57,4.8,Natural
+0,brownverticals,23,4,Neutral
+0,brownverticals,44,3.5,Neutral
+0,brownverticals,38,3.8,Neutral
+2,brownverticals,73,4.2,Natural
+1,brownverticals,50,2.8,Somewhat natural
+2,brownverticals,47,2.4,Natural
+1,brownverticals,58,4.8,Somewhat natural
+2,brownverticals,56,4.8,Natural
+0,brownverticals,84,3,Neutral
+-1,brownverticals,38,4.6,Somewhat artificial
+2,brownverticals,56,4.2,Natural
+0,brownverticals,40,3.2,Neutral
+2,brownverticals,54,3.25,Natural
+1,brownverticals,61,4.75,Somewhat natural
+1,brownverticals,60,3.4,Somewhat natural
+2,brownverticals,49,4,Natural
+-1,brownverticals,26,2.8,Somewhat artificial
+0,brownverticals,26,2.5,Neutral
+1,brownverticals,23,3,Somewhat natural
+0,brownverticals,26,3.4,Neutral
+2,brownverticals,28,4,Natural
+0,brownverticals,25,3,Neutral
+1,brownverticals,63,3.3333333333333335,Somewhat natural
+-1,brownverticals,65,3.8,Somewhat artificial
+0,brownverticals,27,4.2,Neutral
+2,brownverticals,58,4,Natural
+1,brownverticals,41,4,Somewhat natural
+1,brownverticals,62,4,Somewhat natural
+-1,brownverticals,47,3.4,Somewhat artificial
+0,brownverticals,45,4.6,Neutral
+-2,brownverticals,33,4.2,Artificial
+0,brownverticals,33,3.2,Neutral
+2,brownverticals,56,5,Natural
+0,brownverticals,38,3,Neutral
+1,brownverticals,37,4,Somewhat natural
+0,brownverticals,40,3.2,Neutral
+2,brownverticals,57,1,Natural
+2,brownverticals,48,3.4,Natural
+1,brownverticals,62,4.4,Somewhat natural
+1,brownverticals,52,2.6,Somewhat natural
+1,brownverticals,40,4.8,Somewhat natural
+-1,brownverticals,53,4.25,Somewhat artificial
+2,brownverticals,29,4.2,Natural
+2,brownverticals,56,4.25,Natural
+1,brownverticals,25,4.75,Somewhat natural
+1,brownverticals,40,5,Somewhat natural
+2,brownverticals,49,4.6,Natural
+0,brownverticals,56,5,Neutral
+2,brownverticals,59,4.2,Natural
+0,brownverticals,25,5,Neutral
+1,brownverticals,66,3,Somewhat natural
+2,brownverticals,44,4.4,Natural
+2,brownverticals,39,4.6,Natural
+0,brownverticals,60,4.8,Neutral
+1,brownverticals,53,4.2,Somewhat natural
+2,brownverticals,72,3.8,Natural
+-1,brownverticals,57,4.8,Somewhat artificial
+2,brownverticals,31,4.2,Natural
+2,brownverticals,44,4.2,Natural
+0,brownverticals,36,2.2,Neutral
+1,brownverticals,59,3.75,Somewhat natural
+2,brownverticals,59,3.8,Natural
+0,brownverticals,53,4.8,Neutral
+1,brownverticals,50,3.2,Somewhat natural
+2,brownverticals,64,4.2,Natural
+1,brownverticals,38,3.75,Somewhat natural
+0,brownverticals,50,4,Neutral
+2,brownverticals,61,3.8,Natural
+2,brownverticals,36,4.6,Natural
+0,brownverticals,65,3.2,Neutral
+2,brownverticals,47,4.6,Natural
+0,brownverticals,51,5,Neutral
+2,brownverticals,60,3.4,Natural
+1,brownverticals,57,3.6,Somewhat natural
+1,brownverticals,73,2.6666666666666665,Somewhat natural
+1,brownverticals,56,4,Somewhat natural
+2,brownverticals,80,4.4,Natural
+1,brownverticals,61,3.8,Somewhat natural
+0,brownverticals,63,4.6,Neutral
+1,brownverticals,46,4,Somewhat natural
+0,brownverticals,50,3.8,Neutral
+2,brownverticals,66,4.2,Natural
+0,brownverticals,41,2.8,Neutral
+1,brownverticals,63,3.6,Somewhat natural
+2,brownverticals,48,3.2,Natural
+2,brownverticals,43,3.4,Natural
+1,brownverticals,39,4,Somewhat natural
+2,brownverticals,50,4.2,Natural
+1,brownverticals,44,3.2,Somewhat natural
+2,brownverticals,44,3,Natural
+1,brownverticals,48,4.6,Somewhat natural
+-1,brownverticals,53,4,Somewhat artificial
+0,brownverticals,52,3.2,Neutral
+1,brownverticals,65,3.8,Somewhat natural
+2,brownverticals,54,4.4,Natural
+1,brownverticals,83,4.4,Somewhat natural
+2,brownverticals,62,4.4,Natural
+2,brownverticals,38,4,Natural
+2,brownverticals,66,3.8,Natural
+2,brownverticals,57,3.6,Natural
+2,brownverticals,53,4.2,Natural
+1,brownverticals,28,2.25,Somewhat natural
+-2,brownverticals,52,3.8,Artificial
+1,brownverticals,45,4,Somewhat natural
+0,brownverticals,38,2.25,Neutral
+-1,brownverticals,52,4.75,Somewhat artificial
+1,brownverticals,34,3.4,Somewhat natural
+2,brownverticals,25,4.2,Natural
+1,brownverticals,68,4.2,Somewhat natural
+2,brownverticals,25,3.3333333333333335,Natural
+-1,brownverticals,30,4.2,Somewhat artificial
+1,brownverticals,39,3.2,Somewhat natural
+0,brownverticals,46,4.4,Neutral
+2,brownverticals,52,4.2,Natural
+1,brownverticals,40,5,Somewhat natural
+0,brownverticals,50,3.4,Neutral
+0,brownverticals,75,4.2,Neutral
+-1,brownverticals,27,4,Somewhat artificial
+1,brownverticals,58,3.2,Somewhat natural
+0,brownverticals,61,4.6,Neutral
+1,brownverticals,25,3.4,Somewhat natural
+1,brownverticals,23,4.4,Somewhat natural
+-1,brownverticals,34,3.5,Somewhat artificial
+0,brownverticals,26,4,Neutral
+1,brownverticals,48,1.6,Somewhat natural
+1,brownverticals,61,4.8,Somewhat natural
+1,brownverticals,41,4,Somewhat natural
+0,brownverticals,35,2.25,Neutral
+0,brownverticals,24,3.25,Neutral
+-1,brownverticals,62,3,Somewhat artificial
+1,brownverticals,22,3.2,Somewhat natural
+0,brownverticals,30,4,Neutral
+0,brownverticals,29,4,Neutral
+-2,brownverticals,33,4.4,Artificial
+1,brownverticals,41,4.6,Somewhat natural
+2,brownverticals,63,2.2,Natural
+1,brownverticals,51,4,Somewhat natural
+2,brownverticals,53,3.2,Natural
+0,brownverticals,22,3.8,Neutral
+-1,brownverticals,25,3.4,Somewhat artificial
+-1,brownverticals,30,2.75,Somewhat artificial
+0,brownverticals,27,3.8,Neutral
+-1,brownverticals,25,4,Somewhat artificial
+0,brownverticals,26,3,Neutral
+-1,brownverticals,93,4.8,Somewhat artificial
+-1,brownverticals,26,2.8,Somewhat artificial
+2,brownverticals,62,2.6,Natural
+0,brownverticals,22,2.75,Neutral
+0,brownverticals,25,3.8,Neutral
+1,brownverticals,25,3.6,Somewhat natural
+-1,brownverticals,27,3.8,Somewhat artificial
+1,brownverticals,25,4.5,Somewhat natural
+0,brownverticals,57,3.6,Neutral
+1,brownverticals,23,3.5,Somewhat natural
+1,brownverticals,25,3.8,Somewhat natural
+-1,brownverticals,60,4.25,Somewhat artificial
+-1,brownverticals,28,4.4,Somewhat artificial
+1,brownverticals,58,4,Somewhat natural
+2,brownverticals,36,4.6,Natural
+0,brownverticals,28,2.6,Neutral
+0,brownverticals,25,4.25,Neutral
+0,brownverticals,48,3.8,Neutral
+1,brownverticals,32,2.75,Somewhat natural
+1,brownverticals,25,3.8,Somewhat natural
+1,brownverticals,42,4.2,Somewhat natural
+0,brownverticals,46,3.6,Neutral
+2,brownverticals,32,4.8,Natural
+1,brownverticals,24,4.8,Somewhat natural
+1,brownverticals,23,4.6,Somewhat natural
+1,brownverticals,1,4.2,Somewhat natural
+-1,brownverticals,35,3,Somewhat artificial
+1,brownverticals,28,4,Somewhat natural
+-2,brownverticals,32,3.6,Artificial
+2,brownverticals,21,4.2,Natural
+0,brownverticals,32,4.2,Neutral
+0,brownverticals,28,3.8,Neutral
+1,brownverticals,19,3,Somewhat natural
+1,brownverticals,58,3.5,Somewhat natural
+2,brownverticals,42,3.75,Natural
+1,brownverticals,53,4,Somewhat natural
+1,brownverticals,19,4,Somewhat natural
+1,brownverticals,19,3.2,Somewhat natural
+0,brownverticals,19,4,Neutral
+-2,brownverticals,19,3.8,Artificial
+2,brownverticals,26,4.8,Natural
+1,brownverticals,19,3.4,Somewhat natural
+0,brownverticals,55,3.75,Neutral
+2,brownverticals,25,4.8,Natural
+2,brownverticals,49,3.2,Natural
+1,brownverticals,63,4.2,Somewhat natural
+1,brownverticals,19,3.8,Somewhat natural
+2,brownverticals,26,3.6,Natural
+2,brownverticals,55,5,Natural
+1,brownverticals,19,4.2,Somewhat natural
+0,brownverticals,69,3.6,Neutral
+1,brownverticals,27,3.8,Somewhat natural
+2,brownverticals,33,4.2,Natural
+2,brownverticals,30,4,Natural
+-2,brownverticals,30,2.8,Artificial
+2,brownverticals,30,4.5,Natural
+2,brownverticals,32,3.4,Natural
+0,brownverticals,31,4.2,Neutral
+2,brownverticals,60,3.6,Natural
+1,brownverticals,32,3.4,Somewhat natural
+-1,brownverticals,31,3,Somewhat artificial
+1,brownverticals,32,2.75,Somewhat natural
+2,brownverticals,62,4,Natural
+0,brownverticals,32,2.8,Neutral
+0,brownverticals,31,4.8,Neutral
+1,brownverticals,42,4.25,Somewhat natural
+-2,brownverticals,32,3,Artificial
+0,brownverticals,32,2.25,Neutral
+0,brownverticals,43,4.2,Neutral
+1,brownverticals,41,4.6,Somewhat natural
+1,brownverticals,36,4.2,Somewhat natural
+2,brownverticals,42,3.4,Natural
+0,brownverticals,32,4.25,Neutral
+1,brownverticals,55,4,Somewhat natural
+0,brownverticals,30,3.4,Neutral
+-2,brownverticals,25,3.8,Artificial
+1,brownverticals,52,3,Somewhat natural
+1,brownverticals,49,3.6,Somewhat natural
+1,brownverticals,43,4.4,Somewhat natural
+1,brownverticals,48,4.6,Somewhat natural
+2,brownverticals,25,4.5,Natural
+0,brownverticals,53,4.4,Neutral
+0,brownverticals,40,4.6,Neutral
+2,brownverticals,30,4.2,Natural
+2,brownverticals,38,4,Natural
+2,brownverticals,44,4.25,Natural
+0,brownverticals,41,4.2,Neutral
+0,brownverticals,59,3.8,Neutral
+0,brownverticals,31,3.8,Neutral
+0,brownverticals,59,3.8,Neutral
+1,brownverticals,44,4.2,Somewhat natural
+2,brownverticals,43,4.25,Natural
+2,brownverticals,56,3.6,Natural
+1,brownverticals,36,2.6,Somewhat natural
+1,brownverticals,25,1.6666666666666667,Somewhat natural
+2,brownverticals,37,2.2,Natural
+-1,brownverticals,30,4.4,Somewhat artificial
+0,brownverticals,30,4.5,Neutral
+1,brownverticals,58,3.6,Somewhat natural
+-1,brownverticals,34,4.4,Somewhat artificial
+2,brownverticals,59,3.4,Natural
+2,brownverticals,32,4,Natural
+-2,brownverticals,20,3.6,Artificial
+-1,brownverticals,19,3.4,Somewhat artificial
+-2,brownverticals,19,3.6,Artificial
+-2,brownverticals,34,3.75,Artificial
+0,brownverticals,46,3.6,Neutral
+2,brownverticals,40,4.8,Natural
+2,brownverticals,48,3.25,Natural
+-1,brownverticals,58,3.2,Somewhat artificial
+2,brownverticals,33,4,Natural
+0,brownverticals,99,3,Neutral
+1,brownverticals,52,4.6,Somewhat natural
+1,brownverticals,31,3.25,Somewhat natural
+0,brownverticals,36,3.2,Neutral
+2,brownverticals,44,4.4,Natural
+2,brownverticals,60,4.4,Natural
+2,brownverticals,36,3.2,Natural
+2,brownverticals,66,4.4,Natural
+2,brownverticals,59,5,Natural
+1,brownverticals,40,3.6,Somewhat natural
+2,brownverticals,44,3.8,Natural
+1,brownverticals,40,3.8,Somewhat natural
+0,brownverticals,45,3.4,Neutral
+0,brownverticals,48,4.2,Neutral
+-1,brownverticals,54,2.6,Somewhat artificial
+2,brownverticals,53,3.8,Natural
+-1,brownverticals,60,4.8,Somewhat artificial
+2,brownverticals,51,4,Natural
+1,brownverticals,33,2,Somewhat natural
+1,brownverticals,52,1.8,Somewhat natural
+0,brownverticals,62,3,Neutral
+2,brownverticals,35,2.6,Natural
+-1,brownverticals,51,4.8,Somewhat artificial
+1,brownverticals,50,3.6,Somewhat natural
+1,brownverticals,47,4.8,Somewhat natural
+2,brownverticals,24,4.6,Natural
+0,oakverticals,65,4.4,Neutral
+-1,oakverticals,50,3.25,Somewhat artificial
+1,oakverticals,43,4.8,Somewhat natural
+2,oakverticals,51,4,Natural
+1,oakverticals,66,5,Somewhat natural
+0,oakverticals,41,2.8,Neutral
+2,oakverticals,37,4,Natural
+1,oakverticals,58,1.4,Somewhat natural
+1,oakverticals,60,3.2,Somewhat natural
+1,oakverticals,32,4.6,Somewhat natural
+1,oakverticals,50,2.5,Somewhat natural
+1,oakverticals,58,4,Somewhat natural
+1,oakverticals,59,3.4,Somewhat natural
+2,oakverticals,79,4.4,Natural
+-1,oakverticals,49,3.8,Somewhat artificial
+2,oakverticals,68,4.2,Natural
+-1,oakverticals,54,4.4,Somewhat artificial
+1,oakverticals,58,4.4,Somewhat natural
+1,oakverticals,73,3.8,Somewhat natural
+-1,oakverticals,70,4.6,Somewhat artificial
+2,oakverticals,57,4.8,Natural
+-1,oakverticals,45,3.8,Somewhat artificial
+-2,oakverticals,23,4,Artificial
+1,oakverticals,44,3.5,Somewhat natural
+1,oakverticals,38,3.8,Somewhat natural
+0,oakverticals,73,4.2,Neutral
+1,oakverticals,50,2.8,Somewhat natural
+2,oakverticals,47,2.4,Natural
+2,oakverticals,58,4.8,Natural
+1,oakverticals,56,4.8,Somewhat natural
+-1,oakverticals,84,3,Somewhat artificial
+-1,oakverticals,38,4.6,Somewhat artificial
+2,oakverticals,56,4.2,Natural
+0,oakverticals,40,3.2,Neutral
+2,oakverticals,54,3.25,Natural
+2,oakverticals,61,4.75,Natural
+0,oakverticals,60,3.4,Neutral
+0,oakverticals,49,4,Neutral
+0,oakverticals,26,2.8,Neutral
+0,oakverticals,26,2.5,Neutral
+0,oakverticals,23,3,Neutral
+1,oakverticals,26,3.4,Somewhat natural
+1,oakverticals,28,4,Somewhat natural
+-1,oakverticals,25,3,Somewhat artificial
+0,oakverticals,63,3.3333333333333335,Neutral
+0,oakverticals,65,3.8,Neutral
+0,oakverticals,27,4.2,Neutral
+2,oakverticals,41,4,Natural
+2,oakverticals,58,4,Natural
+1,oakverticals,62,4,Somewhat natural
+-2,oakverticals,47,3.4,Artificial
+0,oakverticals,45,4.6,Neutral
+-2,oakverticals,33,4.2,Artificial
+-1,oakverticals,33,3.2,Somewhat artificial
+2,oakverticals,56,5,Natural
+1,oakverticals,38,3,Somewhat natural
+0,oakverticals,37,4,Neutral
+0,oakverticals,40,3.2,Neutral
+2,oakverticals,57,1,Natural
+2,oakverticals,48,3.4,Natural
+1,oakverticals,62,4.4,Somewhat natural
+2,oakverticals,52,2.6,Natural
+1,oakverticals,40,4.8,Somewhat natural
+1,oakverticals,53,4.25,Somewhat natural
+1,oakverticals,29,4.2,Somewhat natural
+2,oakverticals,56,4.25,Natural
+0,oakverticals,25,4.75,Neutral
+0,oakverticals,40,5,Neutral
+0,oakverticals,49,4.6,Neutral
+0,oakverticals,56,5,Neutral
+1,oakverticals,59,4.2,Somewhat natural
+-1,oakverticals,25,5,Somewhat artificial
+1,oakverticals,66,3,Somewhat natural
+1,oakverticals,44,4.4,Somewhat natural
+1,oakverticals,39,4.6,Somewhat natural
+0,oakverticals,60,4.8,Neutral
+-1,oakverticals,53,4.2,Somewhat artificial
+1,oakverticals,72,3.8,Somewhat natural
+2,oakverticals,31,4.2,Natural
+-2,oakverticals,57,4.8,Artificial
+1,oakverticals,44,4.2,Somewhat natural
+2,oakverticals,59,3.8,Natural
+1,oakverticals,59,3.75,Somewhat natural
+1,oakverticals,36,2.2,Somewhat natural
+1,oakverticals,53,4.8,Somewhat natural
+2,oakverticals,50,3.2,Natural
+0,oakverticals,38,3.75,Neutral
+1,oakverticals,64,4.2,Somewhat natural
+-2,oakverticals,50,4,Artificial
+0,oakverticals,36,4.6,Neutral
+2,oakverticals,61,3.8,Natural
+1,oakverticals,65,3.2,Somewhat natural
+1,oakverticals,57,3.6,Somewhat natural
+0,oakverticals,51,5,Neutral
+0,oakverticals,60,3.4,Neutral
+1,oakverticals,47,4.6,Somewhat natural
+0,oakverticals,80,4.4,Neutral
+1,oakverticals,73,2.6666666666666665,Somewhat natural
+1,oakverticals,56,4,Somewhat natural
+-1,oakverticals,61,3.8,Somewhat artificial
+1,oakverticals,63,4.6,Somewhat natural
+2,oakverticals,66,4.2,Natural
+1,oakverticals,46,4,Somewhat natural
+-1,oakverticals,50,3.8,Somewhat artificial
+0,oakverticals,41,2.8,Neutral
+2,oakverticals,48,3.2,Natural
+2,oakverticals,43,3.4,Natural
+0,oakverticals,39,4,Neutral
+1,oakverticals,63,3.6,Somewhat natural
+0,oakverticals,53,4.2,Neutral
+-1,oakverticals,50,4.2,Somewhat artificial
+-1,oakverticals,44,3.2,Somewhat artificial
+0,oakverticals,44,3,Neutral
+1,oakverticals,53,4,Somewhat natural
+1,oakverticals,65,3.8,Somewhat natural
+1,oakverticals,54,4.4,Somewhat natural
+1,oakverticals,52,3.2,Somewhat natural
+2,oakverticals,62,4.4,Natural
+0,oakverticals,83,4.4,Neutral
+2,oakverticals,38,4,Natural
+1,oakverticals,66,3.8,Somewhat natural
+2,oakverticals,57,3.6,Natural
+0,oakverticals,52,3.8,Neutral
+-1,oakverticals,45,4,Somewhat artificial
+1,oakverticals,28,2.25,Somewhat natural
+1,oakverticals,38,2.25,Somewhat natural
+1,oakverticals,52,4.75,Somewhat natural
+2,oakverticals,68,4.2,Natural
+0,oakverticals,34,3.4,Neutral
+2,oakverticals,25,4.2,Natural
+0,oakverticals,25,3.3333333333333335,Neutral
+-1,oakverticals,30,4.2,Somewhat artificial
+0,oakverticals,39,3.2,Neutral
+-1,oakverticals,46,4.4,Somewhat artificial
+2,oakverticals,52,4.2,Natural
+2,oakverticals,64,4.4,Natural
+1,oakverticals,40,5,Somewhat natural
+2,oakverticals,50,3.4,Natural
+2,oakverticals,75,4.2,Natural
+-1,oakverticals,27,4,Somewhat artificial
+1,oakverticals,58,3.2,Somewhat natural
+1,oakverticals,61,4.6,Somewhat natural
+1,oakverticals,23,4.4,Somewhat natural
+-1,oakverticals,25,3.4,Somewhat artificial
+-1,oakverticals,34,3.5,Somewhat artificial
+0,oakverticals,26,4,Neutral
+0,oakverticals,48,1.6,Neutral
+0,oakverticals,61,4.8,Neutral
+0,oakverticals,41,4,Neutral
+0,oakverticals,48,4.6,Neutral
+0,oakverticals,35,2.25,Neutral
+0,oakverticals,24,3.25,Neutral
+1,oakverticals,62,3,Somewhat natural
+0,oakverticals,22,3.2,Neutral
+0,oakverticals,30,4,Neutral
+0,oakverticals,29,4,Neutral
+0,oakverticals,33,4.4,Neutral
+1,oakverticals,41,4.6,Somewhat natural
+2,oakverticals,63,2.2,Natural
+2,oakverticals,51,4,Natural
+2,oakverticals,53,3.2,Natural
+-1,oakverticals,22,3.8,Somewhat artificial
+0,oakverticals,25,3.4,Neutral
+1,oakverticals,27,3.8,Somewhat natural
+0,oakverticals,25,4,Neutral
+-1,oakverticals,26,3,Somewhat artificial
+-1,oakverticals,93,4.8,Somewhat artificial
+-1,oakverticals,26,2.8,Somewhat artificial
+2,oakverticals,62,2.6,Natural
+0,oakverticals,22,2.75,Neutral
+1,oakverticals,25,3.8,Somewhat natural
+1,oakverticals,27,3.8,Somewhat natural
+1,oakverticals,25,4.5,Somewhat natural
+0,oakverticals,25,3.6,Neutral
+0,oakverticals,57,3.6,Neutral
+0,oakverticals,23,3.5,Neutral
+1,oakverticals,25,3.8,Somewhat natural
+-1,oakverticals,60,4.25,Somewhat artificial
+0,oakverticals,28,4.4,Neutral
+2,oakverticals,58,4,Natural
+2,oakverticals,36,4.6,Natural
+-1,oakverticals,28,2.6,Somewhat artificial
+1,oakverticals,25,4.25,Somewhat natural
+1,oakverticals,48,3.8,Somewhat natural
+1,oakverticals,32,2.75,Somewhat natural
+0,oakverticals,25,3.8,Neutral
+-1,oakverticals,42,4.2,Somewhat artificial
+0,oakverticals,46,3.6,Neutral
+0,oakverticals,32,4.8,Neutral
+-1,oakverticals,24,4.8,Somewhat artificial
+1,oakverticals,23,4.6,Somewhat natural
+-1,oakverticals,1,4.2,Somewhat artificial
+-2,oakverticals,32,3.6,Artificial
+1,oakverticals,28,4,Somewhat natural
+1,oakverticals,21,4.2,Somewhat natural
+-1,oakverticals,32,4.2,Somewhat artificial
+1,oakverticals,28,3.8,Somewhat natural
+-1,oakverticals,19,3,Somewhat artificial
+0,oakverticals,42,3.75,Neutral
+0,oakverticals,53,4,Neutral
+0,oakverticals,19,4,Neutral
+-1,oakverticals,19,3.2,Somewhat artificial
+0,oakverticals,19,4,Neutral
+-2,oakverticals,19,3.8,Artificial
+2,oakverticals,26,4.8,Natural
+2,oakverticals,19,3.4,Natural
+0,oakverticals,55,3.75,Neutral
+1,oakverticals,25,4.8,Somewhat natural
+1,oakverticals,49,3.2,Somewhat natural
+0,oakverticals,63,4.2,Neutral
+0,oakverticals,19,3.8,Neutral
+1,oakverticals,26,3.6,Somewhat natural
+0,oakverticals,55,5,Neutral
+0,oakverticals,19,4.2,Neutral
+-1,oakverticals,69,3.6,Somewhat artificial
+2,oakverticals,27,3.8,Natural
+0,oakverticals,33,4.2,Neutral
+2,oakverticals,30,4,Natural
+-2,oakverticals,30,2.8,Artificial
+2,oakverticals,30,4.5,Natural
+0,oakverticals,32,3.4,Neutral
+-1,oakverticals,31,4.2,Somewhat artificial
+2,oakverticals,32,3.4,Natural
+-2,oakverticals,31,3,Artificial
+-1,oakverticals,32,2.75,Somewhat artificial
+2,oakverticals,62,4,Natural
+1,oakverticals,32,2.8,Somewhat natural
+-1,oakverticals,31,4.8,Somewhat artificial
+1,oakverticals,42,4.25,Somewhat natural
+-2,oakverticals,32,3,Artificial
+2,oakverticals,60,3.6,Natural
+1,oakverticals,32,2.25,Somewhat natural
+1,oakverticals,43,4.2,Somewhat natural
+2,oakverticals,41,4.6,Natural
+0,oakverticals,36,4.2,Neutral
+1,oakverticals,42,3.4,Somewhat natural
+-1,oakverticals,32,4.25,Somewhat artificial
+0,oakverticals,55,4,Neutral
+1,oakverticals,25,3.8,Somewhat natural
+2,oakverticals,52,3,Natural
+1,oakverticals,49,3.6,Somewhat natural
+2,oakverticals,43,4.4,Natural
+1,oakverticals,48,4.6,Somewhat natural
+1,oakverticals,25,4.5,Somewhat natural
+1,oakverticals,53,4.4,Somewhat natural
+0,oakverticals,40,4.6,Neutral
+1,oakverticals,30,4.2,Somewhat natural
+1,oakverticals,38,4,Somewhat natural
+0,oakverticals,44,4.25,Neutral
+0,oakverticals,41,4.2,Neutral
+0,oakverticals,59,3.8,Neutral
+-2,oakverticals,31,3.8,Artificial
+0,oakverticals,59,3.8,Neutral
+0,oakverticals,44,4.2,Neutral
+1,oakverticals,43,4.25,Somewhat natural
+2,oakverticals,56,3.6,Natural
+1,oakverticals,36,2.6,Somewhat natural
+-2,oakverticals,25,1.6666666666666667,Artificial
+0,oakverticals,37,2.2,Neutral
+-1,oakverticals,30,4.4,Somewhat artificial
+1,oakverticals,30,4.5,Somewhat natural
+1,oakverticals,58,3.6,Somewhat natural
+-1,oakverticals,34,4.4,Somewhat artificial
+1,oakverticals,59,3.4,Somewhat natural
+1,oakverticals,32,4,Somewhat natural
+-1,oakverticals,20,3.6,Somewhat artificial
+-1,oakverticals,19,3.4,Somewhat artificial
+0,oakverticals,19,3.6,Neutral
+-2,oakverticals,34,3.75,Artificial
+2,oakverticals,40,4.8,Natural
+-1,oakverticals,46,3.6,Somewhat artificial
+2,oakverticals,48,3.25,Natural
+-1,oakverticals,58,3.2,Somewhat artificial
+0,oakverticals,33,4,Neutral
+0,oakverticals,99,3,Neutral
+-1,oakverticals,52,4.6,Somewhat artificial
+2,oakverticals,31,3.25,Natural
+0,oakverticals,36,3.2,Neutral
+2,oakverticals,44,4.4,Natural
+2,oakverticals,60,4.4,Natural
+2,oakverticals,36,3.2,Natural
+0,oakverticals,40,3.6,Neutral
+2,oakverticals,59,5,Natural
+2,oakverticals,66,4.4,Natural
+2,oakverticals,44,3.8,Natural
+-1,oakverticals,40,3.8,Somewhat artificial
+0,oakverticals,45,3.4,Neutral
+0,oakverticals,48,4.2,Neutral
+-1,oakverticals,54,2.6,Somewhat artificial
+2,oakverticals,53,3.8,Natural
+2,oakverticals,51,4,Natural
+-1,oakverticals,60,4.8,Somewhat artificial
+1,oakverticals,33,2,Somewhat natural
+-1,oakverticals,52,1.8,Somewhat artificial
+1,oakverticals,62,3,Somewhat natural
+2,oakverticals,35,2.6,Natural
+0,oakverticals,51,4.8,Neutral
+-1,oakverticals,50,3.6,Somewhat artificial
+0,oakverticals,47,4.8,Neutral
+1,oakverticals,24,4.6,Somewhat natural
+-2,cleavedpattern,65,4.4,Artificial
+1,cleavedpattern,50,3.25,Somewhat natural
+2,cleavedpattern,43,4.8,Natural
+2,cleavedpattern,51,4,Natural
+2,cleavedpattern,66,5,Natural
+0,cleavedpattern,41,2.8,Neutral
+2,cleavedpattern,37,4,Natural
+1,cleavedpattern,58,1.4,Somewhat natural
+0,cleavedpattern,60,3.2,Neutral
+1,cleavedpattern,32,4.6,Somewhat natural
+1,cleavedpattern,50,2.5,Somewhat natural
+0,cleavedpattern,58,4,Neutral
+1,cleavedpattern,59,3.4,Somewhat natural
+2,cleavedpattern,79,4.4,Natural
+2,cleavedpattern,49,3.8,Natural
+1,cleavedpattern,68,4.2,Somewhat natural
+1,cleavedpattern,54,4.4,Somewhat natural
+-1,cleavedpattern,73,3.8,Somewhat artificial
+2,cleavedpattern,58,4.4,Natural
+0,cleavedpattern,57,4.8,Neutral
+1,cleavedpattern,70,4.6,Somewhat natural
+0,cleavedpattern,45,3.8,Neutral
+0,cleavedpattern,23,4,Neutral
+-1,cleavedpattern,44,3.5,Somewhat artificial
+1,cleavedpattern,38,3.8,Somewhat natural
+1,cleavedpattern,73,4.2,Somewhat natural
+1,cleavedpattern,50,2.8,Somewhat natural
+-2,cleavedpattern,47,2.4,Artificial
+2,cleavedpattern,58,4.8,Natural
+2,cleavedpattern,56,4.8,Natural
+0,cleavedpattern,84,3,Neutral
+-2,cleavedpattern,38,4.6,Artificial
+2,cleavedpattern,56,4.2,Natural
+0,cleavedpattern,40,3.2,Neutral
+2,cleavedpattern,54,3.25,Natural
+1,cleavedpattern,61,4.75,Somewhat natural
+1,cleavedpattern,60,3.4,Somewhat natural
+2,cleavedpattern,49,4,Natural
+0,cleavedpattern,26,2.8,Neutral
+-1,cleavedpattern,26,2.5,Somewhat artificial
+-1,cleavedpattern,23,3,Somewhat artificial
+2,cleavedpattern,26,3.4,Natural
+2,cleavedpattern,28,4,Natural
+0,cleavedpattern,25,3,Neutral
+2,cleavedpattern,63,3.3333333333333335,Natural
+-1,cleavedpattern,65,3.8,Somewhat artificial
+0,cleavedpattern,27,4.2,Neutral
+2,cleavedpattern,58,4,Natural
+2,cleavedpattern,41,4,Natural
+0,cleavedpattern,62,4,Neutral
+-1,cleavedpattern,47,3.4,Somewhat artificial
+2,cleavedpattern,45,4.6,Natural
+0,cleavedpattern,33,4.2,Neutral
+-1,cleavedpattern,33,3.2,Somewhat artificial
+2,cleavedpattern,56,5,Natural
+1,cleavedpattern,38,3,Somewhat natural
+1,cleavedpattern,37,4,Somewhat natural
+1,cleavedpattern,40,3.2,Somewhat natural
+2,cleavedpattern,48,3.4,Natural
+0,cleavedpattern,57,1,Neutral
+1,cleavedpattern,62,4.4,Somewhat natural
+1,cleavedpattern,52,2.6,Somewhat natural
+1,cleavedpattern,40,4.8,Somewhat natural
+-1,cleavedpattern,53,4.25,Somewhat artificial
+2,cleavedpattern,29,4.2,Natural
+1,cleavedpattern,56,4.25,Somewhat natural
+0,cleavedpattern,25,4.75,Neutral
+0,cleavedpattern,40,5,Neutral
+1,cleavedpattern,49,4.6,Somewhat natural
+0,cleavedpattern,56,5,Neutral
+1,cleavedpattern,59,4.2,Somewhat natural
+0,cleavedpattern,25,5,Neutral
+1,cleavedpattern,66,3,Somewhat natural
+2,cleavedpattern,44,4.4,Natural
+2,cleavedpattern,39,4.6,Natural
+2,cleavedpattern,60,4.8,Natural
+1,cleavedpattern,53,4.2,Somewhat natural
+2,cleavedpattern,72,3.8,Natural
+1,cleavedpattern,57,4.8,Somewhat natural
+2,cleavedpattern,31,4.2,Natural
+2,cleavedpattern,44,4.2,Natural
+2,cleavedpattern,59,3.8,Natural
+0,cleavedpattern,36,2.2,Neutral
+1,cleavedpattern,59,3.75,Somewhat natural
+1,cleavedpattern,53,4.8,Somewhat natural
+2,cleavedpattern,50,3.2,Natural
+2,cleavedpattern,64,4.2,Natural
+1,cleavedpattern,38,3.75,Somewhat natural
+0,cleavedpattern,50,4,Neutral
+2,cleavedpattern,36,4.6,Natural
+2,cleavedpattern,61,3.8,Natural
+1,cleavedpattern,51,5,Somewhat natural
+2,cleavedpattern,47,4.6,Natural
+-1,cleavedpattern,57,3.6,Somewhat artificial
+2,cleavedpattern,73,2.6666666666666665,Natural
+0,cleavedpattern,65,3.2,Neutral
+2,cleavedpattern,60,3.4,Natural
+2,cleavedpattern,80,4.4,Natural
+2,cleavedpattern,56,4,Natural
+-1,cleavedpattern,61,3.8,Somewhat artificial
+2,cleavedpattern,46,4,Natural
+0,cleavedpattern,63,4.6,Neutral
+2,cleavedpattern,66,4.2,Natural
+0,cleavedpattern,41,2.8,Neutral
+1,cleavedpattern,50,3.8,Somewhat natural
+2,cleavedpattern,48,3.2,Natural
+2,cleavedpattern,43,3.4,Natural
+0,cleavedpattern,39,4,Neutral
+2,cleavedpattern,53,4.2,Natural
+1,cleavedpattern,44,3,Somewhat natural
+-1,cleavedpattern,63,3.6,Somewhat artificial
+-1,cleavedpattern,44,3.2,Somewhat artificial
+1,cleavedpattern,52,3.2,Somewhat natural
+0,cleavedpattern,65,3.8,Neutral
+1,cleavedpattern,83,4.4,Somewhat natural
+0,cleavedpattern,53,4,Neutral
+1,cleavedpattern,54,4.4,Somewhat natural
+1,cleavedpattern,62,4.4,Somewhat natural
+1,cleavedpattern,66,3.8,Somewhat natural
+2,cleavedpattern,38,4,Natural
+2,cleavedpattern,57,3.6,Natural
+-1,cleavedpattern,52,3.8,Somewhat artificial
+1,cleavedpattern,28,2.25,Somewhat natural
+1,cleavedpattern,45,4,Somewhat natural
+2,cleavedpattern,52,4.75,Natural
+-1,cleavedpattern,38,2.25,Somewhat artificial
+0,cleavedpattern,34,3.4,Neutral
+2,cleavedpattern,68,4.2,Natural
+1,cleavedpattern,25,4.2,Somewhat natural
+2,cleavedpattern,25,3.3333333333333335,Natural
+-2,cleavedpattern,30,4.2,Artificial
+0,cleavedpattern,39,3.2,Neutral
+1,cleavedpattern,46,4.4,Somewhat natural
+2,cleavedpattern,64,4.4,Natural
+2,cleavedpattern,52,4.2,Natural
+1,cleavedpattern,40,5,Somewhat natural
+1,cleavedpattern,50,3.4,Somewhat natural
+0,cleavedpattern,75,4.2,Neutral
+2,cleavedpattern,58,3.2,Natural
+-1,cleavedpattern,27,4,Somewhat artificial
+-2,cleavedpattern,61,4.6,Artificial
+0,cleavedpattern,25,3.4,Neutral
+1,cleavedpattern,23,4.4,Somewhat natural
+-1,cleavedpattern,34,3.5,Somewhat artificial
+0,cleavedpattern,26,4,Neutral
+0,cleavedpattern,48,1.6,Neutral
+1,cleavedpattern,61,4.8,Somewhat natural
+1,cleavedpattern,41,4,Somewhat natural
+1,cleavedpattern,48,4.6,Somewhat natural
+0,cleavedpattern,35,2.25,Neutral
+-2,cleavedpattern,62,3,Artificial
+1,cleavedpattern,24,3.25,Somewhat natural
+1,cleavedpattern,22,3.2,Somewhat natural
+-1,cleavedpattern,30,4,Somewhat artificial
+1,cleavedpattern,29,4,Somewhat natural
+-1,cleavedpattern,33,4.4,Somewhat artificial
+2,cleavedpattern,41,4.6,Natural
+1,cleavedpattern,63,2.2,Somewhat natural
+1,cleavedpattern,51,4,Somewhat natural
+1,cleavedpattern,53,3.2,Somewhat natural
+0,cleavedpattern,22,3.8,Neutral
+-1,cleavedpattern,25,3.4,Somewhat artificial
+-1,cleavedpattern,30,2.75,Somewhat artificial
+0,cleavedpattern,27,3.8,Neutral
+-1,cleavedpattern,25,4,Somewhat artificial
+0,cleavedpattern,26,3,Neutral
+-1,cleavedpattern,93,4.8,Somewhat artificial
+-2,cleavedpattern,26,2.8,Artificial
+2,cleavedpattern,62,2.6,Natural
+0,cleavedpattern,22,2.75,Neutral
+-1,cleavedpattern,25,3.8,Somewhat artificial
+0,cleavedpattern,27,3.8,Neutral
+1,cleavedpattern,25,3.6,Somewhat natural
+0,cleavedpattern,25,4.5,Neutral
+1,cleavedpattern,57,3.6,Somewhat natural
+1,cleavedpattern,23,3.5,Somewhat natural
+1,cleavedpattern,25,3.8,Somewhat natural
+1,cleavedpattern,60,4.25,Somewhat natural
+-2,cleavedpattern,28,4.4,Artificial
+2,cleavedpattern,58,4,Natural
+2,cleavedpattern,36,4.6,Natural
+-1,cleavedpattern,28,2.6,Somewhat artificial
+1,cleavedpattern,25,4.25,Somewhat natural
+1,cleavedpattern,48,3.8,Somewhat natural
+2,cleavedpattern,32,2.75,Natural
+1,cleavedpattern,25,3.8,Somewhat natural
+1,cleavedpattern,42,4.2,Somewhat natural
+1,cleavedpattern,46,3.6,Somewhat natural
+2,cleavedpattern,32,4.8,Natural
+1,cleavedpattern,23,4.6,Somewhat natural
+-1,cleavedpattern,24,4.8,Somewhat artificial
+1,cleavedpattern,1,4.2,Somewhat natural
+1,cleavedpattern,35,3,Somewhat natural
+2,cleavedpattern,32,3.6,Natural
+0,cleavedpattern,28,4,Neutral
+0,cleavedpattern,21,4.2,Neutral
+1,cleavedpattern,32,4.2,Somewhat natural
+0,cleavedpattern,28,3.8,Neutral
+1,cleavedpattern,19,3,Somewhat natural
+2,cleavedpattern,58,3.5,Natural
+2,cleavedpattern,42,3.75,Natural
+0,cleavedpattern,53,4,Neutral
+0,cleavedpattern,19,4,Neutral
+2,cleavedpattern,19,3.2,Natural
+0,cleavedpattern,19,4,Neutral
+-2,cleavedpattern,19,3.8,Artificial
+1,cleavedpattern,26,4.8,Somewhat natural
+0,cleavedpattern,19,3.4,Neutral
+1,cleavedpattern,55,3.75,Somewhat natural
+2,cleavedpattern,49,3.2,Natural
+2,cleavedpattern,25,4.8,Natural
+-1,cleavedpattern,63,4.2,Somewhat artificial
+1,cleavedpattern,19,3.8,Somewhat natural
+2,cleavedpattern,26,3.6,Natural
+2,cleavedpattern,55,5,Natural
+2,cleavedpattern,19,4.2,Natural
+0,cleavedpattern,69,3.6,Neutral
+1,cleavedpattern,27,3.8,Somewhat natural
+2,cleavedpattern,33,4.2,Natural
+2,cleavedpattern,30,4,Natural
+-1,cleavedpattern,30,2.8,Somewhat artificial
+2,cleavedpattern,30,4.5,Natural
+2,cleavedpattern,32,3.4,Natural
+0,cleavedpattern,31,4.2,Neutral
+0,cleavedpattern,32,3.4,Neutral
+-1,cleavedpattern,31,3,Somewhat artificial
+2,cleavedpattern,32,2.75,Natural
+2,cleavedpattern,62,4,Natural
+-1,cleavedpattern,32,2.8,Somewhat artificial
+2,cleavedpattern,31,4.8,Natural
+2,cleavedpattern,42,4.25,Natural
+-2,cleavedpattern,32,3,Artificial
+-2,cleavedpattern,60,3.6,Artificial
+-1,cleavedpattern,32,2.25,Somewhat artificial
+2,cleavedpattern,43,4.2,Natural
+1,cleavedpattern,41,4.6,Somewhat natural
+1,cleavedpattern,36,4.2,Somewhat natural
+2,cleavedpattern,42,3.4,Natural
+-1,cleavedpattern,32,4.25,Somewhat artificial
+1,cleavedpattern,55,4,Somewhat natural
+2,cleavedpattern,30,3.4,Natural
+-2,cleavedpattern,25,3.8,Artificial
+2,cleavedpattern,52,3,Natural
+1,cleavedpattern,49,3.6,Somewhat natural
+2,cleavedpattern,43,4.4,Natural
+1,cleavedpattern,48,4.6,Somewhat natural
+2,cleavedpattern,25,4.5,Natural
+-1,cleavedpattern,53,4.4,Somewhat artificial
+1,cleavedpattern,40,4.6,Somewhat natural
+2,cleavedpattern,30,4.2,Natural
+0,cleavedpattern,38,4,Neutral
+2,cleavedpattern,44,4.25,Natural
+0,cleavedpattern,41,4.2,Neutral
+0,cleavedpattern,59,3.8,Neutral
+0,cleavedpattern,31,3.8,Neutral
+0,cleavedpattern,59,3.8,Neutral
+2,cleavedpattern,44,4.2,Natural
+2,cleavedpattern,43,4.25,Natural
+2,cleavedpattern,56,3.6,Natural
+1,cleavedpattern,36,2.6,Somewhat natural
+-2,cleavedpattern,25,1.6666666666666667,Artificial
+0,cleavedpattern,37,2.2,Neutral
+0,cleavedpattern,30,4.4,Neutral
+1,cleavedpattern,58,3.6,Somewhat natural
+1,cleavedpattern,59,3.4,Somewhat natural
+0,cleavedpattern,32,4,Neutral
+0,cleavedpattern,20,3.6,Neutral
+2,cleavedpattern,19,3.4,Natural
+-2,cleavedpattern,19,3.6,Artificial
+-2,cleavedpattern,34,3.75,Artificial
+2,cleavedpattern,40,4.8,Natural
+-2,cleavedpattern,46,3.6,Artificial
+2,cleavedpattern,48,3.25,Natural
+2,cleavedpattern,58,3.2,Natural
+0,cleavedpattern,33,4,Neutral
+0,cleavedpattern,99,3,Neutral
+0,cleavedpattern,52,4.6,Neutral
+-1,cleavedpattern,31,3.25,Somewhat artificial
+1,cleavedpattern,36,3.2,Somewhat natural
+2,cleavedpattern,44,4.4,Natural
+2,cleavedpattern,60,4.4,Natural
+2,cleavedpattern,36,3.2,Natural
+2,cleavedpattern,59,5,Natural
+0,cleavedpattern,40,3.6,Neutral
+2,cleavedpattern,66,4.4,Natural
+2,cleavedpattern,44,3.8,Natural
+1,cleavedpattern,40,3.8,Somewhat natural
+-1,cleavedpattern,45,3.4,Somewhat artificial
+0,cleavedpattern,48,4.2,Neutral
+1,cleavedpattern,54,2.6,Somewhat natural
+2,cleavedpattern,53,3.8,Natural
+1,cleavedpattern,60,4.8,Somewhat natural
+1,cleavedpattern,51,4,Somewhat natural
+0,cleavedpattern,33,2,Neutral
+1,cleavedpattern,52,1.8,Somewhat natural
+1,cleavedpattern,62,3,Somewhat natural
+2,cleavedpattern,35,2.6,Natural
+1,cleavedpattern,51,4.8,Somewhat natural
+1,cleavedpattern,50,3.6,Somewhat natural
+2,cleavedpattern,47,4.8,Natural
+2,cleavedpattern,24,4.6,Natural
+1,singlebrown,65,4.4,Somewhat natural
+1,singlebrown,50,3.25,Somewhat natural
+2,singlebrown,43,4.8,Natural
+2,singlebrown,51,4,Natural
+2,singlebrown,66,5,Natural
+0,singlebrown,41,2.8,Neutral
+2,singlebrown,37,4,Natural
+1,singlebrown,58,1.4,Somewhat natural
+0,singlebrown,60,3.2,Neutral
+2,singlebrown,32,4.6,Natural
+2,singlebrown,50,2.5,Natural
+1,singlebrown,58,4,Somewhat natural
+1,singlebrown,59,3.4,Somewhat natural
+2,singlebrown,79,4.4,Natural
+1,singlebrown,49,3.8,Somewhat natural
+2,singlebrown,68,4.2,Natural
+2,singlebrown,54,4.4,Natural
+1,singlebrown,73,3.8,Somewhat natural
+1,singlebrown,58,4.4,Somewhat natural
+1,singlebrown,57,4.8,Somewhat natural
+1,singlebrown,45,3.8,Somewhat natural
+1,singlebrown,70,4.6,Somewhat natural
+2,singlebrown,23,4,Natural
+2,singlebrown,44,3.5,Natural
+1,singlebrown,38,3.8,Somewhat natural
+1,singlebrown,73,4.2,Somewhat natural
+1,singlebrown,50,2.8,Somewhat natural
+2,singlebrown,47,2.4,Natural
+2,singlebrown,58,4.8,Natural
+2,singlebrown,56,4.8,Natural
+-1,singlebrown,84,3,Somewhat artificial
+2,singlebrown,38,4.6,Natural
+2,singlebrown,56,4.2,Natural
+0,singlebrown,40,3.2,Neutral
+2,singlebrown,54,3.25,Natural
+1,singlebrown,61,4.75,Somewhat natural
+1,singlebrown,60,3.4,Somewhat natural
+1,singlebrown,49,4,Somewhat natural
+2,singlebrown,26,2.8,Natural
+-1,singlebrown,26,2.5,Somewhat artificial
+0,singlebrown,23,3,Neutral
+0,singlebrown,26,3.4,Neutral
+2,singlebrown,28,4,Natural
+2,singlebrown,25,3,Natural
+1,singlebrown,63,3.3333333333333335,Somewhat natural
+2,singlebrown,65,3.8,Natural
+1,singlebrown,27,4.2,Somewhat natural
+2,singlebrown,58,4,Natural
+2,singlebrown,41,4,Natural
+0,singlebrown,62,4,Neutral
+-1,singlebrown,47,3.4,Somewhat artificial
+0,singlebrown,45,4.6,Neutral
+0,singlebrown,33,4.2,Neutral
+1,singlebrown,33,3.2,Somewhat natural
+2,singlebrown,56,5,Natural
+2,singlebrown,38,3,Natural
+1,singlebrown,37,4,Somewhat natural
+0,singlebrown,40,3.2,Neutral
+2,singlebrown,57,1,Natural
+1,singlebrown,48,3.4,Somewhat natural
+2,singlebrown,62,4.4,Natural
+2,singlebrown,52,2.6,Natural
+2,singlebrown,40,4.8,Natural
+2,singlebrown,53,4.25,Natural
+1,singlebrown,29,4.2,Somewhat natural
+1,singlebrown,56,4.25,Somewhat natural
+1,singlebrown,25,4.75,Somewhat natural
+0,singlebrown,40,5,Neutral
+0,singlebrown,49,4.6,Neutral
+2,singlebrown,56,5,Natural
+1,singlebrown,59,4.2,Somewhat natural
+1,singlebrown,25,5,Somewhat natural
+1,singlebrown,66,3,Somewhat natural
+2,singlebrown,44,4.4,Natural
+2,singlebrown,39,4.6,Natural
+0,singlebrown,60,4.8,Neutral
+2,singlebrown,53,4.2,Natural
+2,singlebrown,72,3.8,Natural
+0,singlebrown,57,4.8,Neutral
+2,singlebrown,31,4.2,Natural
+2,singlebrown,44,4.2,Natural
+2,singlebrown,59,3.8,Natural
+1,singlebrown,59,3.75,Somewhat natural
+1,singlebrown,53,4.8,Somewhat natural
+2,singlebrown,50,3.2,Natural
+2,singlebrown,64,4.2,Natural
+1,singlebrown,38,3.75,Somewhat natural
+2,singlebrown,50,4,Natural
+2,singlebrown,61,3.8,Natural
+2,singlebrown,36,4.6,Natural
+2,singlebrown,51,5,Natural
+0,singlebrown,57,3.6,Neutral
+2,singlebrown,47,4.6,Natural
+2,singlebrown,60,3.4,Natural
+1,singlebrown,65,3.2,Somewhat natural
+1,singlebrown,73,2.6666666666666665,Somewhat natural
+1,singlebrown,56,4,Somewhat natural
+1,singlebrown,80,4.4,Somewhat natural
+-1,singlebrown,61,3.8,Somewhat artificial
+0,singlebrown,63,4.6,Neutral
+1,singlebrown,46,4,Somewhat natural
+2,singlebrown,66,4.2,Natural
+1,singlebrown,50,3.8,Somewhat natural
+-2,singlebrown,41,2.8,Artificial
+2,singlebrown,48,3.2,Natural
+2,singlebrown,43,3.4,Natural
+1,singlebrown,63,3.6,Somewhat natural
+0,singlebrown,39,4,Neutral
+0,singlebrown,53,4.2,Neutral
+2,singlebrown,50,4.2,Natural
+2,singlebrown,53,4,Natural
+0,singlebrown,52,3.2,Neutral
+2,singlebrown,44,3,Natural
+2,singlebrown,44,3.2,Natural
+2,singlebrown,48,4.6,Natural
+2,singlebrown,54,4.4,Natural
+1,singlebrown,65,3.8,Somewhat natural
+2,singlebrown,62,4.4,Natural
+0,singlebrown,83,4.4,Neutral
+0,singlebrown,38,4,Neutral
+1,singlebrown,66,3.8,Somewhat natural
+0,singlebrown,57,3.6,Neutral
+1,singlebrown,28,2.25,Somewhat natural
+1,singlebrown,52,3.8,Somewhat natural
+1,singlebrown,45,4,Somewhat natural
+-1,singlebrown,38,2.25,Somewhat artificial
+2,singlebrown,68,4.2,Natural
+2,singlebrown,34,3.4,Natural
+2,singlebrown,25,4.2,Natural
+1,singlebrown,25,3.3333333333333335,Somewhat natural
+0,singlebrown,30,4.2,Neutral
+1,singlebrown,39,3.2,Somewhat natural
+1,singlebrown,46,4.4,Somewhat natural
+2,singlebrown,52,4.2,Natural
+1,singlebrown,40,5,Somewhat natural
+2,singlebrown,64,4.4,Natural
+-2,singlebrown,50,3.4,Artificial
+0,singlebrown,75,4.2,Neutral
+1,singlebrown,27,4,Somewhat natural
+1,singlebrown,58,3.2,Somewhat natural
+0,singlebrown,61,4.6,Neutral
+1,singlebrown,23,4.4,Somewhat natural
+1,singlebrown,25,3.4,Somewhat natural
+0,singlebrown,34,3.5,Neutral
+1,singlebrown,26,4,Somewhat natural
+1,singlebrown,48,1.6,Somewhat natural
+2,singlebrown,61,4.8,Natural
+0,singlebrown,41,4,Neutral
+-1,singlebrown,35,2.25,Somewhat artificial
+1,singlebrown,24,3.25,Somewhat natural
+0,singlebrown,62,3,Neutral
+0,singlebrown,22,3.2,Neutral
+0,singlebrown,30,4,Neutral
+1,singlebrown,29,4,Somewhat natural
+0,singlebrown,41,4.6,Neutral
+-2,singlebrown,33,4.4,Artificial
+1,singlebrown,63,2.2,Somewhat natural
+0,singlebrown,51,4,Neutral
+2,singlebrown,53,3.2,Natural
+0,singlebrown,22,3.8,Neutral
+1,singlebrown,25,3.4,Somewhat natural
+2,singlebrown,30,2.75,Natural
+1,singlebrown,27,3.8,Somewhat natural
+1,singlebrown,25,4,Somewhat natural
+2,singlebrown,26,3,Natural
+1,singlebrown,93,4.8,Somewhat natural
+0,singlebrown,26,2.8,Neutral
+2,singlebrown,62,2.6,Natural
+2,singlebrown,22,2.75,Natural
+2,singlebrown,25,3.8,Natural
+1,singlebrown,27,3.8,Somewhat natural
+2,singlebrown,25,3.6,Natural
+0,singlebrown,25,4.5,Neutral
+0,singlebrown,57,3.6,Neutral
+0,singlebrown,23,3.5,Neutral
+1,singlebrown,25,3.8,Somewhat natural
+1,singlebrown,60,4.25,Somewhat natural
+1,singlebrown,28,4.4,Somewhat natural
+2,singlebrown,58,4,Natural
+1,singlebrown,36,4.6,Somewhat natural
+1,singlebrown,28,2.6,Somewhat natural
+2,singlebrown,25,4.25,Natural
+1,singlebrown,48,3.8,Somewhat natural
+2,singlebrown,32,2.75,Natural
+2,singlebrown,25,3.8,Natural
+-1,singlebrown,42,4.2,Somewhat artificial
+1,singlebrown,46,3.6,Somewhat natural
+1,singlebrown,32,4.8,Somewhat natural
+2,singlebrown,24,4.8,Natural
+2,singlebrown,23,4.6,Natural
+1,singlebrown,1,4.2,Somewhat natural
+1,singlebrown,35,3,Somewhat natural
+1,singlebrown,32,3.6,Somewhat natural
+1,singlebrown,28,4,Somewhat natural
+0,singlebrown,21,4.2,Neutral
+1,singlebrown,32,4.2,Somewhat natural
+-1,singlebrown,28,3.8,Somewhat artificial
+2,singlebrown,19,3,Natural
+2,singlebrown,58,3.5,Natural
+2,singlebrown,42,3.75,Natural
+1,singlebrown,53,4,Somewhat natural
+-1,singlebrown,19,4,Somewhat artificial
+2,singlebrown,19,3.2,Natural
+2,singlebrown,19,4,Natural
+1,singlebrown,19,3.8,Somewhat natural
+2,singlebrown,26,4.8,Natural
+0,singlebrown,19,3.4,Neutral
+1,singlebrown,55,3.75,Somewhat natural
+2,singlebrown,25,4.8,Natural
+1,singlebrown,49,3.2,Somewhat natural
+0,singlebrown,63,4.2,Neutral
+1,singlebrown,19,3.8,Somewhat natural
+-2,singlebrown,26,3.6,Artificial
+2,singlebrown,55,5,Natural
+2,singlebrown,19,4.2,Natural
+2,singlebrown,69,3.6,Natural
+2,singlebrown,27,3.8,Natural
+2,singlebrown,33,4.2,Natural
+2,singlebrown,30,4,Natural
+0,singlebrown,30,2.8,Neutral
+2,singlebrown,30,4.5,Natural
+2,singlebrown,32,3.4,Natural
+2,singlebrown,31,4.2,Natural
+2,singlebrown,32,3.4,Natural
+1,singlebrown,31,3,Somewhat natural
+0,singlebrown,32,2.75,Neutral
+0,singlebrown,62,4,Neutral
+0,singlebrown,32,2.8,Neutral
+2,singlebrown,31,4.8,Natural
+0,singlebrown,32,3,Neutral
+1,singlebrown,60,3.6,Somewhat natural
+2,singlebrown,32,2.25,Natural
+1,singlebrown,43,4.2,Somewhat natural
+2,singlebrown,41,4.6,Natural
+1,singlebrown,36,4.2,Somewhat natural
+-1,singlebrown,42,3.4,Somewhat artificial
+2,singlebrown,32,4.25,Natural
+1,singlebrown,55,4,Somewhat natural
+2,singlebrown,30,3.4,Natural
+2,singlebrown,25,3.8,Natural
+2,singlebrown,52,3,Natural
+0,singlebrown,49,3.6,Neutral
+2,singlebrown,43,4.4,Natural
+2,singlebrown,48,4.6,Natural
+1,singlebrown,25,4.5,Somewhat natural
+2,singlebrown,53,4.4,Natural
+1,singlebrown,40,4.6,Somewhat natural
+2,singlebrown,30,4.2,Natural
+2,singlebrown,38,4,Natural
+2,singlebrown,44,4.25,Natural
+0,singlebrown,41,4.2,Neutral
+2,singlebrown,59,3.8,Natural
+0,singlebrown,31,3.8,Neutral
+1,singlebrown,59,3.8,Somewhat natural
+2,singlebrown,44,4.2,Natural
+-1,singlebrown,43,4.25,Somewhat artificial
+2,singlebrown,56,3.6,Natural
+2,singlebrown,36,2.6,Natural
+-2,singlebrown,25,1.6666666666666667,Artificial
+2,singlebrown,37,2.2,Natural
+0,singlebrown,30,4.4,Neutral
+0,singlebrown,30,4.5,Neutral
+1,singlebrown,58,3.6,Somewhat natural
+1,singlebrown,34,4.4,Somewhat natural
+2,singlebrown,59,3.4,Natural
+-1,singlebrown,32,4,Somewhat artificial
+-2,singlebrown,20,3.6,Artificial
+0,singlebrown,19,3.4,Neutral
+0,singlebrown,19,3.6,Neutral
+1,singlebrown,34,3.75,Somewhat natural
+1,singlebrown,46,3.6,Somewhat natural
+2,singlebrown,40,4.8,Natural
+2,singlebrown,48,3.25,Natural
+2,singlebrown,58,3.2,Natural
+2,singlebrown,33,4,Natural
+0,singlebrown,99,3,Neutral
+2,singlebrown,52,4.6,Natural
+1,singlebrown,31,3.25,Somewhat natural
+2,singlebrown,36,3.2,Natural
+2,singlebrown,44,4.4,Natural
+2,singlebrown,60,4.4,Natural
+2,singlebrown,36,3.2,Natural
+2,singlebrown,66,4.4,Natural
+2,singlebrown,59,5,Natural
+-1,singlebrown,40,3.6,Somewhat artificial
+2,singlebrown,44,3.8,Natural
+1,singlebrown,40,3.8,Somewhat natural
+1,singlebrown,45,3.4,Somewhat natural
+1,singlebrown,48,4.2,Somewhat natural
+2,singlebrown,54,2.6,Natural
+1,singlebrown,53,3.8,Somewhat natural
+1,singlebrown,51,4,Somewhat natural
+2,singlebrown,33,2,Natural
+-1,singlebrown,60,4.8,Somewhat artificial
+0,singlebrown,52,1.8,Neutral
+1,singlebrown,62,3,Somewhat natural
+1,singlebrown,35,2.6,Somewhat natural
+-1,singlebrown,51,4.8,Somewhat artificial
+1,singlebrown,50,3.6,Somewhat natural
+0,singlebrown,47,4.8,Neutral
+1,singlebrown,24,4.6,Somewhat natural
+-1,osb,65,4.4,Somewhat artificial
+-2,osb,43,4.8,Artificial
+-1,osb,51,4,Somewhat artificial
+0,osb,66,5,Neutral
+0,osb,41,2.8,Neutral
+1,osb,37,4,Somewhat natural
+-1,osb,58,1.4,Somewhat artificial
+-1,osb,60,3.2,Somewhat artificial
+1,osb,32,4.6,Somewhat natural
+0,osb,50,2.5,Neutral
+0,osb,58,4,Neutral
+0,osb,59,3.4,Neutral
+1,osb,79,4.4,Somewhat natural
+-1,osb,49,3.8,Somewhat artificial
+2,osb,68,4.2,Natural
+0,osb,54,4.4,Neutral
+0,osb,73,3.8,Neutral
+-2,osb,58,4.4,Artificial
+-1,osb,45,3.8,Somewhat artificial
+0,osb,70,4.6,Neutral
+1,osb,57,4.8,Somewhat natural
+-2,osb,23,4,Artificial
+-1,osb,44,3.5,Somewhat artificial
+0,osb,73,4.2,Neutral
+1,osb,50,2.8,Somewhat natural
+2,osb,47,2.4,Natural
+1,osb,58,4.8,Somewhat natural
+2,osb,56,4.8,Natural
+2,osb,38,4.6,Natural
+-1,osb,84,3,Somewhat artificial
+1,osb,56,4.2,Somewhat natural
+0,osb,40,3.2,Neutral
+0,osb,54,3.25,Neutral
+-1,osb,61,4.75,Somewhat artificial
+1,osb,60,3.4,Somewhat natural
+0,osb,49,4,Neutral
+-2,osb,26,2.8,Artificial
+0,osb,26,2.5,Neutral
+-2,osb,23,3,Artificial
+-1,osb,26,3.4,Somewhat artificial
+1,osb,28,4,Somewhat natural
+-1,osb,25,3,Somewhat artificial
+-1,osb,63,3.3333333333333335,Somewhat artificial
+0,osb,65,3.8,Neutral
+1,osb,27,4.2,Somewhat natural
+2,osb,58,4,Natural
+-1,osb,41,4,Somewhat artificial
+1,osb,62,4,Somewhat natural
+-2,osb,47,3.4,Artificial
+-2,osb,33,4.2,Artificial
+-2,osb,33,3.2,Artificial
+1,osb,56,5,Somewhat natural
+1,osb,38,3,Somewhat natural
+-1,osb,37,4,Somewhat artificial
+0,osb,40,3.2,Neutral
+2,osb,57,1,Natural
+0,osb,48,3.4,Neutral
+-2,osb,62,4.4,Artificial
+0,osb,52,2.6,Neutral
+1,osb,40,4.8,Somewhat natural
+0,osb,53,4.25,Neutral
+0,osb,29,4.2,Neutral
+1,osb,56,4.25,Somewhat natural
+-1,osb,25,4.75,Somewhat artificial
+0,osb,40,5,Neutral
+1,osb,49,4.6,Somewhat natural
+0,osb,56,5,Neutral
+-1,osb,59,4.2,Somewhat artificial
+0,osb,25,5,Neutral
+1,osb,66,3,Somewhat natural
+1,osb,44,4.4,Somewhat natural
+1,osb,39,4.6,Somewhat natural
+-1,osb,60,4.8,Somewhat artificial
+0,osb,53,4.2,Neutral
+-1,osb,72,3.8,Somewhat artificial
+-1,osb,57,4.8,Somewhat artificial
+0,osb,31,4.2,Neutral
+0,osb,44,4.2,Neutral
+1,osb,36,2.2,Somewhat natural
+0,osb,59,3.75,Neutral
+2,osb,59,3.8,Natural
+-2,osb,53,4.8,Artificial
+1,osb,50,3.2,Somewhat natural
+1,osb,64,4.2,Somewhat natural
+0,osb,38,3.75,Neutral
+-1,osb,50,4,Somewhat artificial
+1,osb,61,3.8,Somewhat natural
+-1,osb,51,5,Somewhat artificial
+1,osb,47,4.6,Somewhat natural
+1,osb,60,3.4,Somewhat natural
+1,osb,57,3.6,Somewhat natural
+-1,osb,80,4.4,Somewhat artificial
+0,osb,65,3.2,Neutral
+0,osb,73,2.6666666666666665,Neutral
+-1,osb,56,4,Somewhat artificial
+-1,osb,61,3.8,Somewhat artificial
+-1,osb,63,4.6,Somewhat artificial
+1,osb,46,4,Somewhat natural
+-1,osb,66,4.2,Somewhat artificial
+0,osb,41,2.8,Neutral
+-1,osb,50,3.8,Somewhat artificial
+1,osb,48,3.2,Somewhat natural
+-1,osb,63,3.6,Somewhat artificial
+0,osb,43,3.4,Neutral
+-2,osb,53,4.2,Artificial
+-1,osb,53,4,Somewhat artificial
+-2,osb,44,3.2,Artificial
+-1,osb,50,4.2,Somewhat artificial
+0,osb,44,3,Neutral
+0,osb,39,4,Neutral
+-1,osb,65,3.8,Somewhat artificial
+-1,osb,83,4.4,Somewhat artificial
+2,osb,52,3.2,Natural
+2,osb,54,4.4,Natural
+0,osb,62,4.4,Neutral
+2,osb,66,3.8,Natural
+2,osb,38,4,Natural
+-1,osb,57,3.6,Somewhat artificial
+0,osb,28,2.25,Neutral
+-1,osb,45,4,Somewhat artificial
+-1,osb,52,3.8,Somewhat artificial
+-1,osb,38,2.25,Somewhat artificial
+-1,osb,34,3.4,Somewhat artificial
+2,osb,68,4.2,Natural
+1,osb,25,4.2,Somewhat natural
+1,osb,25,3.3333333333333335,Somewhat natural
+-1,osb,30,4.2,Somewhat artificial
+1,osb,39,3.2,Somewhat natural
+-1,osb,46,4.4,Somewhat artificial
+2,osb,64,4.4,Natural
+0,osb,52,4.2,Neutral
+-1,osb,40,5,Somewhat artificial
+-1,osb,50,3.4,Somewhat artificial
+0,osb,75,4.2,Neutral
+1,osb,58,3.2,Somewhat natural
+1,osb,27,4,Somewhat natural
+0,osb,61,4.6,Neutral
+1,osb,23,4.4,Somewhat natural
+-1,osb,25,3.4,Somewhat artificial
+0,osb,26,4,Neutral
+-1,osb,48,1.6,Somewhat artificial
+0,osb,61,4.8,Neutral
+-2,osb,41,4,Artificial
+-1,osb,35,2.25,Somewhat artificial
+-1,osb,24,3.25,Somewhat artificial
+-2,osb,62,3,Artificial
+1,osb,22,3.2,Somewhat natural
+0,osb,29,4,Neutral
+1,osb,33,4.4,Somewhat natural
+1,osb,63,2.2,Somewhat natural
+-1,osb,51,4,Somewhat artificial
+1,osb,53,3.2,Somewhat natural
+0,osb,22,3.8,Neutral
+0,osb,25,3.4,Neutral
+0,osb,30,2.75,Neutral
+-1,osb,25,4,Somewhat artificial
+0,osb,27,3.8,Neutral
+0,osb,26,3,Neutral
+-1,osb,93,4.8,Somewhat artificial
+-1,osb,26,2.8,Somewhat artificial
+-1,osb,62,2.6,Somewhat artificial
+-1,osb,22,2.75,Somewhat artificial
+-2,osb,25,3.8,Artificial
+-2,osb,25,3.6,Artificial
+0,osb,27,3.8,Neutral
+-1,osb,25,4.5,Somewhat artificial
+0,osb,57,3.6,Neutral
+0,osb,25,3.8,Neutral
+0,osb,60,4.25,Neutral
+-1,osb,28,4.4,Somewhat artificial
+-1,osb,58,4,Somewhat artificial
+0,osb,36,4.6,Neutral
+1,osb,28,2.6,Somewhat natural
+1,osb,25,4.25,Somewhat natural
+1,osb,48,3.8,Somewhat natural
+0,osb,32,2.75,Neutral
+0,osb,25,3.8,Neutral
+-1,osb,46,3.6,Somewhat artificial
+-2,osb,32,4.8,Artificial
+-1,osb,24,4.8,Somewhat artificial
+-1,osb,23,4.6,Somewhat artificial
+0,osb,1,4.2,Neutral
+0,osb,32,3.6,Neutral
+1,osb,28,4,Somewhat natural
+0,osb,21,4.2,Neutral
+-2,osb,28,3.8,Artificial
+-2,osb,19,3,Artificial
+-1,osb,42,3.75,Somewhat artificial
+-1,osb,53,4,Somewhat artificial
+0,osb,19,4,Neutral
+-1,osb,19,3.2,Somewhat artificial
+-1,osb,19,4,Somewhat artificial
+0,osb,19,3.8,Neutral
+1,osb,26,4.8,Somewhat natural
+-1,osb,55,3.75,Somewhat artificial
+-2,osb,49,3.2,Artificial
+1,osb,25,4.8,Somewhat natural
+-2,osb,63,4.2,Artificial
+-1,osb,19,3.8,Somewhat artificial
+-1,osb,26,3.6,Somewhat artificial
+0,osb,55,5,Neutral
+-1,osb,19,4.2,Somewhat artificial
+-2,osb,69,3.6,Artificial
+-1,osb,27,3.8,Somewhat artificial
+-2,osb,33,4.2,Artificial
+0,osb,30,4,Neutral
+-1,osb,30,2.8,Somewhat artificial
+-2,osb,30,4.5,Artificial
+-1,osb,32,3.4,Somewhat artificial
+-1,osb,31,4.2,Somewhat artificial
+0,osb,32,3.4,Neutral
+-1,osb,31,3,Somewhat artificial
+1,osb,32,2.75,Somewhat natural
+2,osb,62,4,Natural
+0,osb,32,2.8,Neutral
+-1,osb,31,4.8,Somewhat artificial
+-2,osb,32,3,Artificial
+-1,osb,60,3.6,Somewhat artificial
+-2,osb,32,2.25,Artificial
+0,osb,43,4.2,Neutral
+-1,osb,36,4.2,Somewhat artificial
+-1,osb,42,3.4,Somewhat artificial
+-1,osb,32,4.25,Somewhat artificial
+1,osb,55,4,Somewhat natural
+-2,osb,30,3.4,Artificial
+0,osb,25,3.8,Neutral
+1,osb,52,3,Somewhat natural
+0,osb,49,3.6,Neutral
+2,osb,43,4.4,Natural
+0,osb,48,4.6,Neutral
+-1,osb,25,4.5,Somewhat artificial
+-1,osb,40,4.6,Somewhat artificial
+1,osb,30,4.2,Somewhat natural
+0,osb,44,4.25,Neutral
+-2,osb,41,4.2,Artificial
+-2,osb,31,3.8,Artificial
+-1,osb,59,3.8,Somewhat artificial
+0,osb,44,4.2,Neutral
+0,osb,43,4.25,Neutral
+-1,osb,56,3.6,Somewhat artificial
+1,osb,36,2.6,Somewhat natural
+2,osb,25,1.6666666666666667,Natural
+0,osb,37,2.2,Neutral
+0,osb,30,4.4,Neutral
+0,osb,58,3.6,Neutral
+0,osb,59,3.4,Neutral
+0,osb,32,4,Neutral
+2,osb,20,3.6,Natural
+-1,osb,19,3.4,Somewhat artificial
+2,osb,19,3.6,Natural
+-2,osb,34,3.75,Artificial
+0,osb,46,3.6,Neutral
+1,osb,40,4.8,Somewhat natural
+2,osb,48,3.25,Natural
+-1,osb,58,3.2,Somewhat artificial
+0,osb,99,3,Neutral
+-2,osb,31,3.25,Artificial
+-1,osb,36,3.2,Somewhat artificial
+0,osb,44,4.4,Neutral
+0,osb,36,3.2,Neutral
+1,osb,60,4.4,Somewhat natural
+-2,osb,40,3.6,Artificial
+2,osb,66,4.4,Natural
+0,osb,59,5,Neutral
+1,osb,44,3.8,Somewhat natural
+-2,osb,40,3.8,Artificial
+-2,osb,45,3.4,Artificial
+-1,osb,48,4.2,Somewhat artificial
+-2,osb,54,2.6,Artificial
+-1,osb,53,3.8,Somewhat artificial
+2,osb,51,4,Natural
+-1,osb,60,4.8,Somewhat artificial
+0,osb,33,2,Neutral
+0,osb,52,1.8,Neutral
+0,osb,62,3,Neutral
+1,osb,35,2.6,Somewhat natural
+-2,osb,51,4.8,Artificial
+-1,osb,50,3.6,Somewhat artificial
+0,osb,47,4.8,Neutral
+-1,osb,24,4.6,Somewhat artificial
+1,clt,65,4.4,Somewhat natural
+0,clt,50,3.25,Neutral
+2,clt,43,4.8,Natural
+2,clt,51,4,Natural
+2,clt,66,5,Natural
+0,clt,41,2.8,Neutral
+2,clt,37,4,Natural
+1,clt,58,1.4,Somewhat natural
+1,clt,60,3.2,Somewhat natural
+2,clt,32,4.6,Natural
+2,clt,50,2.5,Natural
+2,clt,58,4,Natural
+1,clt,59,3.4,Somewhat natural
+2,clt,79,4.4,Natural
+2,clt,49,3.8,Natural
+2,clt,68,4.2,Natural
+1,clt,54,4.4,Somewhat natural
+1,clt,58,4.4,Somewhat natural
+1,clt,73,3.8,Somewhat natural
+1,clt,45,3.8,Somewhat natural
+1,clt,70,4.6,Somewhat natural
+2,clt,57,4.8,Natural
+1,clt,23,4,Somewhat natural
+2,clt,44,3.5,Natural
+-1,clt,38,3.8,Somewhat artificial
+2,clt,73,4.2,Natural
+2,clt,50,2.8,Natural
+0,clt,47,2.4,Neutral
+2,clt,58,4.8,Natural
+2,clt,56,4.8,Natural
+2,clt,38,4.6,Natural
+0,clt,84,3,Neutral
+2,clt,56,4.2,Natural
+0,clt,40,3.2,Neutral
+2,clt,54,3.25,Natural
+2,clt,61,4.75,Natural
+1,clt,60,3.4,Somewhat natural
+2,clt,49,4,Natural
+2,clt,26,2.8,Natural
+0,clt,26,2.5,Neutral
+-1,clt,23,3,Somewhat artificial
+2,clt,26,3.4,Natural
+2,clt,28,4,Natural
+2,clt,25,3,Natural
+1,clt,63,3.3333333333333335,Somewhat natural
+1,clt,65,3.8,Somewhat natural
+2,clt,27,4.2,Natural
+2,clt,41,4,Natural
+2,clt,58,4,Natural
+2,clt,62,4,Natural
+-1,clt,47,3.4,Somewhat artificial
+2,clt,45,4.6,Natural
+2,clt,33,3.2,Natural
+2,clt,33,4.2,Natural
+2,clt,56,5,Natural
+2,clt,38,3,Natural
+0,clt,37,4,Neutral
+1,clt,40,3.2,Somewhat natural
+2,clt,48,3.4,Natural
+2,clt,57,1,Natural
+2,clt,62,4.4,Natural
+2,clt,52,2.6,Natural
+2,clt,40,4.8,Natural
+0,clt,53,4.25,Neutral
+1,clt,29,4.2,Somewhat natural
+2,clt,56,4.25,Natural
+0,clt,25,4.75,Neutral
+2,clt,40,5,Natural
+2,clt,49,4.6,Natural
+2,clt,56,5,Natural
+1,clt,59,4.2,Somewhat natural
+1,clt,25,5,Somewhat natural
+2,clt,44,4.4,Natural
+1,clt,66,3,Somewhat natural
+2,clt,39,4.6,Natural
+1,clt,60,4.8,Somewhat natural
+1,clt,53,4.2,Somewhat natural
+2,clt,72,3.8,Natural
+2,clt,57,4.8,Natural
+2,clt,31,4.2,Natural
+2,clt,44,4.2,Natural
+2,clt,59,3.8,Natural
+1,clt,59,3.75,Somewhat natural
+-1,clt,36,2.2,Somewhat artificial
+1,clt,53,4.8,Somewhat natural
+2,clt,50,3.2,Natural
+2,clt,64,4.2,Natural
+1,clt,38,3.75,Somewhat natural
+2,clt,50,4,Natural
+2,clt,61,3.8,Natural
+0,clt,36,4.6,Neutral
+2,clt,65,3.2,Natural
+2,clt,47,4.6,Natural
+2,clt,60,3.4,Natural
+2,clt,73,2.6666666666666665,Natural
+2,clt,57,3.6,Natural
+-2,clt,51,5,Artificial
+1,clt,56,4,Somewhat natural
+2,clt,80,4.4,Natural
+1,clt,61,3.8,Somewhat natural
+2,clt,63,4.6,Natural
+2,clt,46,4,Natural
+2,clt,66,4.2,Natural
+1,clt,50,3.8,Somewhat natural
+2,clt,41,2.8,Natural
+2,clt,43,3.4,Natural
+2,clt,48,3.2,Natural
+2,clt,44,3.2,Natural
+2,clt,53,4.2,Natural
+1,clt,63,3.6,Somewhat natural
+2,clt,39,4,Natural
+2,clt,50,4.2,Natural
+2,clt,53,4,Natural
+1,clt,44,3,Somewhat natural
+1,clt,65,3.8,Somewhat natural
+2,clt,52,3.2,Natural
+2,clt,54,4.4,Natural
+2,clt,62,4.4,Natural
+0,clt,83,4.4,Neutral
+0,clt,38,4,Neutral
+2,clt,66,3.8,Natural
+0,clt,57,3.6,Neutral
+1,clt,52,3.8,Somewhat natural
+1,clt,28,2.25,Somewhat natural
+1,clt,45,4,Somewhat natural
+0,clt,38,2.25,Neutral
+2,clt,52,4.75,Natural
+2,clt,34,3.4,Natural
+2,clt,25,4.2,Natural
+2,clt,68,4.2,Natural
+2,clt,25,3.3333333333333335,Natural
+0,clt,30,4.2,Neutral
+0,clt,39,3.2,Neutral
+1,clt,46,4.4,Somewhat natural
+2,clt,64,4.4,Natural
+2,clt,52,4.2,Natural
+2,clt,40,5,Natural
+-2,clt,50,3.4,Artificial
+2,clt,75,4.2,Natural
+2,clt,27,4,Natural
+2,clt,61,4.6,Natural
+0,clt,58,3.2,Neutral
+-1,clt,25,3.4,Somewhat artificial
+1,clt,23,4.4,Somewhat natural
+0,clt,34,3.5,Neutral
+1,clt,26,4,Somewhat natural
+1,clt,48,1.6,Somewhat natural
+2,clt,61,4.8,Natural
+-1,clt,41,4,Somewhat artificial
+2,clt,48,4.6,Natural
+0,clt,35,2.25,Neutral
+2,clt,62,3,Natural
+1,clt,24,3.25,Somewhat natural
+-1,clt,22,3.2,Somewhat artificial
+-1,clt,30,4,Somewhat artificial
+1,clt,29,4,Somewhat natural
+1,clt,33,4.4,Somewhat natural
+2,clt,41,4.6,Natural
+2,clt,63,2.2,Natural
+-2,clt,51,4,Artificial
+2,clt,53,3.2,Natural
+-1,clt,22,3.8,Somewhat artificial
+2,clt,25,3.4,Natural
+2,clt,30,2.75,Natural
+0,clt,25,4,Neutral
+2,clt,27,3.8,Natural
+2,clt,26,3,Natural
+1,clt,93,4.8,Somewhat natural
+0,clt,26,2.8,Neutral
+2,clt,62,2.6,Natural
+1,clt,22,2.75,Somewhat natural
+2,clt,25,3.8,Natural
+2,clt,25,3.6,Natural
+1,clt,27,3.8,Somewhat natural
+1,clt,25,4.5,Somewhat natural
+2,clt,57,3.6,Natural
+-1,clt,23,3.5,Somewhat artificial
+1,clt,25,3.8,Somewhat natural
+2,clt,60,4.25,Natural
+1,clt,28,4.4,Somewhat natural
+1,clt,58,4,Somewhat natural
+2,clt,36,4.6,Natural
+1,clt,28,2.6,Somewhat natural
+2,clt,25,4.25,Natural
+1,clt,48,3.8,Somewhat natural
+2,clt,32,2.75,Natural
+2,clt,25,3.8,Natural
+-1,clt,42,4.2,Somewhat artificial
+1,clt,46,3.6,Somewhat natural
+1,clt,32,4.8,Somewhat natural
+1,clt,23,4.6,Somewhat natural
+2,clt,24,4.8,Natural
+1,clt,1,4.2,Somewhat natural
+2,clt,28,4,Natural
+2,clt,32,3.6,Natural
+1,clt,21,4.2,Somewhat natural
+0,clt,32,4.2,Neutral
+-1,clt,28,3.8,Somewhat artificial
+1,clt,19,3,Somewhat natural
+2,clt,58,3.5,Natural
+2,clt,42,3.75,Natural
+1,clt,53,4,Somewhat natural
+-2,clt,19,4,Artificial
+-1,clt,19,3.2,Somewhat artificial
+2,clt,19,4,Natural
+2,clt,19,3.8,Natural
+2,clt,26,4.8,Natural
+-1,clt,19,3.4,Somewhat artificial
+1,clt,55,3.75,Somewhat natural
+1,clt,49,3.2,Somewhat natural
+-1,clt,25,4.8,Somewhat artificial
+-1,clt,63,4.2,Somewhat artificial
+2,clt,19,3.8,Natural
+2,clt,26,3.6,Natural
+2,clt,55,5,Natural
+2,clt,19,4.2,Natural
+2,clt,69,3.6,Natural
+2,clt,27,3.8,Natural
+2,clt,33,4.2,Natural
+2,clt,30,4,Natural
+2,clt,30,4.5,Natural
+1,clt,32,3.4,Somewhat natural
+0,clt,31,4.2,Neutral
+2,clt,32,3.4,Natural
+1,clt,31,3,Somewhat natural
+0,clt,32,2.75,Neutral
+2,clt,62,4,Natural
+2,clt,32,2.8,Natural
+2,clt,31,4.8,Natural
+1,clt,42,4.25,Somewhat natural
+-2,clt,32,3,Artificial
+2,clt,60,3.6,Natural
+2,clt,32,2.25,Natural
+-2,clt,30,2.8,Artificial
+1,clt,43,4.2,Somewhat natural
+2,clt,41,4.6,Natural
+1,clt,36,4.2,Somewhat natural
+0,clt,42,3.4,Neutral
+2,clt,32,4.25,Natural
+1,clt,55,4,Somewhat natural
+2,clt,30,3.4,Natural
+1,clt,25,3.8,Somewhat natural
+2,clt,52,3,Natural
+1,clt,49,3.6,Somewhat natural
+2,clt,43,4.4,Natural
+2,clt,48,4.6,Natural
+1,clt,25,4.5,Somewhat natural
+2,clt,53,4.4,Natural
+2,clt,40,4.6,Natural
+2,clt,38,4,Natural
+2,clt,44,4.25,Natural
+-2,clt,41,4.2,Artificial
+2,clt,59,3.8,Natural
+-1,clt,31,3.8,Somewhat artificial
+2,clt,59,3.8,Natural
+2,clt,44,4.2,Natural
+1,clt,43,4.25,Somewhat natural
+2,clt,56,3.6,Natural
+2,clt,36,2.6,Natural
+0,clt,25,1.6666666666666667,Neutral
+-1,clt,37,2.2,Somewhat artificial
+-1,clt,30,4.4,Somewhat artificial
+2,clt,30,4.5,Natural
+1,clt,58,3.6,Somewhat natural
+2,clt,59,3.4,Natural
+0,clt,32,4,Neutral
+0,clt,20,3.6,Neutral
+1,clt,19,3.4,Somewhat natural
+2,clt,19,3.6,Natural
+0,clt,34,3.75,Neutral
+2,clt,40,4.8,Natural
+2,clt,46,3.6,Natural
+2,clt,48,3.25,Natural
+2,clt,58,3.2,Natural
+2,clt,33,4,Natural
+0,clt,99,3,Neutral
+2,clt,52,4.6,Natural
+2,clt,31,3.25,Natural
+-1,clt,36,3.2,Somewhat artificial
+2,clt,44,4.4,Natural
+2,clt,60,4.4,Natural
+2,clt,36,3.2,Natural
+2,clt,59,5,Natural
+2,clt,66,4.4,Natural
+0,clt,40,3.6,Neutral
+2,clt,44,3.8,Natural
+0,clt,40,3.8,Neutral
+1,clt,45,3.4,Somewhat natural
+1,clt,48,4.2,Somewhat natural
+2,clt,54,2.6,Natural
+0,clt,53,3.8,Neutral
+2,clt,51,4,Natural
+2,clt,60,4.8,Natural
+2,clt,33,2,Natural
+0,clt,52,1.8,Neutral
+1,clt,62,3,Somewhat natural
+2,clt,35,2.6,Natural
+0,clt,51,4.8,Neutral
+-1,clt,50,3.6,Somewhat artificial
+2,clt,47,4.8,Natural
+1,clt,24,4.6,Somewhat natural
+2,logwall,65,4.4,Natural
+2,logwall,50,3.25,Natural
+2,logwall,43,4.8,Natural
+2,logwall,51,4,Natural
+2,logwall,66,5,Natural
+0,logwall,41,2.8,Neutral
+2,logwall,37,4,Natural
+1,logwall,58,1.4,Somewhat natural
+1,logwall,60,3.2,Somewhat natural
+2,logwall,32,4.6,Natural
+1,logwall,50,2.5,Somewhat natural
+1,logwall,58,4,Somewhat natural
+1,logwall,59,3.4,Somewhat natural
+2,logwall,79,4.4,Natural
+2,logwall,49,3.8,Natural
+2,logwall,68,4.2,Natural
+2,logwall,54,4.4,Natural
+1,logwall,58,4.4,Somewhat natural
+1,logwall,73,3.8,Somewhat natural
+2,logwall,45,3.8,Natural
+2,logwall,57,4.8,Natural
+1,logwall,70,4.6,Somewhat natural
+2,logwall,23,4,Natural
+2,logwall,44,3.5,Natural
+2,logwall,38,3.8,Natural
+2,logwall,73,4.2,Natural
+2,logwall,50,2.8,Natural
+2,logwall,47,2.4,Natural
+2,logwall,58,4.8,Natural
+2,logwall,56,4.8,Natural
+2,logwall,84,3,Natural
+2,logwall,38,4.6,Natural
+2,logwall,56,4.2,Natural
+0,logwall,40,3.2,Neutral
+2,logwall,54,3.25,Natural
+2,logwall,61,4.75,Natural
+0,logwall,60,3.4,Neutral
+2,logwall,49,4,Natural
+2,logwall,26,2.8,Natural
+2,logwall,26,2.5,Natural
+2,logwall,23,3,Natural
+2,logwall,26,3.4,Natural
+2,logwall,28,4,Natural
+2,logwall,25,3,Natural
+2,logwall,63,3.3333333333333335,Natural
+2,logwall,65,3.8,Natural
+2,logwall,27,4.2,Natural
+2,logwall,41,4,Natural
+2,logwall,58,4,Natural
+2,logwall,62,4,Natural
+1,logwall,47,3.4,Somewhat natural
+0,logwall,45,4.6,Neutral
+2,logwall,33,4.2,Natural
+2,logwall,33,3.2,Natural
+2,logwall,56,5,Natural
+2,logwall,38,3,Natural
+2,logwall,37,4,Natural
+2,logwall,40,3.2,Natural
+0,logwall,57,1,Neutral
+2,logwall,48,3.4,Natural
+2,logwall,62,4.4,Natural
+2,logwall,52,2.6,Natural
+2,logwall,40,4.8,Natural
+2,logwall,53,4.25,Natural
+2,logwall,29,4.2,Natural
+2,logwall,56,4.25,Natural
+2,logwall,25,4.75,Natural
+2,logwall,40,5,Natural
+2,logwall,49,4.6,Natural
+2,logwall,56,5,Natural
+2,logwall,59,4.2,Natural
+2,logwall,25,5,Natural
+2,logwall,44,4.4,Natural
+1,logwall,66,3,Somewhat natural
+2,logwall,39,4.6,Natural
+2,logwall,60,4.8,Natural
+2,logwall,53,4.2,Natural
+2,logwall,72,3.8,Natural
+2,logwall,57,4.8,Natural
+2,logwall,31,4.2,Natural
+2,logwall,44,4.2,Natural
+2,logwall,36,2.2,Natural
+2,logwall,59,3.8,Natural
+2,logwall,59,3.75,Natural
+1,logwall,53,4.8,Somewhat natural
+2,logwall,50,3.2,Natural
+2,logwall,64,4.2,Natural
+2,logwall,38,3.75,Natural
+2,logwall,50,4,Natural
+2,logwall,36,4.6,Natural
+2,logwall,61,3.8,Natural
+2,logwall,60,3.4,Natural
+2,logwall,47,4.6,Natural
+0,logwall,65,3.2,Neutral
+2,logwall,51,5,Natural
+2,logwall,57,3.6,Natural
+2,logwall,73,2.6666666666666665,Natural
+2,logwall,56,4,Natural
+2,logwall,80,4.4,Natural
+1,logwall,61,3.8,Somewhat natural
+2,logwall,63,4.6,Natural
+2,logwall,66,4.2,Natural
+2,logwall,46,4,Natural
+2,logwall,50,3.8,Natural
+2,logwall,41,2.8,Natural
+2,logwall,48,3.2,Natural
+2,logwall,43,3.4,Natural
+2,logwall,39,4,Natural
+2,logwall,53,4,Natural
+2,logwall,44,3,Natural
+2,logwall,50,4.2,Natural
+2,logwall,44,3.2,Natural
+2,logwall,52,3.2,Natural
+2,logwall,65,3.8,Natural
+2,logwall,62,4.4,Natural
+2,logwall,66,3.8,Natural
+2,logwall,54,4.4,Natural
+1,logwall,83,4.4,Somewhat natural
+2,logwall,38,4,Natural
+2,logwall,57,3.6,Natural
+2,logwall,53,4.2,Natural
+1,logwall,45,4,Somewhat natural
+2,logwall,28,2.25,Natural
+2,logwall,52,3.8,Natural
+2,logwall,52,4.75,Natural
+1,logwall,38,2.25,Somewhat natural
+2,logwall,25,4.2,Natural
+2,logwall,34,3.4,Natural
+2,logwall,68,4.2,Natural
+2,logwall,25,3.3333333333333335,Natural
+2,logwall,30,4.2,Natural
+2,logwall,39,3.2,Natural
+2,logwall,46,4.4,Natural
+2,logwall,64,4.4,Natural
+2,logwall,52,4.2,Natural
+2,logwall,40,5,Natural
+2,logwall,50,3.4,Natural
+2,logwall,75,4.2,Natural
+1,logwall,27,4,Somewhat natural
+2,logwall,58,3.2,Natural
+2,logwall,61,4.6,Natural
+1,logwall,25,3.4,Somewhat natural
+2,logwall,23,4.4,Natural
+1,logwall,34,3.5,Somewhat natural
+2,logwall,26,4,Natural
+1,logwall,48,1.6,Somewhat natural
+2,logwall,61,4.8,Natural
+2,logwall,41,4,Natural
+2,logwall,48,4.6,Natural
+2,logwall,35,2.25,Natural
+2,logwall,24,3.25,Natural
+2,logwall,62,3,Natural
+1,logwall,22,3.2,Somewhat natural
+2,logwall,30,4,Natural
+2,logwall,29,4,Natural
+2,logwall,41,4.6,Natural
+2,logwall,33,4.4,Natural
+2,logwall,63,2.2,Natural
+2,logwall,51,4,Natural
+2,logwall,53,3.2,Natural
+1,logwall,22,3.8,Somewhat natural
+2,logwall,25,3.4,Natural
+0,logwall,30,2.75,Neutral
+1,logwall,25,4,Somewhat natural
+0,logwall,27,3.8,Neutral
+2,logwall,26,3,Natural
+-1,logwall,93,4.8,Somewhat artificial
+2,logwall,26,2.8,Natural
+2,logwall,62,2.6,Natural
+1,logwall,22,2.75,Somewhat natural
+2,logwall,25,3.8,Natural
+2,logwall,25,3.6,Natural
+2,logwall,27,3.8,Natural
+2,logwall,25,4.5,Natural
+2,logwall,57,3.6,Natural
+2,logwall,23,3.5,Natural
+1,logwall,25,3.8,Somewhat natural
+2,logwall,60,4.25,Natural
+0,logwall,28,4.4,Neutral
+1,logwall,58,4,Somewhat natural
+2,logwall,36,4.6,Natural
+1,logwall,28,2.6,Somewhat natural
+2,logwall,25,4.25,Natural
+1,logwall,48,3.8,Somewhat natural
+2,logwall,32,2.75,Natural
+2,logwall,25,3.8,Natural
+2,logwall,42,4.2,Natural
+0,logwall,46,3.6,Neutral
+2,logwall,32,4.8,Natural
+1,logwall,24,4.8,Somewhat natural
+2,logwall,23,4.6,Natural
+2,logwall,1,4.2,Natural
+1,logwall,35,3,Somewhat natural
+2,logwall,28,4,Natural
+2,logwall,32,3.6,Natural
+2,logwall,21,4.2,Natural
+2,logwall,32,4.2,Natural
+0,logwall,28,3.8,Neutral
+2,logwall,19,3,Natural
+2,logwall,58,3.5,Natural
+2,logwall,42,3.75,Natural
+0,logwall,53,4,Neutral
+1,logwall,19,4,Somewhat natural
+2,logwall,19,3.2,Natural
+2,logwall,19,4,Natural
+2,logwall,19,3.8,Natural
+2,logwall,26,4.8,Natural
+0,logwall,19,3.4,Neutral
+2,logwall,55,3.75,Natural
+2,logwall,49,3.2,Natural
+2,logwall,25,4.8,Natural
+1,logwall,63,4.2,Somewhat natural
+2,logwall,26,3.6,Natural
+1,logwall,19,3.8,Somewhat natural
+2,logwall,55,5,Natural
+2,logwall,19,4.2,Natural
+1,logwall,69,3.6,Somewhat natural
+2,logwall,27,3.8,Natural
+2,logwall,33,4.2,Natural
+1,logwall,30,4,Somewhat natural
+2,logwall,30,2.8,Natural
+2,logwall,30,4.5,Natural
+2,logwall,32,3.4,Natural
+2,logwall,31,4.2,Natural
+1,logwall,32,3.4,Somewhat natural
+2,logwall,31,3,Natural
+2,logwall,32,2.75,Natural
+2,logwall,62,4,Natural
+2,logwall,32,2.8,Natural
+2,logwall,31,4.8,Natural
+1,logwall,42,4.25,Somewhat natural
+0,logwall,32,3,Neutral
+1,logwall,60,3.6,Somewhat natural
+1,logwall,32,2.25,Somewhat natural
+0,logwall,43,4.2,Neutral
+0,logwall,41,4.6,Neutral
+2,logwall,36,4.2,Natural
+2,logwall,42,3.4,Natural
+2,logwall,32,4.25,Natural
+2,logwall,55,4,Natural
+0,logwall,30,3.4,Neutral
+1,logwall,25,3.8,Somewhat natural
+2,logwall,52,3,Natural
+2,logwall,49,3.6,Natural
+-1,logwall,43,4.4,Somewhat artificial
+2,logwall,48,4.6,Natural
+2,logwall,25,4.5,Natural
+0,logwall,53,4.4,Neutral
+2,logwall,40,4.6,Natural
+2,logwall,30,4.2,Natural
+0,logwall,38,4,Neutral
+2,logwall,44,4.25,Natural
+0,logwall,41,4.2,Neutral
+2,logwall,59,3.8,Natural
+1,logwall,31,3.8,Somewhat natural
+2,logwall,59,3.8,Natural
+2,logwall,44,4.2,Natural
+2,logwall,43,4.25,Natural
+2,logwall,56,3.6,Natural
+1,logwall,36,2.6,Somewhat natural
+2,logwall,25,1.6666666666666667,Natural
+2,logwall,37,2.2,Natural
+2,logwall,30,4.4,Natural
+2,logwall,30,4.5,Natural
+2,logwall,58,3.6,Natural
+2,logwall,59,3.4,Natural
+2,logwall,34,4.4,Natural
+2,logwall,32,4,Natural
+0,logwall,20,3.6,Neutral
+2,logwall,19,3.4,Natural
+0,logwall,19,3.6,Neutral
+2,logwall,34,3.75,Natural
+2,logwall,40,4.8,Natural
+2,logwall,46,3.6,Natural
+2,logwall,48,3.25,Natural
+2,logwall,33,4,Natural
+2,logwall,52,4.6,Natural
+2,logwall,31,3.25,Natural
+1,logwall,36,3.2,Somewhat natural
+2,logwall,44,4.4,Natural
+2,logwall,60,4.4,Natural
+2,logwall,36,3.2,Natural
+2,logwall,59,5,Natural
+2,logwall,66,4.4,Natural
+2,logwall,40,3.6,Natural
+2,logwall,44,3.8,Natural
+2,logwall,40,3.8,Natural
+1,logwall,45,3.4,Somewhat natural
+0,logwall,48,4.2,Neutral
+2,logwall,54,2.6,Natural
+1,logwall,53,3.8,Somewhat natural
+2,logwall,51,4,Natural
+2,logwall,60,4.8,Natural
+2,logwall,33,2,Natural
+1,logwall,52,1.8,Somewhat natural
+1,logwall,62,3,Somewhat natural
+2,logwall,35,2.6,Natural
+2,logwall,51,4.8,Natural
+-1,logwall,50,3.6,Somewhat artificial
+2,logwall,47,4.8,Natural
+2,logwall,24,4.6,Natural

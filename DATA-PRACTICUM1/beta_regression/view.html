@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html  dir="ltr" lang="sl" xml:lang="sl">
+<head>
+    <title>Podatkovni praktikum I, 3 KT 25/26 PZ1EN: Completed beta regression / bayesian analysis template | e-učilnica UP FAMNIT</title>
+    <link rel="shortcut icon" href="https://e.famnit.upr.si/theme/image.php/classic/theme/1758371740/favicon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="moodle, Podatkovni praktikum I, 3 KT 25/26 PZ1EN: Completed beta regression / bayesian analysis template | e-učilnica UP FAMNIT" />
+<link rel="stylesheet" type="text/css" href="https://e.famnit.upr.si/theme/yui_combo.php?rollup/3.18.1/yui-moodlesimple.css" /><script id="firstthemesheet" type="text/css">/** Required in order to fix style inclusion problems in IE with YUI **/</script><link rel="stylesheet" type="text/css" href="https://e.famnit.upr.si/theme/styles.php/classic/1758371740_1/all" />
+<script>
+//<![CDATA[
+var M = {}; M.yui = {};
+M.pageloadstarttime = new Date();
+M.cfg = {"wwwroot":"https:\/\/e.famnit.upr.si","apibase":"https:\/\/e.famnit.upr.si\/r.php\/api","homeurl":{},"sesskey":"QvMp6OJiUw","sessiontimeout":"7200","sessiontimeoutwarning":1200,"themerev":"1758371740","slasharguments":1,"theme":"classic","iconsystemmodule":"core\/icon_system_fontawesome","jsrev":"1758371740","admin":"admin","svgicons":true,"usertimezone":"Evropa\/Berlin","language":"sl","courseId":7449,"courseContextId":744137,"contextid":755331,"contextInstanceId":135629,"langrev":1766978284,"templaterev":"1758371740","siteId":1,"userId":7779,"developerdebug":true};var yui1ConfigFn = function(me) {if(/-skin|reset|fonts|grids|base/.test(me.name)){me.type='css';me.path=me.path.replace(/\.js/,'.css');me.path=me.path.replace(/\/yui2-skin/,'/assets/skins/sam/yui2-skin')}};
+var yui2ConfigFn = function(me) {var parts=me.name.replace(/^moodle-/,'').split('-'),component=parts.shift(),module=parts[0],min='-min';if(/-(skin|core)$/.test(me.name)){parts.pop();me.type='css';min=''}
+if(module){var filename=parts.join('-');me.path=component+'/'+module+'/'+filename+min+'.'+me.type}else{me.path=component+'/'+component+'.'+me.type}};
+YUI_config = {"debug":true,"base":"https:\/\/e.famnit.upr.si\/lib\/yuilib\/3.18.1\/","comboBase":"https:\/\/e.famnit.upr.si\/theme\/yui_combo.php?","combine":true,"filter":"RAW","insertBefore":"firstthemesheet","groups":{"yui2":{"base":"https:\/\/e.famnit.upr.si\/lib\/yuilib\/2in3\/2.9.0\/build\/","comboBase":"https:\/\/e.famnit.upr.si\/theme\/yui_combo.php?","combine":true,"ext":false,"root":"2in3\/2.9.0\/build\/","patterns":{"yui2-":{"group":"yui2","configFn":yui1ConfigFn}}},"moodle":{"name":"moodle","base":"https:\/\/e.famnit.upr.si\/theme\/yui_combo.php?m\/1758371740\/","combine":true,"comboBase":"https:\/\/e.famnit.upr.si\/theme\/yui_combo.php?","ext":false,"root":"m\/1758371740\/","patterns":{"moodle-":{"group":"moodle","configFn":yui2ConfigFn}},"filter":"DEBUG","modules":{"moodle-core-chooserdialogue":{"requires":["base","panel","moodle-core-notification"]},"moodle-core-lockscroll":{"requires":["plugin","base-build"]},"moodle-core-actionmenu":{"requires":["base","event","node-event-simulate"]},"moodle-core-blocks":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification"]},"moodle-core-dragdrop":{"requires":["base","node","io","dom","dd","event-key","event-focus","moodle-core-notification"]},"moodle-core-handlebars":{"condition":{"trigger":"handlebars","when":"after"}},"moodle-core-event":{"requires":["event-custom"]},"moodle-core-notification":{"requires":["moodle-core-notification-dialogue","moodle-core-notification-alert","moodle-core-notification-confirm","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-core-notification-dialogue":{"requires":["base","node","panel","escape","event-key","dd-plugin","moodle-core-widget-focusafterclose","moodle-core-lockscroll"]},"moodle-core-notification-alert":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-confirm":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-exception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-ajaxexception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-maintenancemodetimer":{"requires":["base","node"]},"moodle-core_availability-form":{"requires":["base","node","event","event-delegate","panel","moodle-core-notification-dialogue","json"]},"moodle-course-util":{"requires":["node"],"use":["moodle-course-util-base"],"submodules":{"moodle-course-util-base":{},"moodle-course-util-section":{"requires":["node","moodle-course-util-base"]},"moodle-course-util-cm":{"requires":["node","moodle-course-util-base"]}}},"moodle-course-categoryexpander":{"requires":["node","event-key"]},"moodle-course-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-course-coursebase","moodle-course-util"]},"moodle-course-management":{"requires":["base","node","io-base","moodle-core-notification-exception","json-parse","dd-constrain","dd-proxy","dd-drop","dd-delegate","node-event-delegate"]},"moodle-form-dateselector":{"requires":["base","node","overlay","calendar"]},"moodle-form-shortforms":{"requires":["node","base","selector-css3","moodle-core-event"]},"moodle-question-searchform":{"requires":["base","node"]},"moodle-question-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-availability_completion-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_date-form":{"requires":["base","node","event","io","moodle-core_availability-form"]},"moodle-availability_grade-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_group-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_grouping-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_profile-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-mod_assign-history":{"requires":["node","transition"]},"moodle-mod_quiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-mod_quiz-util":{"requires":["node","moodle-core-actionmenu"],"use":["moodle-mod_quiz-util-base"],"submodules":{"moodle-mod_quiz-util-base":{},"moodle-mod_quiz-util-slot":{"requires":["node","moodle-mod_quiz-util-base"]},"moodle-mod_quiz-util-page":{"requires":["node","moodle-mod_quiz-util-base"]}}},"moodle-mod_quiz-modform":{"requires":["base","node","event"]},"moodle-mod_quiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-base","moodle-mod_quiz-util-page","moodle-mod_quiz-util-slot","moodle-course-util"]},"moodle-mod_quiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form","datatype-date-format"]},"moodle-mod_quiz-quizbase":{"requires":["base","node"]},"moodle-mod_quiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_quiz-util","querystring-parse"]},"moodle-mod_scheduler-saveseen":{"requires":["base","node","event"]},"moodle-mod_scheduler-delselected":{"requires":["base","node","event"]},"moodle-mod_scheduler-studentlist":{"requires":["base","node","event","io"]},"moodle-message_airnotifier-toolboxes":{"requires":["base","node","io"]},"moodle-editor_atto-rangy":{"requires":[]},"moodle-editor_atto-editor":{"requires":["node","transition","io","overlay","escape","event","event-simulate","event-custom","node-event-html5","node-event-simulate","yui-throttle","moodle-core-notification-dialogue","moodle-editor_atto-rangy","handlebars","timers","querystring-stringify"]},"moodle-editor_atto-plugin":{"requires":["node","base","escape","event","event-outside","handlebars","event-custom","timers","moodle-editor_atto-menu"]},"moodle-editor_atto-menu":{"requires":["moodle-core-notification-dialogue","node","event","event-custom"]},"moodle-report_eventlist-eventfilter":{"requires":["base","event","node","node-event-delegate","datatable","autocomplete","autocomplete-filters"]},"moodle-report_loglive-fetchlogs":{"requires":["base","event","node","io","node-event-delegate"]},"moodle-gradereport_history-userselector":{"requires":["escape","event-delegate","event-key","handlebars","io-base","json-parse","moodle-core-notification-dialogue"]},"moodle-qbank_editquestion-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-tool_lp-dragdrop-reorder":{"requires":["moodle-core-dragdrop"]},"moodle-assignfeedback_editpdf-editor":{"requires":["base","event","node","io","graphics","json","event-move","event-resize","transition","querystring-stringify-simple","moodle-core-notification-dialog","moodle-core-notification-alert","moodle-core-notification-warning","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-atto_accessibilitychecker-button":{"requires":["color-base","moodle-editor_atto-plugin"]},"moodle-atto_accessibilityhelper-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_align-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_bold-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_charmap-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_clear-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_collapse-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emojipicker-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emoticon-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_equation-button":{"requires":["moodle-editor_atto-plugin","moodle-core-event","io","event-valuechange","tabview","array-extras"]},"moodle-atto_h5p-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_html-beautify":{},"moodle-atto_html-codemirror":{"requires":["moodle-atto_html-codemirror-skin"]},"moodle-atto_html-button":{"requires":["promise","moodle-editor_atto-plugin","moodle-atto_html-beautify","moodle-atto_html-codemirror","event-valuechange"]},"moodle-atto_image-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_indent-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_italic-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_link-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-usedfiles":{"requires":["node","escape"]},"moodle-atto_managefiles-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_media-button":{"requires":["moodle-editor_atto-plugin","moodle-form-shortforms"]},"moodle-atto_noautolink-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_orderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_recordrtc-recording":{"requires":["moodle-atto_recordrtc-button"]},"moodle-atto_recordrtc-button":{"requires":["moodle-editor_atto-plugin","moodle-atto_recordrtc-recording"]},"moodle-atto_rtl-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_strike-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_subscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_superscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_table-button":{"requires":["moodle-editor_atto-plugin","moodle-editor_atto-menu","event","event-valuechange"]},"moodle-atto_title-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_underline-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_undo-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_unorderedlist-button":{"requires":["moodle-editor_atto-plugin"]}}},"gallery":{"name":"gallery","base":"https:\/\/e.famnit.upr.si\/lib\/yuilib\/gallery\/","combine":true,"comboBase":"https:\/\/e.famnit.upr.si\/theme\/yui_combo.php?","ext":false,"root":"gallery\/1758371740\/","patterns":{"gallery-":{"group":"gallery"}}}},"modules":{"core_filepicker":{"name":"core_filepicker","fullpath":"https:\/\/e.famnit.upr.si\/lib\/javascript.php\/1758371740\/repository\/filepicker.js","requires":["base","node","node-event-simulate","json","async-queue","io-base","io-upload-iframe","io-form","yui2-treeview","panel","cookie","datatable","datatable-sort","resize-plugin","dd-plugin","escape","moodle-core_filepicker","moodle-core-notification-dialogue"]},"core_comment":{"name":"core_comment","fullpath":"https:\/\/e.famnit.upr.si\/lib\/javascript.php\/1758371740\/comment\/comment.js","requires":["base","io-base","node","json","yui2-animation","overlay","escape"]}},"logInclude":[],"logExclude":[],"logLevel":null};
+M.yui.loader = {modules: {}};
+
+//]]>
+</script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body  id="page-mod-resource-view" class="format-topics  path-mod path-mod-resource chrome dir-ltr lang-sl yui-skin-sam yui3-skin-sam e-famnit-upr-si pagelayout-incourse course-7449 context-755331 cmid-135629 cm-type-resource category-1213 theme ">
+
+<div id="page-wrapper" class="d-print-block">
+
+    <div>
+    <a class="sr-only sr-only-focusable" href="#maincontent">Preskoči na glavno vsebino</a>
+</div><script src="https://e.famnit.upr.si/lib/javascript.php/1758371740/lib/polyfills/polyfill.js"></script>
+<script src="https://e.famnit.upr.si/theme/yui_combo.php?rollup/3.18.1/yui-moodlesimple.js"></script><script src="https://e.famnit.upr.si/lib/javascript.php/1758371740/lib/javascript-static.js"></script>
+<script>
+//<![CDATA[
+document.body.className += ' jsenabled';
+//]]>
+</script>
+
+
+
+    <nav class="fixed-top navbar navbar-bootswatch navbar-expand moodle-has-zindex">
+        <div class="container-fluid">
+            <a href="https://e.famnit.upr.si/my/" class="navbar-brand d-flex align-items-center m-1 p-0 aabtn">
+                    <span class="sitename">e-učilnica UP FAMNIT</span>
+            </a>
+    
+            <ul class="navbar-nav d-none d-md-flex">
+                <!-- custom_menu -->
+                <li class="dropdown nav-item">
+    <a class="dropdown-toggle nav-link" id="drop-down-697b9a8bd281e697b9a8bb13af5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" title="Jezik" aria-controls="drop-down-menu-697b9a8bd281e697b9a8bb13af5">
+        Slovenščina ‎(sl)‎
+    </a>
+    <div class="dropdown-menu" role="menu" id="drop-down-menu-697b9a8bd281e697b9a8bb13af5" aria-labelledby="drop-down-697b9a8bd281e697b9a8bb13af5">
+                <a class="dropdown-item" role="menuitem" href="https://e.famnit.upr.si/mod/resource/view.php?id=135629&amp;lang=en"  lang="en" >English ‎(en)‎</a>
+                <a class="dropdown-item" role="menuitem" href="https://e.famnit.upr.si/mod/resource/view.php?id=135629&amp;lang=sl"  >Slovenščina ‎(sl)‎</a>
+    </div>
+</li>
+                <!-- page_heading_menu -->
+                
+            </ul>
+            <div id="usernavigation" class="navbar-nav my-1 ms-auto">
+                <div class="divider border-start h-50 align-self-center mx-1"></div>
+                
+                <div class="popover-region collapsed popover-region-notifications"
+    id="nav-notification-popover-container" data-userid="7779"
+    data-region="popover-region">
+    <div class="popover-region-toggle nav-link icon-no-margin"
+        data-region="popover-region-toggle"
+        aria-controls="popover-region-container-697b9a8bd42e3697b9a8bb13af6"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="  Prikaži okno z obvestili s/z 48 novimi obvestili  "
+        title="  Prikaži okno z obvestili s/z 48 novimi obvestili  "
+        tabindex="0"
+        role="button">
+                <i class="icon fa fa-bell fa-fw " aria-hidden="true" ></i>
+        <div
+            class="count-container "
+            data-region="count-container"
+            aria-hidden=true
+        >
+            48
+        </div>
+
+    </div>
+    <div         aria-modal="true"
+        tabindex="-1"
+
+        id="popover-region-container-697b9a8bd42e3697b9a8bb13af6"
+        class="popover-region-container"
+        data-region="popover-region-container"
+        aria-hidden="true"
+        aria-label="Okno z obvestili"
+        role="dialog">
+        <div class="popover-region-header-container">
+            <h3 class="popover-region-header-text" data-region="popover-region-header-text">Obvestila</h3>
+            <div class="popover-region-header-actions" data-region="popover-region-header-actions">        <a class="mark-all-read-button btn btn-sm btn-link m-0 py-0 icon-no-margin"
+           href="#"
+           title="Označi vse kot prebrano"
+           data-action="mark-all-read"
+           role="button"
+           aria-label="Označi vse kot prebrano">
+            <span class="normal-icon"><i class="icon fa fa-check fa-fw " aria-hidden="true" ></i></span>
+            <span class="loading-icon icon-no-margin"><i class="icon fa fa-spinner fa-spin fa-fw "  title="Nalaganje" role="img" aria-label="Nalaganje"></i></span>
+            <span aria-live="polite" class="sr-only" data-region="notification-read-feedback"></span>
+        </a>
+            <a href="https://e.famnit.upr.si/message/notificationpreferences.php"
+               title="Nastavitve obvestil"
+               aria-label="Nastavitve obvestil"
+               class="btn btn-sm btn-link m-0 py-0 icon-no-margin" >
+                <i class="icon fa fa-gear fa-fw " aria-hidden="true" ></i></a>
+        <button type="button" class="btn btn-sm btn-link m-0 py-0 icon-no-margin" aria-label="Zapri" title="Zapri" data-action="close-notification-popover">
+            <i class="icon fa fa-xmark fa-fw " aria-hidden="true" ></i>
+        </button>
+</div>
+        </div>
+        <div class="popover-region-content-container" data-region="popover-region-content-container">
+            <div class="popover-region-content" data-region="popover-region-content">
+                        <div class="all-notifications"
+            data-region="all-notifications"
+            role="log"
+            aria-busy="false"
+            aria-atomic="false"
+            aria-relevant="additions"></div>
+        <div class="empty-message" tabindex="0" data-region="empty-message">Nimate novih obvestil</div>
+
+            </div>
+            <span class="loading-icon icon-no-margin"><i class="icon fa fa-spinner fa-spin fa-fw "  title="Nalaganje" role="img" aria-label="Nalaganje"></i></span>
+        </div>
+                <a class="see-all-link"
+                    href="https://e.famnit.upr.si/message/output/popup/notifications.php">
+                    <div class="popover-region-footer-container">
+                        <div class="popover-region-seeall-text">Poglej vse</div>
+                    </div>
+                </a>
+    </div>
+</div>
+                <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+                    <div class="usermenu"><div class="action-menu moodle-actionmenu nowrap-items" id="action-menu-0" data-enhance="moodle-core-actionmenu">
+
+        <div class="menubar d-flex " id="action-menu-0-menubar">
+
+            
+
+
+                <div class="action-menu-trigger">
+                    <div class="dropdown">
+                        <a
+                            href="#"
+                            tabindex="0"
+                            class="nav-link dropdown-toggle icon-no-margin"
+                            id="action-menu-toggle-0"
+                            aria-label="Uporabniški meni"
+                            data-toggle="dropdown"
+                            role="button"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            aria-controls="action-menu-0-menu"
+                        >
+                            
+                            <span class="userbutton"><span class="usertext me-1">Mudahera Richard Dushime</span><span class="avatars"><span class="avatar current"><span class="userinitials size-35" title="Mudahera Richard Dushime" aria-label="Mudahera Richard Dushime" role="img">MD</span></span></span></span>
+                                
+                            <b class="caret"></b>
+                        </a>
+                            <div class="dropdown-menu menu dropdown-menu-right" id="action-menu-0-menu" data-rel="menu-content" aria-labelledby="action-menu-toggle-0" role="menu">
+                                                                <a href="https://e.famnit.upr.si/user/profile.php" class="dropdown-item menu-action" role="menuitem" data-title="profile,moodle" tabindex="-1" >
+                                <span class="menu-action-text">Profil</span>
+                        </a>
+                    <div class="dropdown-divider" role="presentation"><span class="filler">&nbsp;</span></div>
+                                                                <a href="https://e.famnit.upr.si/grade/report/overview/index.php" class="dropdown-item menu-action" role="menuitem" data-title="grades,grades" tabindex="-1" >
+                                <span class="menu-action-text">Ocene</span>
+                        </a>
+                                                                <a href="https://e.famnit.upr.si/calendar/view.php?view=month" class="dropdown-item menu-action" role="menuitem" data-title="calendar,core_calendar" tabindex="-1" >
+                                <span class="menu-action-text">Koledar</span>
+                        </a>
+                                                                <a href="https://e.famnit.upr.si/message/index.php" class="dropdown-item menu-action" role="menuitem" data-title="messages,message" tabindex="-1" >
+                                <span class="menu-action-text">Sporočila</span>
+                        </a>
+                                                                <a href="https://e.famnit.upr.si/user/files.php" class="dropdown-item menu-action" role="menuitem" data-title="privatefiles,moodle" tabindex="-1" >
+                                <span class="menu-action-text">Zasebne datoteke</span>
+                        </a>
+                                                                <a href="https://e.famnit.upr.si/reportbuilder/index.php" class="dropdown-item menu-action" role="menuitem" data-title="reports,core_reportbuilder" tabindex="-1" >
+                                <span class="menu-action-text">Poročila</span>
+                        </a>
+                    <div class="dropdown-divider" role="presentation"><span class="filler">&nbsp;</span></div>
+                                                                <a href="https://e.famnit.upr.si/user/preferences.php" class="dropdown-item menu-action" role="menuitem" data-title="preferences,moodle" tabindex="-1" >
+                                <span class="menu-action-text">Nastavitve</span>
+                        </a>
+                    <div class="dropdown-divider" role="presentation"><span class="filler">&nbsp;</span></div>
+                                                                <a href="https://e.famnit.upr.si/login/logout.php?sesskey=QvMp6OJiUw" class="dropdown-item menu-action" role="menuitem" data-title="logout,moodle" tabindex="-1" >
+                                <span class="menu-action-text">Odjava</span>
+                        </a>
+                            </div>
+                    </div>
+                </div>
+
+        </div>
+
+</div></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="page" class="container-fluid d-print-block">
+        <header id="page-header" class="row">
+    <div class="col-12 pt-3 pb-3">
+        <div class="card ">
+            <div class="card-body ">
+                <div class="d-flex align-items-center">
+                    <div class="me-auto">
+                    <div class="page-context-header d-flex flex-wrap align-items-center mb-2">
+    <div class="page-header-headings">
+        <h1 class="h2 mb-0">Podatkovni praktikum I 25/26</h1>
+    </div>
+</div>
+                    </div>
+                    <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap">
+                    <div id="page-navbar">
+                        <nav aria-label="Navigacijska vrstica">
+    <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="https://e.famnit.upr.si/my/"
+                        
+                        
+                        
+                    >
+                        Nadzorna plošča
+                    </a>
+                </li>
+        
+                <li class="breadcrumb-item">
+                    <a href="https://e.famnit.upr.si/my/courses.php"
+                        
+                        
+                        
+                    >
+                        Moji predmeti
+                    </a>
+                </li>
+        
+                <li class="breadcrumb-item">
+                    <a href="https://e.famnit.upr.si/course/view.php?id=7449"
+                        
+                        title="Podatkovni praktikum I 25/26"
+                        
+                    >
+                        Podatkovni praktikum I 25/26
+                    </a>
+                </li>
+        
+                <li class="breadcrumb-item">
+                    <a href="https://e.famnit.upr.si/course/section.php?id=99923"
+                        
+                        
+                        data-section-name-for="99923" 
+                    >
+                        Beta regression
+                    </a>
+                </li>
+        
+                <li class="breadcrumb-item">
+                    <a href="https://e.famnit.upr.si/mod/resource/view.php?id=135629"
+                        aria-current="page"
+                        title="Datoteka"
+                        
+                    >
+                        Completed beta regression / bayesian analysis template
+                    </a>
+                </li>
+        </ol>
+</nav>
+                    </div>
+                    <div class="ms-auto d-flex">
+                        
+                    </div>
+                    <div id="course-header">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div id="page-content" class="row   d-print-block">
+            <div id="region-main-box" class="region-main">
+                <div id="region-main" class="region-main-content">
+                    <span class="notifications" id="user-notifications"></span>
+                        <span id="maincontent"></span>
+                            <h2>Completed beta regression / bayesian analysis template</h2>
+                        <div class="activity-header" data-for="page-activity-header">
+                                <span class="sr-only">Zahteve zaključka</span>
+                                <div data-region="activity-information" data-activityname="Completed beta regression / bayesian analysis template" class="activity-information">
+
+
+</div>
+                                <div class="activity-description" id="intro">
+                                    <div class="no-overflow"><p>I went into quite a bit more detail in these notes since we dove into two new topics.</p></div>
+                                </div>
+                            </div>
+                    <div role="main"><div class="resourcecontent resourcegeneral">
+  <iframe id="resourceobject" src="https://e.famnit.upr.si/pluginfile.php/755331/mod_resource/content/1/DSP1-BetaRegression_template.html?embed=1" title="Completed beta regression / bayesian analysis template">
+    Klikni na povezavo <a href="https://e.famnit.upr.si/pluginfile.php/755331/mod_resource/content/1/DSP1-BetaRegression_template.html" >DSP1-BetaRegression_template.html</a> za ogled datoteke.
+  </iframe>
+</div></div>
+                    <div class="mt-5 mb-1 activity-navigation container-fluid">
+<div class="row">
+    <div class="col-md-4">        <div class="float-start">
+                <a href="https://e.famnit.upr.si/mod/resource/view.php?id=134904&forceview=1" id="prev-activity-link" class="btn btn-link" >&#x25C0;&#xFE0E; Beta regression data</a>
+
+        </div>
+</div>
+    <div class="col-md-4">        <div class="mdl-align">
+            <div class="urlselect">
+    <form method="post" action="https://e.famnit.upr.si/course/jumpto.php" class="d-flex flex-wrap align-items-center" id="url_select_f697b9a8bb13af16">
+        <input type="hidden" name="sesskey" value="QvMp6OJiUw">
+            <label for="jump-to-activity" class="sr-only">
+                Skoči na ...
+            </label>
+        <select  id="jump-to-activity" class="custom-select urlselect" name="jump"
+                 >
+                    <option value="" selected >Skoči na ...</option>
+                    <option value="/mod/forum/view.php?id=129846&amp;forceview=1"  >Obvestila</option>
+                    <option value="/mod/resource/view.php?id=131946&amp;forceview=1"  >Syllabus</option>
+                    <option value="/mod/assign/view.php?id=136330&amp;forceview=1"  >Final: Part A</option>
+                    <option value="/mod/resource/view.php?id=132636&amp;forceview=1"  >Intro presentation</option>
+                    <option value="/mod/resource/view.php?id=132639&amp;forceview=1"  >Intro demonstration (.qmd / .pdf)</option>
+                    <option value="/mod/resource/view.php?id=132873&amp;forceview=1"  >Data for Importing &amp; Vis</option>
+                    <option value="/mod/resource/view.php?id=133305&amp;forceview=1"  >Quarto file - import, modify, visualise</option>
+                    <option value="/mod/assign/view.php?id=133309&amp;forceview=1"  >Homework 1: Import, summarise, visualise + replication</option>
+                    <option value="/mod/resource/view.php?id=133306&amp;forceview=1"  >Research data intro slides</option>
+                    <option value="/mod/resource/view.php?id=133565&amp;forceview=1"  >Presentation &amp; commented template</option>
+                    <option value="/mod/resource/view.php?id=134332&amp;forceview=1"  >Simple comparisons part 2</option>
+                    <option value="/mod/assign/view.php?id=134406&amp;forceview=1"  >Homework 2 - Simple comparisons</option>
+                    <option value="/mod/resource/view.php?id=134047&amp;forceview=1"  >Dataset for violated assumptions</option>
+                    <option value="/mod/resource/view.php?id=134048&amp;forceview=1"  >Template for violated assumptions</option>
+                    <option value="/mod/resource/view.php?id=134333&amp;forceview=1"  >Violated assumptions (linear regression) quarto</option>
+                    <option value="/mod/resource/view.php?id=134335&amp;forceview=1"  >Logistic regression template</option>
+                    <option value="/mod/resource/view.php?id=134388&amp;forceview=1"  >Completed and annotated quarto document</option>
+                    <option value="/mod/resource/view.php?id=134565&amp;forceview=1"  >Template and data</option>
+                    <option value="/mod/resource/view.php?id=134566&amp;forceview=1"  >Read this: Liddell and Kruschke - 2018 - Analyzing ordinal data with metric models What could possibly go wrong</option>
+                    <option value="/mod/resource/view.php?id=134618&amp;forceview=1"  >Data</option>
+                    <option value="/mod/resource/view.php?id=134899&amp;forceview=1"  >Completed template</option>
+                    <option value="/mod/resource/view.php?id=134943&amp;forceview=1"  >Read this: More on Ordinal regression + an intro to Bayesian analysis</option>
+                    <option value="/mod/resource/view.php?id=134903&amp;forceview=1"  >Beta regression template</option>
+                    <option value="/mod/resource/view.php?id=134904&amp;forceview=1"  >Beta regression data</option>
+                    <option value="/mod/assign/view.php?id=135457&amp;forceview=1"  >HW3 - Ordinal and Beta regression</option>
+                    <option value="/mod/resource/view.php?id=135851&amp;forceview=1"  >Template</option>
+                    <option value="/mod/resource/view.php?id=136006&amp;forceview=1"  >Completed bootstrap template</option>
+                    <option value="/mod/assign/view.php?id=136007&amp;forceview=1"  >Bootstrap and Ordinary Least Products regression</option>
+                    <option value="/mod/resource/view.php?id=136325&amp;forceview=1"  >Completed Shiny app example</option>
+        </select>
+            <noscript>
+                <input type="submit" class="btn btn-secondary ms-1" value="Pojdi">
+            </noscript>
+    </form>
+</div>
+
+        </div>
+</div>
+    <div class="col-md-4">        <div class="float-end">
+                <a href="https://e.famnit.upr.si/mod/assign/view.php?id=135457&forceview=1" id="next-activity-link" class="btn btn-link" >HW3 - Ordinal and Beta regression &#x25B6;&#xFE0E;</a>
+
+        </div>
+</div>
+</div>
+</div>
+                    
+                </div>
+            </div>
+            <div class="columnleft blockcolumn ">
+                <div data-region="blocks-column" class="d-print-none">
+                    <aside id="block-region-side-pre" class="block-region" data-blockregion="side-pre" data-droptarget="1" aria-labelledby="side-pre-block-region-heading"><h2 class="sr-only" id="side-pre-block-region-heading">Bloki</h2></aside>
+                </div>
+            </div>
+
+            <div class="columnright blockcolumn ">
+                <div data-region="blocks-column" class="d-print-none">
+                    <aside id="block-region-side-post" class="block-region" data-blockregion="side-post" data-droptarget="1" aria-labelledby="side-post-block-region-heading"><h2 class="sr-only" id="side-post-block-region-heading">Supplementary blocks</h2></aside>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer id="page-footer" class="footer-dark bg-dark text-light">
+        <div class="container footer-dark-inner">
+            <div id="course-footer"></div>
+            <div class="pb-3">
+                    <div class="footer-support-link"><a href="https://e.famnit.upr.si/user/contactsitesupport.php"><i class="icon fa-regular fa-envelope fa-fw " aria-hidden="true" ></i>Stik s skrbnikom strani</a></div>
+            </div>
+    
+            <div class="logininfo">Prijavljeni ste kot <a href="https://e.famnit.upr.si/user/profile.php?id=7779" title="Poglej profil">Mudahera Richard Dushime</a> (<a href="https://e.famnit.upr.si/login/logout.php?sesskey=QvMp6OJiUw">Odjava</a>)</div>
+            <div class="tool_usertours-resettourcontainer"></div>
+            <div class="homelink"><a href="https://e.famnit.upr.si/course/view.php?id=7449">Podatkovni praktikum I, 3 KT 25/26 PZ1EN</a></div>
+            <nav class="nav navbar-nav d-md-none" aria-label="Meni po meri">
+                    <ul class="list-unstyled pt-3">
+                                        <li><a href="#" title="Jezik">Slovenščina ‎(sl)‎</a></li>
+                                    <li>
+                                        <ul class="list-unstyled ms-3">
+                                                            <li><a href="https://e.famnit.upr.si/mod/resource/view.php?id=135629&amp;lang=en" title="Jezik">English ‎(en)‎</a></li>
+                                                            <li><a href="https://e.famnit.upr.si/mod/resource/view.php?id=135629&amp;lang=sl" title="Jezik">Slovenščina ‎(sl)‎</a></li>
+                                        </ul>
+                                    </li>
+                    </ul>
+            </nav>
+            <div class="tool_dataprivacy"><a href="https://e.famnit.upr.si/admin/tool/dataprivacy/summary.php">Povzetek hrambe podatkov</a></div><div><a class="mobilelink" href="https://download.moodle.org/mobile?version=2024100706.11&amp;lang=sl&amp;iosappid=633359593&amp;androidappid=com.moodle.moodlemobile&amp;siteurl=https%3A%2F%2Fe.famnit.upr.si">Pridobi mobilno aplikacijo</a></div>
+            
+            
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-290246-10");
+pageTracker._trackPageview();
+</script><script>
+//<![CDATA[
+var require = {
+    baseUrl : 'https://e.famnit.upr.si/lib/requirejs.php/1758371740/',
+    // We only support AMD modules with an explicit define() statement.
+    enforceDefine: true,
+    skipDataMain: true,
+    waitSeconds : 0,
+
+    paths: {
+        jquery: 'https://e.famnit.upr.si/lib/javascript.php/1758371740/lib/jquery/jquery-3.7.1.min',
+        jqueryui: 'https://e.famnit.upr.si/lib/javascript.php/1758371740/lib/jquery/ui-1.13.2/jquery-ui.min',
+        jqueryprivate: 'https://e.famnit.upr.si/lib/javascript.php/1758371740/lib/requirejs/jquery-private'
+    },
+
+    // Custom jquery config map.
+    map: {
+      // '*' means all modules will get 'jqueryprivate'
+      // for their 'jquery' dependency.
+      '*': { jquery: 'jqueryprivate' },
+
+      // 'jquery-private' wants the real jQuery module
+      // though. If this line was not here, there would
+      // be an unresolvable cyclic dependency.
+      jqueryprivate: { jquery: 'jquery' }
+    }
+};
+
+//]]>
+</script>
+<script src="https://e.famnit.upr.si/lib/javascript.php/1758371740/lib/requirejs/require.min.js"></script>
+<script>
+//<![CDATA[
+M.util.js_pending("core/first");
+require(['core/first'], function() {
+require(['core/prefetch'])
+;
+require(["media_videojs/loader"], function(loader) {
+    loader.setUp('sl');
+});;
+M.util.js_pending('filter_mathjaxloader/loader'); require(['filter_mathjaxloader/loader'], function(amd) {amd.configure({"mathjaxconfig":"\nMathJax.Hub.Config({\n    config: [\"Accessible.js\", \"Safe.js\"],\n    errorSettings: { message: [\"!\"] },\n    skipStartupTypeset: true,\n    messageStyle: \"none\"\n});\n","lang":"sl"}); M.util.js_complete('filter_mathjaxloader/loader');});;
+M.util.js_pending('block_settings/settingsblock'); require(['block_settings/settingsblock'], function(amd) {amd.init("5", null); M.util.js_complete('block_settings/settingsblock');});;
+M.util.js_pending('core_courseformat/local/content/activity_header'); require(['core_courseformat/local/content/activity_header'], function(amd) {amd.init(); M.util.js_complete('core_courseformat/local/content/activity_header');});;
+
+require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
+    CustomEvents.define('#single_select697b9a8bb13af4', [CustomEvents.events.accessibleChange]);
+    $('#single_select697b9a8bb13af4').on(CustomEvents.events.accessibleChange, function() {
+        var ignore = $(this).find(':selected').attr('data-ignore');
+        if (typeof ignore === typeof undefined) {
+            $('#single_select_f697b9a8bb13af3').submit();
+        }
+    });
+});
+;
+
+require(['jquery', 'message_popup/notification_popover_controller'], function($, Controller) {
+    var container = $('#nav-notification-popover-container');
+    var controller = new Controller(container);
+    controller.registerEventListeners();
+    controller.registerListNavigationEventListeners();
+});
+;
+
+        require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
+            CustomEvents.define('#jump-to-activity', [CustomEvents.events.accessibleChange]);
+            $('#jump-to-activity').on(CustomEvents.events.accessibleChange, function() {
+                if ($(this).val()) {
+                    $('#url_select_f697b9a8bb13af16').submit();
+                }
+            });
+        });
+    ;
+
+require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
+    CustomEvents.define('#single_select697b9a8bb13af18', [CustomEvents.events.accessibleChange]);
+    $('#single_select697b9a8bb13af18').on(CustomEvents.events.accessibleChange, function() {
+        var ignore = $(this).find(':selected').attr('data-ignore');
+        if (typeof ignore === typeof undefined) {
+            $('#single_select_f697b9a8bb13af17').submit();
+        }
+    });
+});
+;
+
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader'], function() {
+    M.util.js_complete('theme_boost/loader');
+});
+;
+M.util.js_pending('core/notification'); require(['core/notification'], function(amd) {amd.init(755331, []); M.util.js_complete('core/notification');});;
+M.util.js_pending('core/log'); require(['core/log'], function(amd) {amd.setConfig({"level":"trace"}); M.util.js_complete('core/log');});;
+M.util.js_pending('core/page_global'); require(['core/page_global'], function(amd) {amd.init(); M.util.js_complete('core/page_global');});;
+M.util.js_pending('core/utility'); require(['core/utility'], function(amd) {M.util.js_complete('core/utility');});;
+M.util.js_pending('core/storage_validation'); require(['core/storage_validation'], function(amd) {amd.init(1769690051); M.util.js_complete('core/storage_validation');});
+    M.util.js_complete("core/first");
+});
+//]]>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?delayStartupUntil=configured"></script>
+<script>
+//<![CDATA[
+M.str = {"moodle":{"lastmodified":"Zadnja sprememba","name":"Ime","error":"Napaka","info":"Informacije","yes":"Da","no":"Ne","cancel":"Prekli\u010di","confirm":"Potrdi","areyousure":"Ste prepri\u010dani?","closebuttontitle":"Zapri","unknownerror":"Neznana napaka","file":"Datoteka","url":"URL","collapseall":"Skr\u010di vse","expandall":"Raz\u0161iri vse"},"repository":{"type":"Tip","size":"Velikost","invalidjson":"Neveljaven JSON niz","nofilesattached":"Ni pripetih datotek","filepicker":"Izbirnik datotek","logout":"Odjava","nofilesavailable":"Ni datotek na voljo","norepositoriesavailable":"Oprostite, noben od trenutnih skladi\u0161\u010d ne more vra\u010dati datotek v zahtevani obliki.","fileexistsdialogheader":"Datoteka obstaja","fileexistsdialog_editor":"Datoteka s tem imenom je \u017ee pripeta v besedilo, ki ga urejate.","fileexistsdialog_filemanager":"Datoteka s tem imenom je \u017ee pripeta","renameto":"Preimenujte v \"{$a}\"","referencesexist":"Obstaja {$a} aliasov\/bli\u017enjic datotek, ki uporabljajo to datoteko kot vir","select":"Izberi"},"admin":{"confirmdeletecomments":"Ali ste prepri\u010dani, da \u017eelite izbrisati izbrane komentarje?","confirmation":"Potrditev"},"debug":{"debuginfo":"Razhro\u0161\u010devalne podrobnosti","line":"Vrstica","stacktrace":"Sled sklada"},"langconfig":{"labelsep":":"}};
+//]]>
+</script>
+<script>
+//<![CDATA[
+(function() { M.util.js_pending('random697b9a8bb13af1'); Y.on('domready', function() { M.util.init_maximised_embed(Y, "resourceobject");  M.util.js_complete('random697b9a8bb13af1'); });
+M.util.help_popups.setup(Y);
+ M.util.js_pending('random697b9a8bb13af19'); Y.on('domready', function() { M.util.js_complete("init");  M.util.js_complete('random697b9a8bb13af19'); });
+})();
+//]]>
+</script>
+
+        </div>
+    </footer>
+</div>
+
+
+</body></html>

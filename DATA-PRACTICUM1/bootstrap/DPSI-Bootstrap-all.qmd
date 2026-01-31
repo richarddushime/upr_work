@@ -1,0 +1,293 @@
+---
+title: "Data Science Practicum I 2025/2026 - The Bootstrap"
+author: "Mike Burnard"
+date: "05 January 2026"
+---
+
+```{r}
+#| label: setup
+
+#install.packages('boot')
+library(tidyverse)
+library(boot)
+options(dplyr.summarise.inform = FALSE)
+```
+
+# The bootstrap
+
+The bootstrap is a simple, powerful, and effective resampling-and-refitting technique. Essentially, it takes some data, applies a function many times (1000 to 10000 usually), and produces point estimates of statistics (like model coefficients, means, medians, variance estimates, etc.). Bootstrap confidence intervals are also good indicators of variance in the data.
+
+Bootstrapping can be useful in many cases:
+
+1. When data is insufficient, yet believed to be representative (too few observations, but the observations are considered reliable)
+2. When confidence intervals cant reliably be calculated based on distributional assumptions (a good example is mixed models, but we haven't talked about that much yet*)
+3. When variance estimates aren't well linked to the the point estimate (which variance indicator would you use for the median?)
+4. ...and others
+
+* In the regression models we used before we had fixed effects associated with our variables. This means our variables were independent and uncorrelated. In a mixed effects model we have both random and fixed effects. This allows us have non-independent and correlated variables as dependent variables in our model. But, in most cases, we cant calculate reliable confidence intervals in the same way, especially if our data isn't associated with the normal distribution. In these cases we can use bootstrap confidence intervals for our coefficients and effect sizes.
+
+For more information about bootstrapping, see Section 5.2 of ISLR and:
+
+Davidson, A. C. and Kuonen, D. (2003) ‘An introduction to the bootstrap with application in R’, Statistical Computing & Statistical Graphics Newsletter, 13(1), pp. 6–11. Available at: http://www.statoo.com/en/publications/bootstrap_scgn_v131.pdf.
+
+The references in Davidson & Kuonen (2003) are useful for further information.
+
+# The general bootstrap model   
+
+The basics are of the bootstrap quite simple:
+
+1. Select your data
+2. Sample with replacement
+3. Calculate statistics of interest with the sampled data
+4. Record results
+5. Repeat steps 2 to 4 ~ 1000 to 10000 times
+6. Calculate the indicators of all the repeated bootstrapped statistics (mean, variance)
+
+Those steps are quite simple, and we can do them on our own rather easily. But using the boot package provides many advantages.
+
+```{r}
+#| label: basic_boot
+
+#basic setup
+set.seed(1278)
+# small data set 
+# try hist(rgamma(100,5,1)) to get a better idea of what the data look likes
+data <- rgamma(10, 5, 1)
+
+hist(data)
+
+mean(data)
+median(data)
+sd(data)
+IQR(data)
+
+
+#we will use the boot() functions which takes (minimally):
+# Data
+# "statistic" - returned from a special* function can be a:
+#     value (e.g. mean) or,
+#     a vector of values (e.g., regression coefficients)
+#  and the number of bootstrap replicates
+# so, it might look like this: 
+# boot.out <- boot(data, my_boot_func, 10000)
+
+# boot() manages the sampling process by default, but it can be overwritten if
+# special sampling is needed
+
+# there are other arguments for the function as well that control
+# the type of bootstrap ('ordinary' is the default and fine for most cases)
+# strata: we will do an example with this later - 
+#     but it allows sampling within levels of factor
+# and controls for paralellisation. 
+
+# the special function takes two things:
+# data from the call to boot, and an sampling index (i), which is provided
+# by the call to boot()
+
+# this example function is a very basic version
+boot_func <- function(data, i) {
+  # make the resampled dataset
+  boot_data <- data[i] 
+  # calculate a value based on the resampled data
+  median <- median(boot_data)
+  # return the calculated value
+  return(median)
+}
+
+# with the function ready, we can call boot() to do the bootstrap
+# the boot() function returns a bootstrap object (list)
+boot.out <- boot(data, boot_func, 1000)
+
+# the bootstrap object can be a little difficult to navigate
+# we have some useful functions to use on it though like:
+plot(boot.out)
+#we can examine specific parts of the object in a usual way
+# $t0 is the main result - the point estimate or vector of estimates
+boot.out$t0 
+# with enough replicates, the point estimate(s) will always be the same as
+# the calculating it the traditional way.
+median(data)
+
+# Perhaps the most important aspect are boot strap confidence intervals
+# the boot.ci() returns several types of bootstrap confidence intverals
+# unlike the point estimates, confidence intervals won't 
+# necessarily be the same
+# by default boot.ci() returns five kinds off CIs
+# some may give warnings, in this case, we won't get studentized CIs
+
+boot_cis <- boot.ci(boot.out)
+#we can see all values
+boot_cis
+#we can get specific values, though they aren't very easily accessible
+boot_cis$bca[4:5]
+```
+
+# Bootstrap regression coefficients
+
+Lets look at an example of regression coefficients. We fit a linear regression to a subset of the IRIS data set.
+
+We will compare the results of our bootstrap with a subset of the data to the full set of obsrevations for the setosa species.
+```{r}
+#| label: boot_coef
+
+set.seed(1234)
+# Just the setosa species
+iris.setosa <- iris %>% filter(Species == "setosa")
+
+#some randomly selected observations to use in our bootstrap.
+iris.mini <- iris.setosa %>% sample_n(10)
+
+#our boot function with a simple regression
+bf <- function(data, i) {
+  d <- data[i,]
+  lin <- lm(Petal.Length ~ Petal.Width, data=d)
+  return(lin$coef) # we return just the coefficients
+}
+
+#get our bootstrapped data
+iris.boot <- boot(iris.mini, bf, 1000)
+
+# compare 
+
+# lm of just the "mini" data
+mini.lm <- lm(Petal.Length ~ Petal.Width, data=iris.mini)
+
+#lm of the full setosa data
+setosa.lm <- lm(Petal.Length ~ Petal.Width, data=iris.setosa)
+
+#boot results for the coefficients
+iris.boot
+mini.lm #same
+setosa.lm 
+
+iris.bci <- boot.ci(iris.boot, type=c("norm", "perc", "bca", "basic"), index=1)
+iris.bci
+
+iris.bci <- boot.ci(iris.boot, type=c("norm", "perc", "bca", "basic"), index=2)
+iris.bci
+```
+
+# Bootstrap regression with stratification
+
+We had one species before, but if we need to resample within each species, we need to include a stratification variable. we use the strata= argument in boot(). This should be a factor, but you can convert in-line (strata=as.factor(d$not_a_factor)). If we don't specific stratification it is possible that some of our bootstrapped data sets may not include any observations from one or more of the categories in the data. This will cause problems...
+
+We will calculate mean variables and their CI's.
+```{r}
+#| label: stratified_boot
+
+set.seed(4567)
+bf <- function(data, i) {
+  d <- data[i,]
+  lin <- lm(Petal.Length ~ Petal.Width + Sepal.Length + Sepal.Width + Species, data=d)
+  d$pred <- predict(lin)
+  suppressWarnings(d.out <- d %>% select(Species, pred) %>%
+    group_by(Species) %>%
+    summarise(mean=mean(pred)))
+  return(d.out$mean)
+}
+
+iris.boot <- boot(iris, bf, 1000, strata=iris$Species)
+
+iris.boot
+
+iris.lm <- lm(Petal.Length ~ Petal.Width + Sepal.Length + Sepal.Width + Species, data=iris)
+#modified to save to iris.mu with predicted values for comparison
+#something like this bit and below might be on your test....
+iris.mu <- bind_cols(iris, as.data.frame(predict(iris.lm, interval="conf"))) %>%
+  group_by(Species) %>%
+  summarise(model.mu = mean(fit),
+            model.lwr = mean(lwr),
+            model.upr = mean(upr))
+
+
+z <- tibble(boot.mu=0, bca.lwr=0, bca.upr=0)
+for(i in 1:length(iris.boot$t0)) {
+  y <- boot.ci(iris.boot, conf=0.95, type=c("bca"), index=i)
+  z <- bind_rows(z, tibble(boot.mu=iris.boot$t0[i], bca.lwr=y$bca[4], bca.upr=y$bca[5]))
+}
+iris.mu <- bind_cols(iris.mu, z[-1,])
+
+#I set this up a bit strange to see how the ci's compare a bit easier...
+ggplot(data=iris.mu) + theme_bw() +
+  geom_pointrange(aes(x=Species, y=model.mu, ymax=model.upr, ymin=model.lwr), colour="blue", position=position_nudge(x=+0.1), shape=1) +
+  geom_errorbar(aes(x=Species, y=boot.mu, ymax=bca.upr, ymin=bca.lwr), colour="red", position=position_nudge(x=-0.1)) +
+  geom_point(aes(x=Species, y=boot.mu), shape=4, size=2, position=position_nudge(x=-0.1)) +
+  labs(y="Point estimate with 95 % Confidence intervals",
+       subtitle="Red = Bootstrap outputs (BCa CIs), Blue = Linear model")
+  
+
+#some other info:
+# iris.bci <- boot.ci(iris.boot, type="bca", index=2)
+# #but what is index 2?
+# levels(factor(iris.boot$strata))[2]
+# iris.bci
+# plot(iris.boot, index=1)
+```
+
+# Example with non-normal data
+
+This example introduces 2 new things:
+1. Very simple profiling (elapsed time to run the code)
+2. parallelisation using "parallel='multicore'" and specifying the number of cpus to use with ncpus. 
+
+*note* parallelisation is different between platforms, so your results may vary.
+```{r}
+#| label: boot_non_normal
+
+d <- tibble(type = rep(c("button", "lobster", "portabella"), each=10), 
+            weight=c(rgamma(10, 10, 7), rgamma(10, 10, 3), rgamma(10, 10, 1)))
+ggplot(data=d, aes(y=weight, x=type)) + theme_bw() +
+  geom_boxplot()
+```
+
+
+```{r}
+#| label: boot_shrooms_func
+
+start.time <- Sys.time()
+
+boot.f <- function(data,i) {
+  
+  dx <- data[i,]
+  
+  x <- glm(weight ~ type, data=dx, family="Gamma")
+  
+  dxb <- dx %>% mutate(pred = predict(x, type="response")) %>%
+    group_by(type) %>%
+    summarise(mu = mean(pred))
+  
+  return(dxb$mu)
+  
+}
+
+shrooms.boot <- boot(d, boot.f, 10000, 
+                     strata=as.factor(d$type), 
+                     parallel = "multicore", ncpus=1)
+
+
+z <- tibble(boot.mu=0, bca.lwr=0, bca.upr=0)
+for(i in 1:length(shrooms.boot$t0)) {
+  y <- boot.ci(shrooms.boot, conf=0.95, type=c("bca"), index=i)
+  z <- bind_rows(z, tibble(boot.mu=shrooms.boot$t0[i], bca.lwr=y$bca[4], bca.upr=y$bca[5]))
+}
+z <- z[-1,] %>% mutate(type=c("button", "lobster", "portabella"))
+
+end.time <- Sys.time();
+elapsed <- end.time - start.time;
+elapsed
+```
+
+
+```{r}
+#| label: boot_shrooms_vis
+
+ggplot(data=z, aes(x=type, y=boot.mu, ymax=bca.upr, ymin=bca.lwr)) + theme_bw() +
+  geom_point() +
+  geom_errorbar(width=0.2) +
+  labs(y="Weight (g)", x="Mushroom type", 
+       caption="Mean values with 95 % BCa confidence intervals") 
+```
+
+
+
+

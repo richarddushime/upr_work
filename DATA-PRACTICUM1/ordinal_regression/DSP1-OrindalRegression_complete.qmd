@@ -1,0 +1,252 @@
+---
+title: "DSP I - 2025/2026 - Ordinal regression"
+author: "Mike B."
+format: revealjs
+---
+
+## Goal: model survey response data on a likert-like scale
+
+Data on a likert-like scale are categories in a specific order. They seek to measure something that cant be measured directly (like beauty, or interestingness, or agreement). This is called a latent variable. (There are other ways to model latent variables, too).
+
+## Motivation
+
+A survey (ongoing!) asks respondents to rate pictures of walls along several likert-like scales, including boring-interesting (this is a semantic differential scale, which has opposite adjectives on either end of the scale).
+
+We will examine if boring-interesting ratings differ between wall types.
+
+## Our setup
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(ordinal)
+
+palette <- viridis::viridis(10, option = "magma")
+
+`%notin%` <- Negate(`%in%`)
+```
+
+## Data
+
+```{r}
+#| label: data
+
+d.boring <- read_csv("data/boring-interesting.csv")
+
+b_i_scale = tibble(Value = c(-2, -1, 0, 1, 2),
+                   Labels = c("Very boring", "Boring", "Neutral", "Interesting", "Very Interesting"))
+
+d.boring <- right_join(d.boring, b_i_scale, by = "Value") |> 
+  mutate(Labels = factor(Labels, levels = b_i_scale$Labels, ordered = TRUE))
+```
+
+## Visualise
+
+```{r}
+#| label: visualise
+
+ggplot(data = d.boring, aes(x = Value)) + 
+  geom_col(stat = "count", fill = palette[5]) +
+  facet_wrap(~ Panel, nrow = 2) +
+  theme_classic()
+
+ggplot(data = d.boring, aes(x = Labels)) + 
+  geom_col(stat = "count", fill = palette[5]) +
+  facet_wrap(~ Panel, nrow = 2) +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+```
+
+## Analyse - Ordinal regression
+
+Ordinal regression is used when ordered categories are our response. There are three main types of ordinal  regression: 
+  1. Cumulative models: typically used when the response is a Likert-like scale (strongly disagree to strong agree, for example)
+  2. Sequential models: typically used when we are interested in differentiating between one category and all following categories (for example: how many apples do you eat during a typical week? less than one, one to two, three to five, more than five - the process is sequential, you eat three to five without eating at least two)
+  3. Adjacent categories: typically used when comparing to a baseline doesn't necessarily make sense. For example, when looking at educational attainment as a response variable: high school diploma, some college, bachelors, masters, PhD. We often aren't interested in comparing all of these to the baseline (high school in this case), but rather comparing PhD and masters, or bachelors and some college.
+  
+  
+We will look at the cumulative model today as it is probably the most common. 
+
+Major assumption: Proportional odds (aka, parallel lines). The effect of a predictor is even for all cut-points. We will demo this as we go through the example. There is an option to fit a partial proportional odds model, but it creates some challenges. It can be done in the ordinal package or using brms for Bayesian modelling.
+
+```{r}
+#| label: logistic_pdf_overlay_theory
+#| code-fold: true
+#| code-summary: "click to view"
+
+logistic_pdf <- function(x, loc = 0, s = 1) {
+  exp(-(x - loc) / s) / (s * (1 + exp(-(x - loc) / s))^2)
+}
+
+#alternatively: dlogis(x, location = 0, scale = 1)
+
+logistic.df <- tibble(x = seq(-10,10, length.out = 1000),
+                      y = logistic_pdf(x, loc=0, s=1))
+
+ggplot(data=logistic.df, aes(y=y, x=x)) + theme_minimal() +
+  geom_vline(xintercept = -1.2, linetype=2, colour="#666666") +
+  geom_vline(xintercept = -0.4, linetype=2, colour="#666666") +
+  geom_vline(xintercept = 0.4, linetype=2, colour="#666666") +
+  geom_vline(xintercept = 1.2, linetype=2, colour="#666666") +
+  annotate("text", x=-1.6, y=0.125, label="Very boring", angle=90) +
+  annotate("text", x=-0.8, y=0.125, label="Boring", angle=90) +
+  annotate("text", x=0, y=0.125, label="Neither", angle=90) +
+  annotate("text", x=0.8, y=0.125, label="Interesting", angle=90) +
+  annotate("text", x=1.6, y=0.125, label="Very Interesting", angle=90) +
+  geom_line(colour = palette[5]) +
+  labs(subtitle="Theoretical segementation of the ordinal scale with constant spacing",
+       x="Latent boring-interesting scale",
+       y="Density")
+```
+
+## Ordinal regression cont.
+
+With this setup, the probability of selecting any scale value is the area under the curve for that section. Lets do boring and very interesting.
+
+We use the the difference between the inverse logit (plogis for simplicity) for the barriers we set (and that we we later get from a model).
+
+```{r}
+#| label: logistic_pdf_overlay_theory_II
+#| code-fold: true
+#| code-summary: "click to view"
+
+#boring
+round(plogis(-0.4) - plogis(-1.2), 3) * 100
+
+#very interesting
+round(plogis(Inf) - plogis(1.2), 3) * 100
+```
+
+## Visualise probability of very interesting
+
+```{r}
+#| label: logistic_pdf_overlay_theory_III
+#| code-fold: true
+#| code-summary: "click to view"
+
+ggplot(data=logistic.df, aes(y=y, x=x)) + theme_minimal() +
+  geom_area(data = logistic.df |> filter(x > 1.2 & x < Inf),
+            aes(y = y), fill = palette[9], alpha = 0.3) +
+  geom_vline(xintercept = -1.2, linetype=2, colour="#666666") +
+  geom_vline(xintercept = -0.4, linetype=2, colour="#666666") +
+  geom_vline(xintercept = 0.4, linetype=2, colour="#666666") +
+  geom_vline(xintercept = 1.2, linetype=2, colour="#666666") +
+  geom_text(x=-1.6, y=0.125, label="Very boring", angle=90, check_overlap=TRUE) +
+  geom_text(x=-0.8, y=0.125, label="Boring", angle=90, check_overlap=TRUE) +
+  geom_text(x=0, y=0.125, label="Neither", angle=90, check_overlap=TRUE) +
+  geom_text(x=0.8, y=0.125, label="Interesting", angle=90, check_overlap=TRUE) +
+  geom_text(x=1.6, y=0.125, label="Very Interesting", angle=90, check_overlap=TRUE) +
+  geom_line(colour = palette[5]) +
+  annotate(geom = "text", x = 2.5, y = 0.01,
+           label = paste0(round(plogis(Inf) - plogis(1.2), 3) * 100, " %")) + 
+  labs(subtitle="Theoretical segementation of the ordinal scale with constant spacing",
+       x="Latent boring-interesting scale",
+       y="Density")
+```
+
+
+
+
+## Analyse
+
+```{r}
+#| label: analyse
+
+#fit the model
+boring.clm <- clm(Labels ~ Panel, data = d.boring)
+
+#examine output
+summary(boring.clm)
+```
+
+## What is the probability of Interesting for the base case?
+
+boundaries for interesting are: neutral|interesting and interesting|very interesting.
+
+```{r}
+#| label: probs_interesting
+
+round(plogis(1.08) - plogis(-0.27), 3) * 100
+
+```
+
+## Visualising our model - base case: 2waycladding
+
+```{r}
+ggplot(data=logistic.df, aes(y=y, x=x)) + theme_minimal() +
+  # geom_area(data=logistic.df |> filter(x > -0.26 & x < 1.08),
+  #           aes(y=y), fill=palette[9], alpha = 0.3) +
+  geom_vline(xintercept = -2.84, linetype=2, colour="#666666") +
+  geom_vline(xintercept = -1.63, linetype=2, colour="#666666") +
+  geom_vline(xintercept = -0.27, linetype=2, colour="#666666") +
+  geom_vline(xintercept = 1.08, linetype=2, colour="#666666") +
+  geom_text(x=-3.2, y=0.125, label="Very boring", angle=90, check_overlap=TRUE) +
+  geom_text(x=-2, y=0.125, label="Boring", angle=90, check_overlap=TRUE) +
+  geom_text(x=-0.65, y=0.125, label="Neither", angle=90, check_overlap=TRUE) +
+  geom_text(x=0.6, y=0.125, label="Interesting", angle=90, check_overlap=TRUE) +
+  geom_text(x=1.6, y=0.125, label="Very Interesting", angle=90, check_overlap=TRUE) +
+  geom_line(colour = palette[5]) + 
+  #annotate("text", x = 0.45, y = 0.045, label = paste0(round(plogis(1.08) - plogis(-0.26), 2) * 100, " %")) +
+  labs(subtitle="Modelled segementation of the ordinal scale for 2waycladding",
+       x="Latent boring-interesting scale",
+       y="Density")
+```
+
+## Visualsing our model: panel = brownverticals
+
+```{r}
+
+ggplot(data=logistic.df, aes(y=y, x=x)) + theme_minimal() +
+  geom_area(data=logistic.df |> filter(x > (-0.27 - 1.37) & x < (1.08 - 1.37)),
+            aes(y=y), fill=palette[9], alpha = 0.3) +
+  geom_vline(xintercept = -2.84, linetype=2, colour="#666666") +
+  geom_vline(xintercept = -1.63, linetype=2, colour="#666666") +
+  geom_vline(xintercept = -0.27, linetype=2, colour="#666666") +
+  geom_vline(xintercept = 1.08, linetype=2, colour="#666666") +
+  geom_vline(xintercept = -2.84 - 1.37, linetype=3, colour=palette[6]) +
+  geom_vline(xintercept = -1.63 - 1.37, linetype=3, colour=palette[6]) +
+  geom_vline(xintercept = -0.27 - 1.37, linetype=3, colour=palette[6]) +
+  geom_vline(xintercept = 1.08 - 1.37, linetype=3, colour=palette[6]) +
+  geom_line(colour = palette[5]) + 
+  annotate("text", x = -1, y = 0.045, 
+           label = paste0(round(plogis(1.08 - 1.37) - plogis(-0.26 - 1.37), 2) * 100, " %")) +
+  labs(subtitle="Modelled segementation of the ordinal scale for brown verticals (dotted line)",
+       x="Latent boring-interesting scale",
+       y="Density")
+```
+
+```{r}
+#| label: model_predicts
+#| code-fold: true
+#| code-summary: "click to view"
+
+
+newdata = tibble(Panel = c("2waycladding", "brownverticals", "clt"))
+y <- predict(boring.clm, newdata = newdata, type = "prob", se.fit = TRUE, interval = TRUE)
+
+#warning this changes if you have only one Panel type in newdata :(
+x <- as_tibble((data.frame(do.call(rbind, y)))) |> 
+  mutate(Panel = rep(c("2waycladding", "brownverticals", "clt"), times = 4),
+         Item = rep(c("fit", "se", "lwr", "upr"), each = 3))
+names(x)[0:5] <- c("Very boring", "Boring", "Neutral", "Interesting", "Very Interesting")
+
+x <- x |> 
+  pivot_longer(cols=1:5, names_to="Labels", values_to = "Values") |> 
+  pivot_wider(names_from = "Item", values_from = "Values") |> 
+  mutate(
+    Labels = factor(Labels,
+                        levels = c("Very boring", "Boring", "Neutral", "Interesting", "Very Interesting"),
+                        ordered = TRUE)
+  )
+
+ggplot(data = x, aes(y = fit, ymin = lwr, ymax=upr, x = Labels)) + 
+  geom_point() +
+  geom_errorbar(width = 0.2) +
+  facet_wrap(~Panel, ncol=3) +
+  theme_classic() +
+  labs(x = "Boring-Interesting Scale",
+       y = "Probability",
+       subtitle = "Estimated probability of boring-interesting scale selection for panel: 2-way cladding") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+```

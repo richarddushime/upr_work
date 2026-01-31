@@ -1,0 +1,501 @@
+---
+title: "DSP 1 - Final 2025/2026"
+author: "RDM"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+# Instructions
+
+1. Update the YAML Header with the information requested. Add a table of contents with depth 2.
+2. Change the filename to DPS1_Final_2025-2026_Lastname-studentID.(qmd and html)
+3. Complete the tasks as described below.
+  * If you use any packages we haven't used in class, please explain why you chose them
+4. Use good coding practices, label your code chunks, provide explanatory comments, ensure it is easily readable. 
+5. Observe the rules for AI. If you use it provide specific descriptions of how it was used as requested on the e-classroom, not only a general comment.
+6. Submit the .qmd file and .html file together through the e-classroom.
+  * The html file may be self-contained (check online for the yaml instruction) or submitted with the dependent folders/files. Make sure the file you submit can be opened and viewed in complete form with the files you submit.
+
+# Setup
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+# Load necessary libraries
+library(tidyverse) # Core data manipulation and visualization (ggplot2, dplyr, readr)
+library(fs)        # File system operations (handling file paths in Task 3)
+library(broom)     # Tidy model output (converting model objects to dataframes)
+library(gt)        # Grammar of Tables (creating professional tables)
+library(emmeans)   # Estimated Marginal Means (post-hoc comparisons for regression)
+
+# Set a consistent theme for all plots
+# theme_minimal is clean and uses a white background, suitable for reports
+theme_set(theme_minimal())
+```
+
+# Task 1 - Visualising distributions
+
+Create a visualisation that displays the four distributions described below with the requested annotations. Use a theme other than the default.
+
+Distributions: 
+  1. Beta(3,12)
+  2. Gamma(5,10)
+  3. Lognormal(5,10)
+  4. Normal(5,5) 
+  
+For each distribution:
+
+  1. Fill in the area between the 33rd and 66th quantiles (i.e., 0.33, 0.66) so that the range is clearly differentiated from the rest of the distribution.
+  2. Mark the mean and median on the chart (make sure it is clear which mark is the mean and which is the median)
+  3. Annotate with the mean and median, rounded to 2 decimal points.
+  
+The charts should be combined into a single visualisation. The x-axis limits should make sure the distribution is clearly defined and easy to interpret.
+
+**Bonus - 5 extra points**: Recreate the charts from Task 1 and add the mode of each distribution.
+
+*Included the bonus in the implementation below.*
+
+```{r}
+#| label: task1-vis
+#| fig.width: 10
+#| fig.height: 8
+
+# Define properties for each distribution
+# Used lists to store parameters for flexibility
+
+# Function to convert linear mean/sd to lognormal parameters
+# R's dlnorm uses meanlog and sdlog (parameters of the underlying normal distribution).
+# If we assume the instructions "Lognormal(5,10)" refer to the Linear Mean=5 and Linear SD=10,
+# we must convert them using the Method of Moments.
+get_lognorm_params <- function(mean, sd) {
+  list(
+    # Formula for meanlog: log(m^2 / sqrt(v + m^2))
+    meanlog = log(mean^2 / sqrt(sd^2 + mean^2)),
+    # Formula for sdlog: sqrt(log(1 + v/m^2))
+    sdlog = sqrt(log(1 + (sd^2 / mean^2)))
+  )
+}
+
+# Apply conversion for Lognormal(5,10)
+ln_params <- get_lognorm_params(5, 10)
+
+# List of distributions with their specific functions and parameters
+# This allows us to iterate over them generically
+dists <- list(
+  Beta = list(
+    fun = dbeta,   # Density function
+    params = list(shape1 = 3, shape2 = 12),
+    qfun = qbeta,  # Quantile function (for shading)
+    range = c(0, 1), # Support of Beta is [0,1]
+    stats = c(
+      mean = 3/(3+12), # Expected value: a / (a+b)
+      mode = (3-1)/(3+12-2) # Mode: (a-1)/(a+b-2)
+    )
+  ),
+  Gamma = list(
+    fun = dgamma,
+    # Assuming parameters are Shape (k)=5 and Rate=10 based on standard notation often used in context.
+    # (If Scale was meant, params would constitute a much wider distribution).
+    params = list(shape = 5, rate = 10), 
+    qfun = qgamma,
+    # Custom range for better visibility (zoomed in)
+    manual_range = c(0, 1.5),
+    stats = c(
+      mean = 5/10, # Mean: shape / rate
+      mode = (5-1)/10 # Mode: (shape-1) / rate
+    )
+  ),
+  Lognormal = list(
+    fun = dlnorm,
+    params = ln_params, # Calculated above
+    qfun = qlnorm,
+    # Custom range to show the mode (near 0) and the long tail up to 25
+    manual_range = c(0, 25), 
+    stats = c(
+      mean = 5, # As defined
+      # Mode of lognormal: exp(meanlog - sdlog^2)
+      mode = exp(ln_params$meanlog - ln_params$sdlog^2)
+    )
+  ),
+  Normal = list(
+    fun = dnorm,
+    params = list(mean = 5, sd = 5),
+    qfun = qnorm,
+    # Custom range: Starts at -10 to show the full left tail clearly
+    manual_range = c(-10, 20),
+    stats = c(
+      mean = 5,
+      mode = 5 # For Normal, Mean = Median = Mode
+    )
+  )
+)
+
+# Helper function to generate data frame for plotting
+# Arguments: 'name' (dist name), 'info' (list from dists above)
+generate_dist_data <- function(name, info) {
+  # determine x range
+  # Use manual range if provided, otherwise calculate from quantiles (0.1% to 99.9%)
+  if (!is.null(info$manual_range)) {
+    x <- seq(info$manual_range[1], info$manual_range[2], length.out = 1000)
+  } else {
+    lb <- info$qfun(0.001, info$params[[1]], info$params[[2]])
+    ub <- info$qfun(0.999, info$params[[1]], info$params[[2]])
+    # Ensure positive distributions don't go below 0
+    if(name %in% c("Beta", "Gamma", "Lognormal")) lb <- max(0, lb)
+    x <- seq(lb, ub, length.out = 1000)
+  }
+  
+  # Calculate density (y-values) using do.call to pass list of params to function
+  y <- do.call(info$fun, c(list(x = x), info$params))
+  
+  # Calculate 33rd and 66th percentiles for shading
+  q33 <- do.call(info$qfun, c(list(p = 0.33), info$params))
+  q66 <- do.call(info$qfun, c(list(p = 0.66), info$params))
+  
+  # Calculate exact Median
+  median_val <- do.call(info$qfun, c(list(p = 0.5), info$params))
+  
+  # Extract pre-calculated Mean and Mode
+  mean_val <- info$stats["mean"]
+  mode_val <- info$stats["mode"]
+  
+  # Return a tidy dataframe
+  tibble(
+    Distribution = name,
+    x = x,
+    y = y,
+    q33 = q33,
+    q66 = q66,
+    mean = mean_val,
+    median = median_val,
+    mode = mode_val
+  )
+}
+
+# Combine all data into one dataframe using map_df
+plot_data <- map_df(names(dists), ~generate_dist_data(., dists[[.]]))
+
+# Plot Task 1 (Mean + Median only)
+# Using ggplot2 for visualization
+p_task1 <- ggplot(plot_data, aes(x, y)) +
+  # Line for the distribution curve
+  geom_line(color = "black") +
+  # Area shading between 33rd and 66th percentiles
+  # We filter the data to only include x values within this range
+  geom_area(data = plot_data %>% filter(x >= q33 & x <= q66), fill = "skyblue", alpha = 0.5) +
+  # Vertical line for Mean (Red Dashed)
+  geom_vline(aes(xintercept = mean), color = "red", linetype = "dashed") +
+  # Vertical line for Median (Blue Dotted)
+  geom_vline(aes(xintercept = median), color = "blue", linetype = "dotted") +
+  # Text annotations: Placed at the top (y=Inf)
+  geom_text(data = plot_data %>% distinct(Distribution, mean, median),
+            aes(x = median, y = Inf, 
+                label = paste0("Mean: ", round(mean, 2), "\nMedian: ", round(median, 2))),
+            vjust = 1.5, size = 3, color = "black") +
+  # Facet wrap creates separate panels for each distribution
+  # scales="free" is critical because ranges and heights vary significantly
+  facet_wrap(~Distribution, scales = "free") +
+  labs(
+    title = "Probability Distributions",
+    subtitle = "Shaded: 33rd-66th percentiles. Red: Mean, Blue: Median",
+    x = "Value",
+    y = "Density"
+  ) +
+  theme(strip.text = element_text(face = "bold", size = 12))
+
+p_task1
+
+```
+
+---
+
+# Task 2 - Fit a regression and report the outcomes
+
+Fit a regression to the data from fibre_reinforced.csv with str as the dependent variable with density and treatment as the independent variables. The data is from a study investigating using flax fibre cord treated with different materials as reinforcement in concrete.
+
+1. Visualise the raw data
+2. Choose an appropriate regression method and fit the regression
+3. Visualise the regression outputs, annotating the visualisation with relevant information.
+4. Use a table layout package (i.e., tinytables, gt, kable) to display the regression outputs.
+5. Write a summary of the findings, defining effect sizes. In this case an effect size of more than 10
+
+```{r}
+#| label: task2-load
+#| message: false
+
+# Load Data
+# read_csv is faster and more robust than read.csv
+fibre_data <- read_csv("data/fibre_reinforced.csv")
+```
+
+### 1. Visualise the raw data
+
+```{r}
+#| label: task2-vis-raw
+#| layout-ncol: 2 
+# layout-ncol: 2 forces the two plots (p1 and p2) to appear side-by-side in the output
+
+# Boxplot of Strength by Treatment
+# Shows distribution of strength for each categorical treatment type
+p1 <- ggplot(fibre_data, aes(x = treatment, y = str, fill = treatment)) +
+  geom_boxplot() +
+  labs(title = "Strength by Treatment", y = "Strength (str)", x = "Treatment") +
+  theme(legend.position = "none")
+
+# Scatter of Strength vs Density
+# Shows relationship between continuous variables, colored by treatment
+p2 <- ggplot(fibre_data, aes(x = density, y = str, color = treatment)) +
+  geom_point() +
+  # Add linear trend lines to see if density typically increases strength
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Strength vs Density", y = "Strength (str)", x = "Density")
+
+# Print plots (will be displayed side-by-side due to layout-ncol)
+p1
+p2
+```
+
+### 2. Fit Regression
+
+Chosen method: **Linear Regression (`lm`)**. 
+**Justification**: The dependent variable `str` (strength) is continuous. The predictors include a continuous variable (`density`) and a categorical variable (`treatment`). A linear model is appropriate to estimate the effect of treatment while controlling for density, assuming linearity and normality of residuals (which can be checked).
+
+```{r}
+#| label: task2-model
+
+# Fit linear model
+# Formula: str (Dependent) ~ density (Indep) + treatment (Indep)
+lm_model <- lm(str ~ density + treatment, data = fibre_data)
+
+# Summary of the model (R-squared, coefficients, F-statistic)
+summary(lm_model)
+```
+
+### 3. Visualise Regression Outputs
+
+```{r}
+#| label: task2-vis-results
+
+# Extract results with broom::tidy
+# conf.int = TRUE calculates the 95% Confidence Intervals for us
+tidy_results <- tidy(lm_model, conf.int = TRUE)
+
+# Coefficient Plot (Forest Plot)
+# Visualizes the estimate and its uncertainty
+ggplot(tidy_results %>% filter(term != "(Intercept)"), 
+       aes(x = estimate, y = term, xmin = conf.low, xmax = conf.high)) +
+  geom_pointrange(color = "darkblue") + # Point for estimate, line for CI
+  geom_vline(xintercept = 0, linetype = "dashed", color = "red") + # Ref line at 0 (null hypothesis)
+  labs(
+    title = "Regression Coefficients (95% CI)",
+    subtitle = "Effect of Density and Treatment on Strength",
+    x = "Estimate",
+    y = "Term"
+  ) +
+  geom_text(aes(label = round(estimate, 2)), vjust = -1)
+```
+
+### 4. Tables
+
+**Table 1: Regression Coefficients**
+
+```{r}
+#| label: task2-table-coefs
+
+# Create a professional table using 'gt'
+tidy_results %>%
+  gt() %>%
+  tab_header(title = "Linear Regression Results", subtitle = "Dependent Variable: Strength") %>%
+  # Format numbers to 2 decimal places for readability
+  fmt_number(columns = c(estimate, std.error, statistic, conf.low, conf.high), decimals = 2) %>%
+  # Format p-values scientifically (e.g., 2e-16)
+  fmt_scientific(columns = p.value)
+```
+
+**Table 2: Comparisons between Treatments**
+
+```{r}
+#| label: task2-table-emmeans
+
+# Pairwise comparisons using Estimated Marginal Means (emmeans)
+# This compares each treatment against every other treatment, averaged over density
+em_means <- emmeans(lm_model, pairwise ~ treatment)
+em_contrasts <- as.data.frame(em_means$contrasts)
+
+# Display contrasts in a table
+em_contrasts %>%
+  gt() %>%
+  tab_header(title = "Pairwise Comparisons of Treatments") %>%
+  fmt_number(columns = c(estimate, SE, t.ratio), decimals = 2) %>%
+  fmt_scientific(columns = p.value)
+```
+
+### 5. Summary of Findings
+
+```{r}
+#| label: task2-summary
+#| echo: false
+#| results: asis 
+#| # results: asis ensures that cat() output is rendered as Markdown text, not code output
+
+# Extracting significant effects > 10 (absolute value)
+sig_effects <- tidy_results %>% 
+  filter(abs(estimate) > 10 & term != "(Intercept)")
+
+cat("**Key Findings:**\n\n")
+cat("The regression analysis allows us to control for density while comparing treatments.\n\n")
+
+# Dynamic text generation based on model results
+if(nrow(sig_effects) > 0) {
+  cat("The following variables had an effect size greater than 10:\n")
+  for(i in 1:nrow(sig_effects)) {
+    # Print bullet point for each large effect
+    cat(paste0("- **", sig_effects$term[i], "**: Estimate = ", round(sig_effects$estimate[i], 2), "\n"))
+  }
+} else {
+  cat("No variables showed an effect size greater than 10 in the model coefficients.\n")
+}
+
+cat("\n(See Table 2 for pairwise differences between treatments).")
+
+```
+
+---
+
+# Task 3 - Read and combine files using purrr:map and fs
+
+Using a combination of the fs package and purrr package (specifically using a map function - choose the appropriate function) to read the contents of multiple files into a dataframe or tibble. The files are in the thermal_comfort folder.
+
+When reading the files, add columns that contain the two components extracted from the filename (the portion that does not include the extension or any path components): condition and date, separately. The file name identifies the condition id, the date of the measurements in the form "ConditionID-Date.csv". Read the "conditions.csv" file separately, and merge the specific conditions into the combined dataframe or tibble you produced using a join function.
+
+The final merged and joined file should have the following columns: date, subject_id, condition_id, rating, material_ratio, temperature in that order.
+
+After reading in the file, make a visualisation and summary table (using, e.g., tinytable, gt, or kable) that represents the data appropriately grouping it by room condition (material ratio and temperature).
+
+```{r}
+#| label: task3-process
+
+# 1. Get file paths
+# fs::dir_ls is convenient for getting all files matching a pattern
+file_paths <- dir_ls("data/thermal_comfort", glob = "*.csv")
+
+# 2. Function to read and annotate
+# This function will be applied to each file
+read_and_annotate <- function(path) {
+  # Extract filename without extension (e.g., "A01-20251010")
+  fname <- path_file(path) %>% path_ext_remove()
+  
+  # Split 'ConditionID-Date' string into parts
+  parts <- str_split(fname, "-")[[1]]
+  cond_id <- parts[1]
+  date_val <- parts[2]
+  
+  # Read CSV
+  # Use show_col_types = FALSE to silence messages during loop
+  read_csv(path, show_col_types = FALSE) %>%
+    mutate(
+      condition_id = cond_id,
+      date = date_val
+    )
+}
+
+# 3. Process all files with map_dfr
+# map_dfr iterates over 'file_paths', runs 'read_and_annotate', and binds results into one dataframe
+combined_ratings <- map_dfr(file_paths, read_and_annotate)
+
+# 4. Read Loop Conditions
+# Explicitly specifying col_types to avoid parsing errors
+# (e.g., preventing "30:70" from being misread as time)
+conditions_df <- read_csv("data/conditions.csv", 
+                          col_types = cols(
+                            material_ratio = col_character(),
+                            temperature = col_double(),
+                            code = col_character()
+                          ))
+
+# 5. Join Code
+# Merge the ratings with the condition details
+final_df <- combined_ratings %>%
+  # Join on the condition ID (called 'condition_id' in ratings, 'code' in conditions)
+  left_join(conditions_df, by = c("condition_id" = "code")) %>%
+  select(date, subject_id, condition_id, rating, material_ratio, temperature)
+
+# Show structure to verify results
+glimpse(final_df)
+```
+
+### Visualisation and Summary
+
+```{r}
+#| label: task3-vis-summary
+
+# Summary Table
+summary_stats <- final_df %>%
+  group_by(material_ratio, temperature) %>%
+  summarise(
+    Mean_Rating = mean(rating, na.rm = TRUE),
+    Median_Rating = median(rating, na.rm = TRUE),
+    Count = n(),
+    .groups = "drop" # Drop grouping after summary
+  )
+
+summary_stats %>%
+  gt() %>%
+  tab_header(title = "Thermal Comfort Ratings by Condition") %>%
+  fmt_number(columns = c(Mean_Rating), decimals = 2)
+
+# Visualization
+ggplot(final_df, aes(x = material_ratio, y = rating, fill = factor(temperature))) +
+  geom_boxplot() +
+  labs(
+    title = "Thermal Comfort Ratings",
+    x = "Material Ratio",
+    y = "Rating (1-7)",
+    fill = "Temperature"
+  ) +
+  theme_minimal()
+```
+
+
+# Bonus - 5 extra points
+
+Recreate the charts from Task 1 and add the mode of each distribution.
+
+```{r}
+#| label: bonus-vis
+#| fig.width: 10
+#| fig.height: 8
+
+# Re-using plot_data from Task 1
+# This code block is almost identical to Task 1, but includes the Mode line.
+ggplot(plot_data, aes(x, y)) +
+  geom_line(color = "black") +
+  # Area shading
+  geom_area(data = plot_data %>% filter(x >= q33 & x <= q66), fill = "skyblue", alpha = 0.5) +
+  # Mean line (Red, Dashed)
+  geom_vline(aes(xintercept = mean), color = "red", linetype = "dashed") +
+  # Median line (Blue, Dotted)
+  geom_vline(aes(xintercept = median), color = "blue", linetype = "dotted") +
+  # Mode line (Green, Solid) - Bonus inclusion
+  geom_vline(aes(xintercept = mode), color = "darkgreen", linetype = "solid") +
+  # Text annotations including Mode
+  geom_text(data = plot_data %>% distinct(Distribution, mean, median, mode),
+            aes(x = median, y = Inf, 
+                label = paste0("Mean: ", round(mean, 2), "\nMedian: ", round(median, 2), "\nMode: ", round(mode, 2))),
+            vjust = 1.5, size = 3, color = "black") +
+  facet_wrap(~Distribution, scales = "free") +
+  labs(
+    title = "Probability Distributions (with Mode)",
+    subtitle = "Shaded: 33rd-66th percentiles. Red: Mean, Blue: Median, Green: Mode",
+    x = "Value",
+    y = "Density"
+  ) +
+  theme(strip.text = element_text(face = "bold", size = 12))
+```
+
+# Thank you

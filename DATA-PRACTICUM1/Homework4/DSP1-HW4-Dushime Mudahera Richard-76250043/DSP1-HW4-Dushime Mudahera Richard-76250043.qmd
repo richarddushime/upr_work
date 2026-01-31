@@ -1,0 +1,273 @@
+---
+title: "Homework 4 - DSP1 - 2025/2026"
+author: "Dushime Mudahera Richard 76250043"
+format: html
+toc: true
+---
+
+Homework 4
+
+Step 1: Rename this file as follows: "DSP1-HW4-Name-StudentID" with your name and student ID replacing the appropriate parts.
+Step 2: Update the author field in the YAML as indicated.
+Step 3: Ensure the document has a Table of Contents when rendered (hint: you set this in the YAML)
+Step 3: Complete to the Tasks below. Be sure to add meaningful label tags to each R code chunk and structure your analysis sensibly.
+Step 4: Render to html or pdf (you may need to change target formats in the YAML)
+Step 5: Zip (or otherwise compress) the html other relevant support folders and include this qmd file with your work filled in
+Step 6: Submit the compressed folder which should be named "DSP1-HW4-Name-StudentID" through the e-classroom by Sunday, January 18, 2026.
+
+Hint: Make sure that when I open the html file I can view all the embedded images, see all your code and easily identify your responses to questions.
+
+Note: Please see the rules for using AI on the e-classroom.
+
+## Ordinary least products regression and the bootstrap
+
+For this section you will use your knowledge and skills to complete a task you have (likely) not encountered before. Use Ordinary least products (OLP) regression to compare measurement methods of the same phenomenon.
+
+Ordinary least products regression is related to ordinary least squares regression (simple linear regression). However, it accounts for error on both the x and y axis data. It is often used to compare two different measures of the same phenomenon. For example, we can compare a standard method of measuring something to a new method of measuring something.
+
+In this case we are most interested in the coefficients for the slope and intercept. We can determine if there is bias present in the new measure if the confidence intervals for the slopes do not include certain values.
+
+Fixed bias is present if the confidence interval for the intercept of the OLP regression line DOES NOT include 0. Fixed bias is a constant difference in measurement.
+
+Proportional bias is present if the confidence interval of the slope of the OLP regression line DOES NOT include 1. Proportional bias differs at different levels of measurement (i.e., greater error at higher measured values, and smaller error and lower measured values).
+
+In this analysis you should write your own code to determine the OLP regression line intercept and slope and determine their bias-corrected accelerated confidence intervals via *bootstrapping*.
+
+Use the attached *wood-mc.csv* data set and compare the Reference results to the Spike and NIR results.
+
+In this case, we compare three methods of measuring the moisture content of wood (how much water is in wood, as a % of weight). Assume the measurements are taken on the same sample of wood (each row is one piece of wood that was measured multiple times.)
+
+1. Reference method (weigh the wood, dry it in an oven, weigh it again: only appropriate in the lab, or calibration in industry).
+2. Spike electrode meter (drive electrodes into the material, measure conductance/resistance between electrodes: damages wood, but used often in industry because it is quick and pretty accurate if multiple measurements are taken)
+3. Near infrared spectroscopy (NIR) (chemometric analysis of NIR spectra to assess moisture content: non-contact and fast, new method and we need to know how well it works)
+
+(This data is simulated.)
+
+See the attached paper (Ludbrook, 2010) for details on implementing OLP (esp. equations 1 through 5).
+
+## 4.a) Estimated statistics.
+
+Create a table that includes the OLP estimated Intercept and Slope for each comparison (ref<->spike, ref<->NIR), along with the upper and lower bounds of the confidence intervals for each. 
+
+## 4.b) Visulisation
+
+Create a visualisation that shows the point estimate of the intercept and slope for each comparison, along with the confidence intervals for each. Slopes and Intercepts should be in separate charts.
+
+Create a visualisation of the regression lines for each each pair of measurements with the OLP regression line overlaid (this should be two plots, one for each pair of measurements).
+
+## 4.c) Text responses
+
+Is either method biased? How so? Do you notice anything of interest about the results?
+
+
+# Ordinary Least Products Regression and the Bootstrap
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(boot)
+library(knitr)
+library(kableExtra)
+
+options(dplyr.summarise.inform = FALSE)
+```
+
+## Data Loading
+
+```{r}
+#| label: load_data
+data <- read_csv("wood-mc.csv")
+head(data)
+```
+
+## Methods
+
+### OLP Regression Function
+
+Ordinary Least Products (OLP) regression (also known as Geometric Mean Regression or Reduced Major Axis regression) minimizes the product of the deviations in x and y. Following the formulation for OLP (Ludbrook, 2010), the estimates are:
+
+The **Slope** ($b_{OLP}$) is calculated as the ratio of the standard deviations, preserving the sign of the interaction:
+$$ b_{OLP} = \text{sign}(r) \frac{S_y}{S_x} $$
+where:
+- $S_y$ is the standard deviation of $y$.
+- $S_x$ is the standard deviation of $x$.
+- $r$ is the Pearson correlation coefficient.
+
+The **Intercept** ($a_{OLP}$) is calculated as:
+$$ a_{OLP} = \bar{y} - b_{OLP} \bar{x} $$
+where $\bar{y}$ and $\bar{x}$ are the sample means.
+
+We will implement this function and use the `boot` package to generate Bias-Corrected Accelerated (BCa) confidence intervals.
+
+```{r}
+#| label: olp_func
+olp_regression <- function(data, indices, formula) {
+  d <- data[indices, ]
+  
+  # getting x and y
+  vars <- all.vars(formula)
+  y_name <- vars[1]
+  x_name <- vars[2]
+  
+  x <- d[[x_name]]
+  y <- d[[y_name]]
+  
+  # statistics
+  sx <- sd(x)
+  sy <- sd(y)
+  r <- cor(x, y)
+  
+  # OLP Slope
+  slope <- sign(r) * (sy / sx)
+  
+  # OLP Intercept
+  intercept <- mean(y) - slope * mean(x)
+  
+  return(c(intercept, slope))
+}
+```
+
+## Analysis
+
+We will perform 2000 bootstrap replicates for each comparison.
+
+### Reference vs Spike
+
+```{r}
+#| label: boot_spike
+set.seed(123)
+boot_spike <- boot(
+  data = data,
+  statistic = olp_regression,
+  R = 2000,
+  formula = Spike ~ Reference
+)
+
+# Confidence Intervals
+ci_spike_int <- boot.ci(boot_spike, type = "bca", index = 1)
+ci_spike_slope <- boot.ci(boot_spike, type = "bca", index = 2)
+
+boot_spike
+```
+
+### Reference vs NIR
+
+```{r}
+#| label: boot_nir
+set.seed(123)
+boot_nir <- boot(
+  data = data,
+  statistic = olp_regression,
+  R = 2000,
+  formula = NIR ~ Reference
+)
+
+# Confidence Intervals
+ci_nir_int <- boot.ci(boot_nir, type = "bca", index = 1)
+ci_nir_slope <- boot.ci(boot_nir, type = "bca", index = 2)
+
+boot_nir
+```
+
+## 4.a) Estimated Statistics Table
+
+```{r}
+#| label: results_table
+
+results <- tibble(
+  Comparison = c("Reference vs Spike", "Reference vs NIR"),
+  Intercept_Est = c(boot_spike$t0[1], boot_nir$t0[1]),
+  Intercept_Lower = c(ci_spike_int$bca[4], ci_nir_int$bca[4]),
+  Intercept_Upper = c(ci_spike_int$bca[5], ci_nir_int$bca[5]),
+  Slope_Est = c(boot_spike$t0[2], boot_nir$t0[2]),
+  Slope_Lower = c(ci_spike_slope$bca[4], ci_nir_slope$bca[4]),
+  Slope_Upper = c(ci_spike_slope$bca[5], ci_nir_slope$bca[5])
+)
+
+results %>%
+  kable(digits = 4, caption = "OLP Regression Coefficients (Intercept and Slope) with Bootstrap BCA 95% Confidence Intervals") %>%
+  kable_styling()
+```
+
+## 4.b) Visualization
+
+### Estimates and Confidence Intervals
+
+```{r}
+#| label: vis_estimates
+
+plot_data <- results %>%
+  pivot_longer(
+    cols = c(Intercept_Est, Slope_Est),
+    names_to = "Parameter_Type",
+    values_to = "Estimate"
+  ) %>%
+  mutate(
+    Parameter = if_else(str_detect(Parameter_Type, "Intercept"), "Intercept", "Slope"),
+    Lower = if_else(Parameter == "Intercept", Intercept_Lower, Slope_Lower),
+    Upper = if_else(Parameter == "Intercept", Intercept_Upper, Slope_Upper)
+  )
+
+ggplot(plot_data, aes(x = Comparison, y = Estimate)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = Lower, ymax = Upper), width = 0.2) +
+  facet_wrap(~Parameter, scales = "free") +
+  theme_minimal() +
+  labs(title = "OLP Estimates with 95% BCA Confidence Intervals",
+       y = "Estimate Value")
+
+```
+
+### OLP Regression Lines
+
+```{r}
+#| label: vis_lines
+
+# We can't use geom_smooth(method='lm') naturally for OLP, so we use abline logic manually or augment data
+
+# Reference vs Spike
+p1 <- ggplot(data, aes(x = Reference, y = Spike)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(intercept = boot_spike$t0[1], slope = boot_spike$t0[2], color = "red", size = 1) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "gray") + # Identity line
+  labs(title = "Reference vs Spike (OLP)", subtitle = "Red: OLP Fit, Dashed: Identity (y=x)") +
+  theme_minimal()
+
+# Reference vs NIR
+p2 <- ggplot(data, aes(x = Reference, y = NIR)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(intercept = boot_nir$t0[1], slope = boot_nir$t0[2], color = "blue", size = 1) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "gray") + # Identity line
+  labs(title = "Reference vs NIR (OLP)", subtitle = "Blue: OLP Fit, Dashed: Identity (y=x)") +
+  theme_minimal()
+
+p1
+p2
+```
+
+## 4.c) Responses to Questions and Conclusion
+
+**Is either method biased? How so?**
+
+Based on the bootstrap analysis (2000 replicates):
+
+1.  **Reference vs Spike**:
+    *   The 95% BCA Confidence Interval for the slope was approximately [-1.83, 1.26]. This interval **includes 1**, so we do not have sufficient evidence to claim Proportional Bias.
+    *   The 95% BCA Confidence Interval for the intercept was approximately [-3.3, 40.8]. This interval **includes 0**, so we do not have sufficient evidence to claim Fixed Bias.
+    *   *However*, the point estimate for the OLP slope was negative (-1.17), which is highly counter-intuitive for two methods measuring the same property.
+
+2.  **Reference vs NIR**:
+    *   The 95% BCA Confidence Interval for the slope was approximately [-1.39, 2.18]. This interval **includes 1**, so we do not have sufficient evidence to claim Proportional Bias.
+    *   The 95% BCA Confidence Interval for the intercept was approximately [-16.5, 34.5]. This interval **includes 0**, so we do not have sufficient evidence to claim Fixed Bias.
+
+**Do you notice anything of interest about the results?**
+
+*   **Extremely Low/Negative Correlation**: The Reference method is poorly correlated with the other methods ($r \approx -0.06$ for Spike, $r \approx 0.24$ for NIR).
+*   **Instability of OLP**: As OLP slope depends on $S_y/S_x$ multiplied by the sign of $r$, when $r$ is close to 0, the sign can easily flip between bootstrap replicates (or be negative as seen here), rendering the slope estimate highly unstable or physically meaningless (negative slope for calibration).
+
+*   **Wide Confidence Intervals**: Consequently, the bias-corrected confidence intervals are extremely wide. While they "include" the null hypothesis values (0 for intercept, 1 for slope), this is a Type II error trap: we fail to reject the null not because the methods are good, but because the precision is abysmal.
+
+*   **Conclusion**: The provided data suggests the methods are not interchangeable with the Reference, despite the lack of "significant" bias detected by the CI overlap. A valid calibration requires a strong positive correlation ($r > 0.9$ typically).
+
+# Thank you
